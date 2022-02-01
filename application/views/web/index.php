@@ -16,7 +16,7 @@ $soa = $this->db->get('tbl_siswa');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>TESSSPPDB MTs Umar Zahid Semelo | <?php echo $user['nama_lengkap']; ?></title>
+    <title>PPDB MTs Umar Zahid Semelo | <?php echo $user['nama_lengkap']; ?></title>
     <base href="<?php echo base_url(); ?>" />
     <link rel="shortcut icon" href="assets/images/favicon.png" type="image/png">
     <!-- Bootstrap Core CSS -->
