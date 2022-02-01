@@ -56,8 +56,6 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	<?php
 	} ?>
 
-	<?php
-	if ($sub_menu == "verifikasi" or $sub_menu == "set_pengumuman") { ?>
 		<!-- Theme JS files -->
 		<script type="text/javascript" src="assets/panel/js/plugins/tables/datatables/datatables.min.js"></script>
 		<!-- <script type="text/javascript" src="assets/panel/js/plugins/forms/selects/select2.min.js"></script> -->
@@ -66,8 +64,6 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 		<script type="text/javascript" src="assets/panel/js/pages/datatables_basic.js"></script>
 		<!-- /theme JS files -->
 
-	<?php
-	} ?>
 
 	<script src="assets/panel/js/select2.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="assets/panel/css/sweetalert.css">
