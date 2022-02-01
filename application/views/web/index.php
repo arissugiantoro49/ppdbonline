@@ -121,7 +121,7 @@ $soa = $this->db->get('tbl_siswa');
                 </button>
                 <a class="navbar-brand" href="#page-top">
                     <img src="img/logo.png" alt="Logo" width="35" style="position:absolute;margin-top:-10px;">
-                    <span style="margin-left:45px;">&nbsp;PPDB MTs Umar Zahid Semelo</span>
+                    <span style="margin-left:45px;">&nbsp;Coba TEs MTs Umar Zahid Semelo</span>
                 </a>
             </div>
 
