@@ -140,7 +140,8 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 											} ?>"><a href="panel_siswa/biodata"><i class="icon-file-check2"></i> <span><b>BIODATA</b></span></a></li>
 								<li class="<?php if ($menu == 'panel_siswa' and $sub_menu == 'biodata') {
 												echo 'active';
-											} ?>"><a href="panel_siswa/biodata"><i class="icon-file-check2"></i> <span><b>UJIAN SELEKSI</b></span></a></li>
+											} ?>">
+											<!-- <a href="panel_siswa/biodata"><i class="icon-file-check2"></i> <span><b>UJIAN SELEKSI</b></span></a></li> -->
 
 								<li><a href="panel_siswa/cetak" target="_blank"><i class="icon-printer2"></i> <span><b>PRINT PENDAFTARAN</b></span></a></li>
 								<!--<li><a href="panel_siswa/rekap_nilai" target="_blank"><i class="icon-printer4"></i> <span>Rekap Nilai</span></a></li>-->
