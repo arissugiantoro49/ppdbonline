@@ -37,12 +37,6 @@ class Model_web extends CI_Model
 					'paud'				=> $data->post('paud'),
 					'tk'				=> $data->post('tk'),
 					'no_hp_siswa'		=> $data->post('no_hp_siswa'),
-
-					'matematika'		=> $data->post('matematika'),
-					'ipa'		=> $data->post('ipa'),
-					'pai'		=> $data->post('pai'),
-					'bahasa_indonesia'		=> $data->post('bahasa_indonesia'),
-
 					'jenis_tinggal'		=> $data->post('jenis_tinggal'),
 					'alamat_siswa'		=> $data->post('alamat_siswa'),
 					'desa'				=> $data->post('desa'),
@@ -68,7 +62,6 @@ class Model_web extends CI_Model
 					'pdd_ibu'			=> $data->post('pdd_ibu'),
 					'pekerjaan_ibu'		=> $data->post('pekerjaan_ibu'),
 					'penghasilan_ibu'	=> $data->post('penghasilan_ibu'),
-
 					'nama_wali'			=> $data->post('nama_wali'),
 					'nik_wali'			=> $data->post('nik_wali'),
 					'th_lahir_wali'		=> $data->post('th_lahir_wali'),
@@ -86,6 +79,14 @@ class Model_web extends CI_Model
 					'lokasi_sekolah'	=> $data->post('lokasi_sekolah'),
 					'tgl_siswa'			=> date('Y-m-d H:i:s')
 				);
+
+				$data1 = array(
+					'matematika'			=> $data1->post('matematika'),
+					'ipa'					=> $data1->post('ipa'),
+					'pai'					=> $data1->post('pai'),
+					'bahasa_indonesia'		=> $data1->post('bahasa_indonesia'),
+				);
+
 
 				$dokumen_kk = $this->upload_dokumen("dokumen_kk", $nis . "_kk");
 				$data["dokumen_kk"] = $dokumen_kk;
@@ -106,6 +107,7 @@ class Model_web extends CI_Model
 				}
 
 				return $this->db->insert('tbl_siswa', $data);
+				return $this->db->insert('tbl_nilai', $data1);
 				break;
 
 			case 'id_baru':
