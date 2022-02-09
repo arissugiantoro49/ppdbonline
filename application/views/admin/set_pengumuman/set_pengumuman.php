@@ -42,7 +42,7 @@
                 <th>NISN</th>
                 <th>NIK</th>
                 <th>Nama Lengkap</th>
-                <th>Rata-rata Nilai Rapor</th>
+               <!-- <th>Rata-rata Nilai Rapor</th> -->
                 <th>Status Penerimaan</th>
                 <th class="text-center" width="220">Aksi</th>
               </tr>
@@ -56,8 +56,9 @@
                   <td><?php echo $baris->no_pendaftaran; ?></td>
                   <td><?php echo $baris->nisn; ?></td>
                   <td><?php echo $baris->nik; ?></td>
-                  <td><?php echo $baris->nama_lengkap; ?></td>
-                  <td><?php echo intval(($baris->matematika + $baris->ipa + $baris->bahasa_indonesia + $baris->pai) / 4); ?></td>
+                  <td><?php echo $baris->nama_lengkap; ?></td>              
+                 <!-- <td><?php echo intval(($baris->matematika + $baris->ipa + $baris->bahasa_indonesia + $baris->pai) / 4); ?></td>
+                  -->
                   <td align="center">
                     <?php if ($baris->status_pendaftaran == 'lulus') { ?>
                       <label class="label label-success">Di Terima</label>
