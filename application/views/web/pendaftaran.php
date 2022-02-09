@@ -58,7 +58,7 @@ $user = $this->db->get('tbl_user')->row_array();
         <div class="page-content page-wizard">
           <div class="header" style="margin-top:-20px; text-align: center;">
             <img src="img/logo.png" style="margin-bottom:10px;" width="100"><br>
-            <h2 align="center"> VERSI FINAL <br> 
+            <h2 align="center"> 
               FORM PENDAFTARAN PPDB ONLINE <strong> <br><?php echo $user['nama_lengkap']; ?></strong></h2>
             <hr style="margin-top:20px;">
           </div>
@@ -73,7 +73,7 @@ $user = $this->db->get('tbl_user')->row_array();
                           <legend>Ketentuan</legend>
                           <div class="col-md-2"></div>
                           <div class="col-md-8">
-                            <?php $this->load->view('web/step/0'); ?>
+                            <?php $this->load->view('web/step/1'); ?>
                             <div class="col-md-12">
                               <span class="text-primary" style="font-size:18px;color:#222;"><strong>Apakah Anda setuju dengan ketentuan PPDB Online diatas?</strong></span>
                               <div class="form-group" style="padding-bottom:30px;">
@@ -177,7 +177,7 @@ $user = $this->db->get('tbl_user')->row_array();
             <div class="footer">
               <div class="copyright">
                 <p class="pull-left sm-pull-reset">
-                  <span>Copyright &copy; <a href="#" target="_blank"><?php echo $user['nama_lengkap']; ?></a> <?php echo date('Y'); ?></span>
+                  <span> SKRIPSI FTI 2022- &copy; <a href="#" target="_blank"><?php echo $user['nama_lengkap']; ?></a> <?php echo date('Y'); ?></span>
                 </p>
                 <p class="pull-right sm-pull-reset">
                   <span><a href="" class="m-r-10"><i class="fa fa-home"></i> Beranda </a> | <a href="#" class="m-l-10 m-r-10" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-legal"></i> Ketentuan & Syarat PPDB</a></span>
