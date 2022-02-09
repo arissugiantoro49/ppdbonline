@@ -1,3 +1,5 @@
+
+
 <div class="panel">
   <div class="panel-heading" style="background: #275555ff; color: honeydew;">
     <h2 align="center" style="margin-top: 10px;">FORM ISIAN<br><b>DATA NILAI UJIAN</b> </h2>
@@ -41,7 +43,7 @@
         <div id="error-pai" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <!-- Lampiran Upload Berkas Nilai Raport -->
+    <!-- Lampiran Upload Berkas Nilai Raport 
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Lampiran Nilai Raport <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
@@ -50,9 +52,10 @@
         <div id="error-dokumen_kk" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-
+-->
+    
      <!-- Nilai USBN/UMBN -->
-
+<!--
     <h3 style="text-align:left; margin-top:6px;"><br><b>DATA NILAI USBN/UMBN</b> </h3>
    <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Matematika <span class="text-danger">*</span></label>
@@ -86,7 +89,10 @@
         <div id="error-pai" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-<!-- Lampiran Upload Berkas Nilai USBN/UMBN -->
+
+
+ Lampiran Upload Berkas Nilai USBN/UMBN 
+
 <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Lampiran Nilai USBN/UMBN <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
@@ -95,8 +101,10 @@
         <div id="error-dokumen_kk" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    
+    -->
+
     <!-- Ujian Akhir Tahun  -->
+    <!--
     <h3 style="text-align:left; margin-top:6px;"><br><b>DATA NILAI UJIAN AKHIR TAHUN</b> </h3>
    <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Matematika <span class="text-danger">*</span></label>
@@ -130,7 +138,7 @@
         <div id="error-pai" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-<!-- Lampiran Upload Berkas Ujian AKhir Tahun Semester -->
+ Lampiran Upload Berkas Ujian AKhir Tahun Semester 
 <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Lampiran Nilai Ujian Akhir Tahun <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
@@ -139,5 +147,6 @@
         <div id="error-dokumen_kk" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
+    -->
    </div>
 </div>
