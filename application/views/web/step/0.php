@@ -130,7 +130,7 @@
         <div id="error-pai" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-<!-- Lampiran Upload Berkas Ujian AKhir Tahun -->
+<!-- Lampiran Upload Berkas Ujian AKhir Tahun Semester -->
 <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Lampiran Nilai Ujian Akhir Tahun <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
