@@ -229,8 +229,6 @@
       </div>
     </div>
 
-
-
     <div class="form-group">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">No. Handphone/WA <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon" style="margin-top:3px;">
@@ -239,42 +237,8 @@
         <div id="error-no_hp_siswa" style=" background:#FFBABA; color: #D8000C; width:auto; padding-left:10px; font-size: 10px;"></div>
       </div>
     </div>
-    
-    <div class="form-group" style="padding-bottom:30px;">
-      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Matematika <span class="text-danger">*</span></label>
-      <div class="col-sm-9 prepend-icon">
-        <input type="text" name="matematika" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika"]' required>
-        <i class="fa fa-book" style="margin-left:15px;"></i>
-        <div id="error-matematika" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
-      </div>
-    </div>
 
-    <div class="form-group" style="padding-bottom:30px;">
-      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">IPA <span class="text-danger">*</span></label>
-      <div class="col-sm-9 prepend-icon">
-        <input type="text" name="ipa" class="form-control bg-blue" placeholder="Nilai IPA" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-ipa"]' required>
-        <i class="fa fa-book" style="margin-left:15px;"></i>
-        <div id="error-ipa" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
-      </div>
-    </div>
-
-    <div class="form-group" style="padding-bottom:30px;">
-      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Bahasa Indonesia <span class="text-danger">*</span></label>
-      <div class="col-sm-9 prepend-icon">
-        <input type="text" name="bahasa_indonesia" class="form-control bg-blue" placeholder="Nilai Bahasa Indonesia" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-bahasa_indonesia"]' required>
-        <i class="fa fa-book" style="margin-left:15px;"></i>
-        <div id="error-bahasa_indonesia" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
-      </div>
-    </div>
-
-    <div class="form-group" style="padding-bottom:30px;">
-      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">PAI <span class="text-danger">*</span></label>
-      <div class="col-sm-9 prepend-icon">
-        <input type="text" name="pai" class="form-control bg-blue" placeholder="Nilai PAI" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-pai"]' required>
-        <i class="fa fa-book" style="margin-left:15px;"></i>
-        <div id="error-pai" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
-      </div>
-    </div>
+    //Saya Hapus Nilai di sini
 
     <hr>
 
