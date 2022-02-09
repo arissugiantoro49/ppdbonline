@@ -73,7 +73,7 @@ $user = $this->db->get('tbl_user')->row_array();
                           <legend>Ketentuan</legend>
                           <div class="col-md-2"></div>
                           <div class="col-md-8">
-                            <?php $this->load->view('web/step/1'); ?>
+                            <?php $this->load->view('web/step/0'); ?>
                             <div class="col-md-12">
                               <span class="text-primary" style="font-size:18px;color:#222;"><strong>Apakah Anda setuju dengan ketentuan PPDB Online diatas?</strong></span>
                               <div class="form-group" style="padding-bottom:30px;">
@@ -95,6 +95,16 @@ $user = $this->db->get('tbl_user')->row_array();
                             <div class="col-md-2"></div>
                             <div class="col-md-8">
                               <?php $this->load->view('web/step/2'); ?>
+                            </div>
+                          </div>
+                          <div class="col-lg-12"></div>
+                        </fieldset>
+                        <fieldset>
+                          <legend>Data Nilai</legend>
+                          <div class="row">
+                            <div class="col-md-2"></div>
+                            <div class="col-md-8">
+                              <?php $this->load->view('web/step/0'); ?>
                             </div>
                           </div>
                           <div class="col-lg-12"></div>
