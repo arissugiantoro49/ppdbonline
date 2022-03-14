@@ -85,6 +85,7 @@ class Model_web extends CI_Model
 					'ipa'					=> $data1->post('ipa'),
 					'pai'					=> $data1->post('pai'),
 					'bahasa_indonesia'		=> $data1->post('bahasa_indonesia'),
+					'dokumen_raport'		=> $data1->Post('dokumen_raport')
 				);
 
 
@@ -95,6 +96,9 @@ class Model_web extends CI_Model
 				$data["dokumen_akte_kelahiran"] = $dokumen_akte_kelahiran;
 
 				$dokumen_skl = $this->upload_dokumen("dokumen_skl", $nis . "_skl");
+				$data["dokumen_skl"] = $dokumen_skl;
+
+				$dokumen_raport = $this->upload_raport("dokumen_raport", $nis . "_raport");
 				$data["dokumen_skl"] = $dokumen_skl;
 				
 				if (

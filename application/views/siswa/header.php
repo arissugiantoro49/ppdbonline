@@ -141,16 +141,16 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<li class="<?php if ($menu == 'panel_siswa' and $sub_menu == 'biodata') {
 												echo 'active';
 											} ?>">
-											<!-- <a href="panel_siswa/biodata"><i class="icon-file-check2"></i> <span><b>UJIAN SELEKSI</b></span></a></li> -->
-
+			<a href="panel_siswa/"><i class="icon-file-check2"></i> <span><b>UJIAN SELEKSI</b></span></a></li> 
+			<li><a href="panel_siswa/"><i class="icon-printer4"></i> <span>Rekap Nilai</span></a></li>
 								<li><a href="panel_siswa/cetak" target="_blank"><i class="icon-printer2"></i> <span><b>PRINT PENDAFTARAN</b></span></a></li>
-								<!--<li><a href="panel_siswa/rekap_nilai" target="_blank"><i class="icon-printer4"></i> <span>Rekap Nilai</span></a></li>-->
+		
 
 								<!-- /Main -->
 
 								<!-- Data Lainnya -->
 								<li class="navigation-header"><span><b>Lainnya</b></span> <i class="icon-menu" title="Data visualization"></i></li>
-								<!--<li><a href="files/Panduan_PPDB_Online_2.pdf"><i class="icon-file-download2"></i> <span>Download Panduan</span></a></li>-->
+								<li><a href="files/Panduan_PPDB_Online_2.pdf"><i class="icon-file-download2"></i> <span>Download Panduan</span></a></li>
 								<li><a href="panel_siswa/logout"><i class="icon-switch2"></i> <span><b>KELUAR</b></span></a></li>
 								<!-- /Data Lainnya -->
 

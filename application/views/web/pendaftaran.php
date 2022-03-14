@@ -99,6 +99,7 @@ $user = $this->db->get('tbl_user')->row_array();
                           </div>
                           <div class="col-lg-12"></div>
                         </fieldset>
+                        
                         <fieldset>
                           <legend>Data Nilai</legend>
                           <div class="row">
@@ -179,7 +180,7 @@ $user = $this->db->get('tbl_user')->row_array();
                 <p class="pull-left sm-pull-reset">
                   <span> SKRIPSI FTI 2022- &copy; <a href="#" target="_blank"><?php echo $user['nama_lengkap']; ?></a> <?php echo date('Y'); ?></span>
                 </p>
-                <p class="pull-right sm-pull-reset">
+                <p class="pull-right sm-pull-reset" >
                   <span><a href="" class="m-r-10"><i class="fa fa-home"></i> Beranda </a> | <a href="#" class="m-l-10 m-r-10" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fa fa-legal"></i> Ketentuan & Syarat PPDB</a></span>
                 </p>
               </div>

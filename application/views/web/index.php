@@ -144,6 +144,21 @@ $soa = $this->db->get('tbl_siswa');
                         <a href="#contact"><i class="fa fa-phone-square"></i> Kontak</a>
                     </li>
 
+                     <a href="logcs" class="btn btn-danger" style="margin: 5px; border-radius: 6px;">
+                                    <i class="fa fa-sign-in faa-pulse"></i> &nbsp;
+                                    <b><?php if ($ceks == '') {
+                                            echo "Login";
+                                        } else {
+                                            echo "Panel";
+                                        } ?> Siswa</b></a>
+                                       <a href="panel_admin/log_in" class="btn btn-warning" style="margin: 5px; border-radius: 6px;">
+                                    <i class="fa fa-sign-in faa-pulse"></i> &nbsp;
+                                    <b>
+                                        <?php if ($ceks == '') {
+                                            echo "Login";
+                                        } else {
+                                            echo "Panel";
+                                        } ?> ADMIN</b></a>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -176,22 +191,6 @@ $soa = $this->db->get('tbl_siswa');
                                     <i class="fa fa-list faa-pulse"></i> &nbsp;
                                     <b>KLIK DAFTAR</b>
                                 </a>
-                               
-                                <a href="logcs" class="btn btn-danger" style="margin: 5px; border-radius: 6px;">
-                                    <i class="fa fa-sign-in faa-pulse"></i> &nbsp;
-                                    <b><?php if ($ceks == '') {
-                                            echo "MASUK";
-                                        } else {
-                                            echo "Panel";
-                                        } ?> SISWA</b></a>
-                                       <a href="panel_admin/log_in" class="btn btn-warning" style="margin: 5px; border-radius: 6px;">
-                                    <i class="fa fa-sign-in faa-pulse"></i> &nbsp;
-                                    <b>
-                                        <?php if ($ceks == '') {
-                                            echo "MASUK";
-                                        } else {
-                                            echo "Panel";
-                                        } ?> ADMIN</b></a>
                                 <br>
                             </span>
                         <?php } else { ?>
