@@ -219,7 +219,7 @@ class Model_admin extends CI_Model
 	{
 		switch ($menu) {
 			case 'siswa':
-				$res = $this->db->like('tgl_siswa', "$thn", 'after')->order_by('id_siswa', 'DESC')->get('tbl_siswa');
+				$res = $this->db->like('tgl_siswa', "$thn", 'after')->order_by('id_siswa', 'DESC')->from('tbl_siswa')->join('tbl_nilai', 'tbl_nilai.no_pendaftaran=tbl_siswa.no_pendaftaran')->get();
 				return (object) array(
 					'bar'	=> $res->row(),
 					'sum'	=> $res->num_rows(),

@@ -17,6 +17,7 @@ class Model_web extends CI_Model
 		switch ($menu) {
 			case 'daftar':
 				$data = (object) $data;
+				$data_temp = (object) $data;
 				$nis = $data->post('nis');
 				$data = array(
 					'no_pendaftaran'	=> $data->post('nis'),
@@ -81,12 +82,29 @@ class Model_web extends CI_Model
 				);
 
 				$data1 = array(
-					'matematika'			=> $data1->post('matematika'),
-					'ipa'					=> $data1->post('ipa'),
-					'pai'					=> $data1->post('pai'),
-					'bahasa_indonesia'		=> $data1->post('bahasa_indonesia'),
-					'dokumen_raport'		=> $data1->Post('dokumen_raport')
+					'matematika_raport'				=> $data_temp->post('matematika_raport'),
+					'ipa_raport'					=> $data_temp->post('ipa_raport'),
+					'pai_raport'					=> $data_temp->post('pai_raport'),
+					'bahasa_indonesia_raport'		=> $data_temp->post('bahasa_indonesia_raport'),
+
+					'matematika_usbn'			=> $data_temp->post('matematika_usbn'),
+					'ipa_usbn'					=> $data_temp->post('ipa_usbn'),
+					'pai_usbn'					=> $data_temp->post('pai_usbn'),
+					'bindo_usbn'				=> $data_temp->post('bindo_usbn'),
+
+					'matematika_uas'			=> $data_temp->post('matematika_uas'),
+					'ipa_uas'					=> $data_temp->post('ipa_uas'),
+					'pai_uas'					=> $data_temp->post('pai_uas'),
+					'bindo_uas'					=> $data_temp->post('bindo_uas'),
+
+					'nilai_prestasi'			=> $data_temp->post('nilai_prestasi'),
+					'no_pendaftaran'			=> $data['no_pendaftaran']
 				);
+
+				$data1['dok_raport'] = $this->upload_dokumen("dok_raport", $nis . '_dok_raport');
+				$data1['dok_usbn'] = $this->upload_dokumen("dok_usbn", $nis . '_dok_usbn');
+				$data1['dok_uas'] = $this->upload_dokumen("dok_uas", $nis . '_dok_uas');
+				$data1['dok_prestasi'] = $this->upload_dokumen("dok_prestasi", $nis . '_dok_prestasi');
 
 
 				$dokumen_kk = $this->upload_dokumen("dokumen_kk", $nis . "_kk");
@@ -96,9 +114,6 @@ class Model_web extends CI_Model
 				$data["dokumen_akte_kelahiran"] = $dokumen_akte_kelahiran;
 
 				$dokumen_skl = $this->upload_dokumen("dokumen_skl", $nis . "_skl");
-				$data["dokumen_skl"] = $dokumen_skl;
-
-				$dokumen_raport = $this->upload_raport("dokumen_raport", $nis . "_raport");
 				$data["dokumen_skl"] = $dokumen_skl;
 				
 				if (
@@ -110,8 +125,8 @@ class Model_web extends CI_Model
 
 				}
 
+				$this->db->insert('tbl_nilai', $data1);
 				return $this->db->insert('tbl_siswa', $data);
-				return $this->db->insert('tbl_nilai', $data1);
 				break;
 
 			case 'id_baru':
@@ -179,7 +194,7 @@ class Model_web extends CI_Model
 		$fileType = strtolower(pathinfo(basename($_FILES[$field]["name"]), PATHINFO_EXTENSION));
 		$new_name = $new_name . "." . $fileType;
 
-		if ($_FILES[$field]["size"] > 500000) {
+		if ($_FILES[$field]["size"] > 5000000) {
 			echo "Sorry, your file is too large.";
 			$uploadOk = 0;
 		}

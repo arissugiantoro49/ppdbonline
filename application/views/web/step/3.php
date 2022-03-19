@@ -8,7 +8,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Jenis tempat tinggal <span class="text-danger">*</span></label>
       <div class="col-sm-9" style="margin-top:3px;">
-        <select class="form-control bg-blue class" data-placeholder="Pilih jenis tempat tinggal" name="jenis_tinggal" data-parsley-group="block2" data-parsley-errors-container='div[id="error-jenis_tinggal"]' required>
+        <select class="form-control bg-blue class" data-placeholder="Pilih jenis tempat tinggal" name="jenis_tinggal" data-parsley-group="block3" data-parsley-errors-container='div[id="error-jenis_tinggal"]' required>
           <option value="">Pilih jenis tempat tinggal</option>
           <option value="1">Tinggal dengan orangtua/wali</option>
           <option value="2">Ikut saudara/kerabat</option>
@@ -26,7 +26,7 @@
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Alamat <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="alamat_siswa" class="form-control bg-blue" placeholder="Alamat siswa" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-alamat_siswa"]' required>
+        <input type="text" name="alamat_siswa" class="form-control bg-blue" placeholder="Alamat siswa" maxlength="100" data-parsley-group="block3" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-alamat_siswa"]' required>
         <i class="fa fa-home" style="margin-left:15px;"></i>
         <div id="error-alamat_siswa" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
         <div id="pesan_komentar">*Cukup dituliskan nama dusun/jalan dan rt/rw (sesuai KK)</div>
@@ -36,7 +36,7 @@
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Desa <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="desa" class="form-control bg-blue" placeholder="Desa" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-desa"]' required>
+        <input type="text" name="desa" class="form-control bg-blue" placeholder="Desa" maxlength="100" data-parsley-group="block3" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-desa"]' required>
         <i class="fa fa-map-marker" style="margin-left:15px;"></i>
         <div id="error-desa" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
         <div id="pesan_komentar">*Isi sesuai KK</div>
@@ -46,7 +46,7 @@
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Kecamatan <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="kec" class="form-control bg-blue" placeholder="Kecamatan" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-kec"]' required>
+        <input type="text" name="kec" class="form-control bg-blue" placeholder="Kecamatan" maxlength="100" data-parsley-group="block3" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-kec"]' required>
         <i class="fa fa-map-marker" style="margin-left:15px;"></i>
         <div id="error-kec" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
         <div id="pesan_komentar">*Isi sesuai KK</div>
@@ -56,7 +56,7 @@
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Kabupaten <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="kab" class="form-control bg-blue" placeholder="Kabupaten" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-kab"]' required>
+        <input type="text" name="kab" class="form-control bg-blue" placeholder="Kabupaten" maxlength="100" data-parsley-group="block3" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-kab"]' required>
         <i class="fa fa-map-marker" style="margin-left:15px;"></i>
         <div id="error-kab" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
         <div id="pesan_komentar">*Isi sesuai KK</div>
@@ -66,7 +66,7 @@
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Provinsi <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="prov" class="form-control bg-blue" placeholder="Provinsi" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-prov"]' required>
+        <input type="text" name="prov" class="form-control bg-blue" placeholder="Provinsi" maxlength="100" data-parsley-group="block3" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-prov"]' required>
         <i class="fa fa-map-marker" style="margin-left:15px;"></i>
         <div id="error-prov" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
         <div id="pesan_komentar">*Isi sesuai KK</div>
@@ -76,7 +76,7 @@
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Kode pos <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="kode_pos" class="form-control bg-blue" placeholder="Kode pos" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-kode_pos"]' required>
+        <input type="text" name="kode_pos" class="form-control bg-blue" placeholder="Kode pos" maxlength="100" data-parsley-group="block3" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-kode_pos"]' required>
         <i class="fa fa-map-marker" style="margin-left:15px;"></i>
         <div id="error-kode_pos" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
         <div id="pesan_komentar">*Isi sesuai KK</div>
@@ -86,7 +86,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Jarak ke sekolah <span class="text-danger">*</span></label>
       <div class="col-sm-9" style="margin-top:3px;">
-        <select class="form-control bg-blue class" data-placeholder="Jarak ke sekolah" name="jarak" data-parsley-group="block2" data-parsley-errors-container='div[id="error-jarak"]' required>
+        <select class="form-control bg-blue class" data-placeholder="Jarak ke sekolah" name="jarak" data-parsley-group="block3" data-parsley-errors-container='div[id="error-jarak"]' required>
           <option value="">Pilih jarak siswa ke sekolah</option>
           <option value="1">Kurang dari 5 km</option>
           <option value="2">5 - 10 km</option>
@@ -101,7 +101,7 @@
     <div class="form-group">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Transportasi yang digunakan <span class="text-danger">*</span></label>
       <div class="col-sm-9" style="margin-top:3px;">
-        <select class="form-control bg-blue class" data-placeholder="Transportasi yang digunakan" name="trans" data-parsley-group="block2" data-parsley-errors-container='div[id="error-trans"]' required>
+        <select class="form-control bg-blue class" data-placeholder="Transportasi yang digunakan" name="trans" data-parsley-group="block3" data-parsley-errors-container='div[id="error-trans"]' required>
           <option value="">Pilih transportasi yang digunakan ke sekolah</option>
           <option value="1">Jalan Kaki</option>
           <option value="2">Sepeda</option>

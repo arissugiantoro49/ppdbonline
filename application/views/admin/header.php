@@ -161,7 +161,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 											<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') {
 												echo 'active';
 											} ?>">
-											<!--<a href="#"><i class="icon-file-check"></i> <span><b>REKAP NILAI SELEKSI</b></span></a></li> -->
+											<a href="panel_admin/rekap_nilai_admin"><i class="icon-file-check"></i> <span><b>REKAP NILAI SISWA</b></span></a></li> 
 
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'set_pengumuman') {
 												echo 'active';

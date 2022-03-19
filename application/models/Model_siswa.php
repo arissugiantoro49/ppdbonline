@@ -9,6 +9,11 @@ class Model_siswa extends CI_Model
 		return $this->db->get_where('tbl_siswa', "no_pendaftaran='$sess'")->row();
 	}
 
+	function cek_nilai($sess)
+	{
+		return $this->db->get_where('tbl_nilai', "no_pendaftaran='$sess'")->row();
+	}
+
 	function ubah_biodata()
 	{
 		$data = array(
@@ -66,6 +71,42 @@ class Model_siswa extends CI_Model
 		return $this->db->update('tbl_siswa', $data, array('no_pendaftaran' => $data['no_pendaftaran']));
 	}
 
+	function ubah_nilai()
+	{
+		$data = array(
+			'matematika_raport'		=> $this->input->post('matematika_raport'),
+			'ipa_raport'					=> $this->input->post('ipa_raport'),
+			'pai_raport'					=> $this->input->post('pai_raport'),
+			'bahasa_indonesia_raport'		=> $this->input->post('bahasa_indonesia_raport'),
+
+			'matematika_usbn'			=> $this->input->post('matematika_usbn'),
+			'ipa_usbn'					=> $this->input->post('ipa_usbn'),
+			'pai_usbn'					=> $this->input->post('pai_usbn'),
+			'bindo_usbn'				=> $this->input->post('bindo_usbn'),
+
+			'matematika_uas'			=> $this->input->post('matematika_uas'),
+			'ipa_uas'					=> $this->input->post('ipa_uas'),
+			'pai_uas'					=> $this->input->post('pai_uas'),
+			'bindo_uas'					=> $this->input->post('bindo_uas'),
+
+			'nilai_prestasi'			=> $this->input->post('nilai_prestasi'),
+		);
+
+		$no_pendaftaran = $this->input->post('no_pendaftaran');
+		$fields = ["dok_uas", "dok_usbn", "dok_raport", "dok_prestasi"];
+
+		foreach ($fields as $field) {
+			if (
+				!$_FILES[$field]['name'] == "" &&
+				!$_FILES[$field]['size'] == 0
+			) {
+				$file_name = $this->upload_dokumen($field, $no . "_$field");
+				$data[$field] = $file_name;
+			}
+		}
+		return $this->db->update('tbl_nilai', $data, array('no_pendaftaran' => $no_pendaftaran));
+	}
+
 	private function upload_dokumen($field, $new_name)
 	{
 		$uploadOk = 1;
@@ -90,6 +131,11 @@ class Model_siswa extends CI_Model
 	function get_data()
 	{
 		return json_encode($this->db->get_where('tbl_siswa', "no_pendaftaran='" . $this->session->userdata('no_pendaftaran') . "'")->row());
+	}
+
+	function get_nilai()
+	{
+		return json_encode($this->db->get_where('tbl_nilai', "no_pendaftaran='" . $this->session->userdata('no_pendaftaran') . "'")->row());
 	}
 
 	function get_fy()

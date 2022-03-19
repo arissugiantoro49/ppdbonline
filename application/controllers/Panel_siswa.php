@@ -57,12 +57,25 @@ class Panel_siswa extends CI_Controller
 		echo $this->siswa->get_data();
 	}
 
+	public function data_nilai() {
+		echo $this->siswa->get_nilai();
+	}
+
 	public function ubah_biodata() {
 		if ($this->session->userdata('no_pendaftaran') == NULL) {
 			redirect('logcs');
 		} else {
 			$this->siswa->ubah_biodata();
 			redirect('panel_siswa/biodata?edit=success');
+		}
+	}
+
+	public function ubah_nilai() {
+		if ($this->session->userdata('no_pendaftaran') == NULL) {
+			redirect('logcs');
+		} else {
+			$this->siswa->ubah_nilai();
+			redirect('panel_siswa/rekap_nilai?edit=success');
 		}
 	}
 
@@ -122,45 +135,18 @@ class Panel_siswa extends CI_Controller
 	{
 		if ($this->session->userdata('no_pendaftaran') == NULL) {
 			redirect('logcs');
+		} else {
+			$sess = $this->session->userdata('no_pendaftaran');
+			$data = array(
+				'user'		=> $this->siswa->base_biodata($sess),
+				'nilai'		=> $this->siswa->cek_nilai($sess),
+				'judul_web'	=> "BIODATA"
+			);
+
+			$this->load->view('siswa/header', $data);
+			$this->load->view('siswa/rekap_nilai', $data);
+			$this->load->view('siswa/footer');
 		}
-
-		$sess 		= $this->session->userdata('no_pendaftaran');
-		$base_bio 	= $this->siswa->base_biodata($sess);
-
-		$data = array(
-			'user'			=> $base_bio,
-			'judul_web'		=> "Cetak Rekap Nilai " . ucwords($base_bio->nama_lengkap),
-			'thn_ppdb'		=> $this->siswa->get_fy(),
-			'nilai_rapor'	=> $this->siswa->get_print('study-report', $sess)->rata_rata_nilai,
-			'rapor'			=> array(
-				'sci'	=> $this->siswa->get_val('rapor', $sess, "Ilmu Pengetahuan Alam (IPA)"),
-				'soc'	=> $this->siswa->get_val('rapor', $sess, "Ilmu Pengetahuan Sosial (IPS)"),
-				'mat'	=> $this->siswa->get_val('rapor', $sess, "Matematika"),
-				'ind'	=> $this->siswa->get_val('rapor', $sess, "Bahasa Indonesia"),
-				'eng'	=> $this->siswa->get_val('rapor', $sess, "Bahasa Inggris"),
-				'rlg'	=> $this->siswa->get_val('rapor', $sess, "Pendidikan Agama"),
-				'nat'	=> $this->siswa->get_val('rapor', $sess, "PKN")
-			),
-			'nilai_usbn'	=> $this->siswa->get_print('schtest-val', $sess)->nilai_usbn,
-			'usbn'			=> array(
-				'sci'	=> $this->siswa->get_val('usbn', $sess, "Ilmu Pengetahuan Alam (IPA)"),
-				'soc'	=> $this->siswa->get_val('usbn', $sess, "Ilmu Pengetahuan Sosial (IPS)"),
-				'mat'	=> $this->siswa->get_val('usbn', $sess, "Matematika"),
-				'ind'	=> $this->siswa->get_val('usbn', $sess, "Bahasa Indonesia"),
-				'eng'	=> $this->siswa->get_val('usbn', $sess, "Bahasa Inggris"),
-				'rlg'	=> $this->siswa->get_val('usbn', $sess, "Pendidikan Agama"),
-				'nat'	=> $this->siswa->get_val('usbn', $sess, "PKN")
-			),
-			'nilai_unbk'	=> $this->siswa->get_print('nattest-val', $sess)->nilai_unbk,
-			'unbk'			=> array(
-				'sci'	=> $this->siswa->get_val('unbk', $sess, "Ilmu Pengetahuan Alam (IPA)"),
-				'mat'	=> $this->siswa->get_val('unbk', $sess, "Matematika"),
-				'ind'	=> $this->siswa->get_val('unbk', $sess, "Bahasa Indonesia"),
-				'eng'	=> $this->siswa->get_val('unbk', $sess, "Bahasa Inggris")
-			),
-		);
-
-		$this->load->view('siswa/rekap_nilai', $data);
 	}
 
 	public function cetak_lulus()

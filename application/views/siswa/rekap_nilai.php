@@ -1,221 +1,329 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title><?php echo $judul_web; ?></title>
-    <base href="<?php echo base_url();?>"/>
-  	<link rel="icon" type="image/png" href="img/logo.png"/>
-    <style>
-    table {
-        border-collapse: collapse;
-    }
-    thead > tr{
-      background-color: #0070C0;
-      color:#f1f1f1;
-    }
-    thead > tr > th{
-      background-color: #0070C0;
-      color:#fff;
-      padding: 10px;
-      border-color: #fff;
-    }
-    th, td {
-      padding: 2px;
-    }
+<style>
+  #tbl_input {
+    width: 50px;
+    text-align: center;
+  }
 
-    th {
-        color: #222;
-    }
-    body{
-      font-family:Calibri;
-    }
-    </style>
-  </head>
-  <body onload="window.print();">
-    <?php $this->load->view('kop_lap'); ?>
-    <h4 align="center" style="margin-top:0px;"><u>REKAPITULASI NILAI</u></h4>
-    <br>
+  #tbl_input2 {
+    width: 100px;
+    text-align: center;
+  }
 
-    <table width="100%" border="0">
-      <tr>
-        <td width="200">NO. PENDAFTARAN</td>
-        <td width="1">:</td>
-        <td><b><i><?php echo $user->no_pendaftaran; ?></i></b></td>
-      </tr>
-      <tr>
-        <td>TANGGAL PENDAFTARAN </td>
-        <td>:</td>
-        <td><?php echo $this->lib_data->tgl_id(date('d-m-Y', strtotime($user->tgl_siswa))); ?></td>
-      </tr>
-      <tr>
-        <td>TANGGAL CETAK </td>
-        <td>:</td>
-        <td><?php echo $this->lib_data->tgl_id(date('d-m-Y')); ?></td>
-      </tr>
-      <tr>
-        <td>NIS</td>
-        <td>:</td>
-        <td><?php echo $user->nis; ?></td>
-      </tr>
-      <tr>
-        <td>NISN</td>
-        <td>:</td>
-        <td><?php echo $user->nisn; ?></td>
-      </tr>
-      <tr>
-        <td>NIK</td>
-        <td>:</td>
-        <td><?php echo $user->nik; ?></td>
-      </tr>
-      <tr>
-        <td>NAMA LENGKAP</td>
-        <td>:</td>
-        <td><?php echo ucwords($user->nama_lengkap); ?></td>
-      </tr>
-      <tr>
-        <td>JENIS KELAMIN</td>
-        <td>:</td>
-        <td><?php echo $user->jk; ?></td>
-      </tr>
-      <tr>
-        <td>TEMPAT, TANGGAL LAHIR</td>
-        <td>:</td>
-        <td><?php echo "$user->tempat_lahir, ".$this->lib_data->tgl_id($user->tgl_lahir); ?></td>
-      </tr>
-      <tr>
-        <td>ASAL SEKOLAH</td>
-        <td>:</td>
-        <td><?php echo ucwords($user->nama_sekolah); ?></td>
-      </tr>
-    </table>
-    <br>
+  #th_center>th {
+    text-align: center;
+  }
 
-    <table width="100%" border="1">
-      <tr>
-        <th rowspan="2">Mata Pelajaran</th>
-        <th colspan="5">Nilai Rapor Semester</th>
-        <th rowspan="2">Rata - Rata<br>Rapor</th>
-        <th rowspan="2">Nilai USBN</th>
-        <th rowspan="2">Nilai<br>UNBK/UNKP</th>
-      </tr>
-      <tr>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-        <th>5</th>
-      </tr>
-      <tr align="center">
-        <td align="left">Ilmu Pengetahuan Alam (IPA)</td>
-        <td><?php echo number_format($rapor['sci']['semester1'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['sci']['semester2'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['sci']['semester3'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['sci']['semester4'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['sci']['semester5'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['sci']['rata_rata_nilai'],2,",","."); ?></td>
-        <td><?php echo number_format($usbn['sci'],2,",","."); ?></td>
-        <td><?php echo number_format($unbk['sci'],2,",","."); ?></td>
-      </tr>
-      <tr align="center">
-        <td align="left">Ilmu Pengetahuan Sosial (IPS)</td>
-        <td><?php echo number_format($rapor['soc']['semester1'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['soc']['semester2'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['soc']['semester3'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['soc']['semester4'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['soc']['semester5'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['soc']['rata_rata_nilai'],2,",","."); ?></td>
-        <td><?php echo number_format($usbn['soc'],2,",","."); ?></td>
-        <td>-</td>
-      </tr>
-      <tr align="center">
-        <td align="left">Matematika</td>
-        <td><?php echo number_format($rapor['mat']['semester1'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['mat']['semester2'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['mat']['semester3'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['mat']['semester4'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['mat']['semester5'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['mat']['rata_rata_nilai'],2,",","."); ?></td>
-        <td><?php echo number_format($usbn['mat'],2,",","."); ?></td>
-        <td><?php echo number_format($unbk['mat'],2,",","."); ?></td>
-      </tr>
-      <tr align="center">
-        <td align="left">Bahasa Indonesia</td>
-        <td><?php echo number_format($rapor['ind']['semester1'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['ind']['semester2'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['ind']['semester3'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['ind']['semester4'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['ind']['semester5'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['ind']['rata_rata_nilai'],2,",","."); ?></td>
-        <td><?php echo number_format($usbn['ind'],2,",","."); ?></td>
-        <td><?php echo number_format($unbk['ind'],2,",","."); ?></td>
-      </tr>
-      <tr align="center">
-        <td align="left">Bahasa Inggris</td>
-        <td><?php echo number_format($rapor['eng']['semester1'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['eng']['semester2'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['eng']['semester3'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['eng']['semester4'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['eng']['semester5'],2,",","."); ?></td>
-        <td><?php echo number_format($rapor['eng']['rata_rata_nilai'],2,",","."); ?></td>
-        <td><?php echo number_format($usbn['eng'],2,",","."); ?></td>
-        <td><?php echo number_format($unbk['eng'],2,",","."); ?></td>
-      </tr>
-      <tr align="center">
-        <td align="left">Pendidikan Agama</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td><?php echo number_format($usbn['rlg'],2,",","."); ?></td>
-        <td>-</td>
-      </tr>
-      <tr align="center">
-        <td align="left">PKN</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td>-</td>
-        <td><?php echo number_format($usbn['nat'],2,",","."); ?></td>
-        </td>
-        <td>-</td>
-      </tr>
-      <tr>
-        <th colspan="6">Jumlah</th>
-        <th><?php echo number_format($nilai_rapor,2,",","."); ?></th>
-        <th><?php echo number_format($nilai_usbn,2,",","."); ?></th>
-        <th><?php echo number_format($nilai_unbk,2,",","."); ?></th>
-      </tr>
-      <tr>
-        <th colspan="6">Rata - Rata</th>
-        <th><?php echo number_format($nilai_rapor / 5,2,",","."); ?></th>
-        <th><?php echo number_format($nilai_usbn / 7,2,",","."); ?></th>
-        <th><?php echo number_format($nilai_unbk / 4,2,",","."); ?></th>
-      </tr>
-    </table>
-    <br><br>
+  .d-none {
+    display: none;
+  }
 
-    <div style="float:right;margin-right:100px;">
-      ..............,...................<?php echo date('Y'); ?><br>
-			Orang Tua / Wali  <br>
-      <br><br><br>
-      .............................................
+  .mr-1 {
+    margin-right: 1rem;
+  }
+
+  .ml-2 {
+    margin-left: 2rem;
+  }
+</style>
+
+<?php
+error_reporting(0);
+$user = $user; ?>
+<!-- Main content -->
+<div class="content-wrapper">
+
+  <!-- Content area -->
+  <div class="content">
+
+    <!-- Dashboard content -->
+    <div class="row">
+      <form action="./panel_siswa/ubah_nilai" enctype="multipart/form-data" method="post" id="ubah_nilai">
+        <div class="col-md-7">
+          <div class="panel panel-flat">
+            <div class="panel-body">
+              <fieldset class="content-group">
+                <legend class="text-bold"><i class="icon-user"></i>
+                  <span class="mr-1">BIODATA NILAI SISWA</span>
+                  <?php
+                  if ($this->input->get("edit") === "success") {
+                    echo '<p class="badge bg-success">Berhasil mengubah biodata</p>';
+                  }
+                  ?>
+                </legend>
+                <div>
+                  <button type="button" class="btn btn-warning" id="ubah">Ubah</button>
+                  <button type="button" class="btn btn-secondary d-none" id="batal">Batal</button>
+                  <button type="submit" class="btn btn-primary d-none" id="simpan">Simpan</button>
+                  <button type="button" class="btn btn btn-default ml-2" data-toggle="modal" data-target="#modalDokumen">Lihat Dokumen</button>
+                 
+                </div>
+                <!-- Modal Dokumen -->
+                <div class="modal fade" id="modalDokumen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="modalDokumenLabel">Daftar Dokumen</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p><strong>Dokumen Raport</strong></p>
+                          <p id="info_dok_raport">Tidak ada</p>
+                          <embed id="embed_dok_raport" width="100%">
+
+                          <p style="margin-top: 2em"><strong>Dokumen USBN/UMBN</strong></p>
+                          <p id="info_dok_usbn">Tidak ada</p>
+                          <embed id="embed_dok_usbn" width="100%">
+
+                          <p style="margin-top: 2em"><strong>Dokumen UAS</strong></p>
+                          <p id="info_dok_uas">Tidak ada</p>
+                          <embed id="embed_dok_uas" width="100%">
+
+                          <p style="margin-top: 2em"><strong>Dokumen Prestasi</strong></p>
+                          <p id="info_dok_prestasi">Tidak ada</p>
+                          <embed id="embed_dok_prestasi" width="100%">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <script>
+                    $('#modalDokumen').on('show.bs.modal', function(e) {
+                      const fields = ["dok_raport", "dok_usbn", "dok_uas", "dok_prestasi"]
+
+                      fields.forEach(v => {
+                        $("#embed_" + v)[0].src = ""
+                        $("#embed_" + v)[0].style.height = "";
+                        $("#embed_" + v)[0].style.display = "none"
+                        $("#info_" + v)[0].style.display = "none"
+                      })
+
+                      fetch("panel_siswa/data_nilai")
+                        .then(response => response.json())
+                        .then(result => {
+                          fields.forEach(v => {
+                            if (result[v] && result[v] !== "") {
+                              $("#embed_" + v)[0].src = "uploads/dokumen/" + result[v]
+                              if (result[v].split(".").pop() === "pdf") {
+                                $("#embed_" + v)[0].style.height = "550px";
+                              }
+                              $("#embed_" + v)[0].style.display = "block"
+                            } else {
+                              $("#info_" + v)[0].style.display = "block"
+                            }
+                          })
+                        })
+                    })
+                  </script>
+                <br>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped">
+                    <br>
+                    <span class="mr-1 text-bold">Nilai Raport</span>
+                    <br>
+                    <input type="hidden" name="no_pendaftaran" value="<?php echo $user->no_pendaftaran; ?>">
+                    <tr>
+                      <th width="20%">Matematika</th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="matematika_raport" class="form-control" value="<?php echo $nilai->matematika_raport; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">IPA</th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="ipa_raport" class="form-control" value="<?php echo $nilai->ipa_raport; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">Bahasa Indonesia</th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="bahasa_indonesia_raport" class="form-control" value="<?php echo $nilai->bahasa_indonesia_raport; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">PAI</th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="pai_raport" class="form-control" value="<?php echo $nilai->pai_raport; ?>" disabled></td>
+                    </tr>
+                    <tr>
+                      <th width="20%">Rata Rata</th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="avg_raport" class="form-control" value="<?php echo 
+                      ($nilai->matematika_raport + $nilai->ipa_raport + $nilai->bahasa_indonesia_raport + $nilai->pai_raport) / 4  ; ?>" disabled></td>
+                    </tr>
+                    
+                    
+                    
+              
+                  </table>
+                  <table class="table table-bordered table-striped">
+                    <br>
+                    <span class="mr-1 text-bold">BIODATA NILAI USBN/UMBK</span>
+                    <br>
+
+                    <tr>
+                      <th width="20%">Matematika </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="matematika_usbn" class="form-control" value="<?php echo $nilai->matematika_usbn; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">IPA </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="ipa_usbn" class="form-control" value="<?php echo $nilai->ipa_usbn; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">Bahasa Indonesia </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="bindo_usbn" class="form-control" value="<?php echo $nilai->bindo_usbn; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">PAI </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="pai_usbn" class="form-control" value="<?php echo $nilai->pai_usbn; ?>" disabled></td>
+                    </tr>
+                   <tr>
+                      <th width="20%">Rata Rata</th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="avg_usbn" class="form-control" value="<?php echo 
+                      ($nilai->matematika_usbn + $nilai->ipa_usbn + $nilai->bindo_usbn + $nilai->pai_usbn) / 4  ; ?>" disabled></td>
+                    </tr>
+              
+                  </table>
+                   <table class="table table-bordered table-striped">
+                    <br>
+                    <span class="mr-1 text-bold">BIODATA NILAI UAS</span>
+                    <br>
+
+                    <tr>
+                      <th width="20%">Matematika </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="matematika_uas" class="form-control" value="<?php echo $nilai->matematika_uas; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">IPA </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="ipa_uas" class="form-control" value="<?php echo $nilai->ipa_uas; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">Bahasa Indonesia </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="bindo_uas" class="form-control" value="<?php echo $nilai->bindo_uas; ?>" disabled></td>
+                    </tr>
+                     <tr>
+                      <th width="20%">PAI </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="pai_uas" class="form-control" value="<?php echo $nilai->pai_uas; ?>" disabled></td>
+                    </tr>
+                   <tr>
+                      <th width="20%">Rata Rata</th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="avg_uas" class="form-control" value="<?php echo 
+                      ($nilai->matematika_uas + $nilai->ipa_uas + $nilai->bindo_uas + $nilai->pai_uas) / 4  ; ?>" disabled></td>
+                    </tr>
+              
+                  </table>
+                   <table class="table table-bordered table-striped">
+                    <br>
+                    <span class="mr-1 text-bold">BIODATA NILAI PRESTASI</span>
+                    <br>
+
+                    <tr>
+                      <th width="20%">Nilai Prestasi </th>
+                      <th width="1%">:</th>
+                      <td><input type="text" name="nilai_prestasi" class="form-control" value="<?php echo $nilai->nilai_prestasi; ?>" disabled></td>
+                    </tr>
+                     
+              
+                  </table>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="panel panel-flat">
+            <div class="panel-body">
+              <center>
+                <img src="img/logo.png" alt="<?php echo $user->nama_lengkap; ?>" class="" width="176">
+              </center>
+              <br>
+              <fieldset class="content-group">
+                <hr style="margin-top:0px;">
+                <b>Tanggal Daftar</b> : <br>
+                <?php echo $this->lib_data->tgl_id(date('d-m-Y H:i:s', strtotime($user->tgl_siswa))); ?>
+                <hr>
+                <b>No. Pendaftaran : </b><?php echo $user->no_pendaftaran; ?>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-5">
+          <div class="panel panel-flat">
+            <div class="panel-body">
+              <fieldset class="content-group">
+                <legend class="text-bold"><i class="icon-file-text"></i> Dokumen</legend>
+                <div class="table-responsive">
+                  <table class="table table-bordered table-striped">
+                    <tr>
+                      <th width="30%">Dokumen Raport <span class="text-danger">*</span></th>
+                      <th width="1%">:</th>
+                      <td>
+                        <input type="file" name="dok_raport" class="form-control" accept="application/pdf, image/*" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th width="30%"> Dokumen USBN/UMBN <span class="text-danger">*</span></th>
+                      <th width="1%">:</th>
+                      <td>
+                        <input type="file" name="dok_usbn" accept="application/pdf, image/*" class="form-control" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th width="30%">Dokumen UAS <span class="text-danger">*</span></th>
+                      <th width="1%">:</th>
+                      <td>
+                        <input type="file" name="dok_uas" accept="application/pdf, image/*" class="form-control" disabled>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th width="30%">Dokumen Prestasi</th>
+                      <th width="1%">:</th>
+                      <td>
+                        <input type="file" name="dok_prestasi" accept="application/pdf, image/*" class="form-control" disabled>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+
+  
+      </form>
     </div>
-    <br><br><br><br><br><br><br><br>
+    <!-- /dashboard content -->
 
-    <table width="100%" border="0" style="margin-left:5px;">
-      <tr>
-        <td valign="top" width="1">1.</td>
-        <td>Semua data nilai yang di masukan adalah benar dan sesuai dengan nilai asli.</td>
-      </tr>
-      <tr>
-        <td valign="top">2.</td>
-        <td align="justify">Apabila ditemukan data nilai yang telah saya berikan tidak benar, maka saya bersedia dikenakan sanksi dan atau di diskualifikasi dari seleksi Penerimaan Peserta Didik Baru (PPDB) MTs Umar Zahid Semelo Tahun Pelajaran 2021-2022 <?php echo $thn_ppdb; ?>.</td>
-      </tr>
-    </table>
+    <script>
 
-  </body>
-</html>
+      const form = document.forms["ubah_nilai"]
+
+      function toggle() {
+        btnUbah.classList.toggle("d-none")
+        btnBatal.classList.toggle("d-none")
+        btnSimpan.classList.toggle("d-none")
+
+        const list = ["matematika_raport", "ipa_raport", "bahasa_indonesia_raport" , "pai_raport", "matematika_usbn", "ipa_usbn", "bindo_usbn", "pai_usbn", "matematika_uas", "ipa_uas", "bindo_uas", "pai_uas", "nilai_prestasi", "dok_uas", "dok_usbn", "dok_raport", "dok_prestasi"  ]
+        list.forEach(e => {
+          form[e].toggleAttribute("disabled")
+        })
+      }
+
+      const btnUbah = document.getElementById("ubah");
+      const btnBatal = document.getElementById("batal");
+      const btnSimpan = document.getElementById("simpan");
+
+      btnUbah.onclick = toggle
+      btnBatal.onclick = toggle
+
+      
+    </script>
