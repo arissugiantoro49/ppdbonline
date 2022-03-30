@@ -1,5 +1,5 @@
 <!-- Main content -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
 <div class="content-wrapper">
   <!-- Content area -->
   <div class="content">
@@ -20,7 +20,7 @@
           </div>
 
           <br>
-<a  href="panel_admin/edit_materi" class="btn btn-danger"><b>INFORMASI JADWAL UJIAN</b></a>
+ <a href="panel_admin/edit_materi" class="btn btn-danger"><b>INFORMASI JADWAL UJIAN</b></a>
           <div class="col-md-3" style="float: right; margin-right: 25px;">
             <div class="input-group">
               <div class="input-group-addon"><i class="icon-calendar22"></i></div>
@@ -57,17 +57,100 @@
                   <td><?php echo $no++; ?></td>
                   <td><?php echo $baris->nisn; ?></td>
                   <td><?php echo $baris->nama_lengkap; ?></td> 
+                  
                   <td>
                   <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#modal-nilai-raport-<?= $baris->nisn ?>"><?php echo ($baris->matematika_raport + $baris->ipa_raport + $baris->bahasa_indonesia_raport + $baris->pai_raport) / 4; ?></button>
                   <div class="modal fade" id="modal-nilai-raport-<?= $baris->nisn ?>">
                     <div class="modal-dialog modal-sm">
                       <div class="modal-content">
                         <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
                         <h4 class="modal-title" id="gridSystemModalLabel">Detail Nilai Raport</h4>
                         </div>
                         <div class="modal-body">
-                          test
+                         <h6>Matematika : 
+                          <?php echo ($baris->matematika_raport); ?> </h6>
+                         <h6>Ilmu Pengetahuan Alam :  
+                          <?php echo ($baris->ipa_raport ); ?> </h6>
+                          <h6>Bahasa Indonesia : 
+                          <?php echo ($baris->bahasa_indonesia_raport ); ?></h6>
+                          <h6>Pendidikan Agama Islam : 
+                          <?php echo ($baris->pai_raport ); ?> </h6>
+                          <h6 class="modal-title" id="gridSystemModalLabel">Rata-rata :
+                          <?php echo ($baris->matematika_raport + $baris->ipa_raport + $baris->bahasa_indonesia_raport + $baris->pai_raport) / 4; ?> </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+                  
+                  <td>
+                  <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#modal-nilai-usbn-<?= $baris->nisn ?>"> <?php echo ($baris->matematika_usbn + $baris->ipa_usbn + $baris->bindo_usbn + $baris->pai_usbn) / 4; ?></button>
+                  <div class="modal fade" id="modal-nilai-usbn-<?= $baris->nisn ?>">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Detail Nilai USBN/UMBN</h4>
+                        </div>
+                        <div class="modal-body">
+                         <h6>Matematika : 
+                          <?php echo ($baris->matematika_usbn); ?> </h6>
+                         <h6>Ilmu Pengetahuan Alam :  
+                          <?php echo ($baris->ipa_usbn ); ?> </h6>
+                          <h6>Bahasa Indonesia : 
+                          <?php echo ($baris->bindo_usbn ); ?></h6>
+                          <h6>Pendidikan Agama Islam : 
+                          <?php echo ($baris->pai_usbn ); ?> </h6>
+                          <h6 class="modal-title" id="gridSystemModalLabel">Rata-rata :
+                          <?php echo ($baris->matematika_usbn + $baris->ipa_usbn + $baris->bindo_usbn + $baris->pai_usbn) / 4; ?> </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+                   
+                 <td>
+                  <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#modal-nilai-uas-<?= $baris->nisn ?>"> <?php echo ($baris->matematika_uas + $baris->ipa_uas + $baris->bindo_uas + $baris->pai_uas) / 4; ?></button>
+                  <div class="modal fade" id="modal-nilai-uas-<?= $baris->nisn ?>">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Detail Nilai Ujian Akhir Semester</h4>
+                        </div>
+                        <div class="modal-body">
+                         <h6>Matematika : 
+                          <?php echo ($baris->matematika_uas); ?> </h6>
+                         <h6>Ilmu Pengetahuan Alam :  
+                          <?php echo ($baris->ipa_uas ); ?> </h6>
+                          <h6>Bahasa Indonesia : 
+                          <?php echo ($baris->bindo_uas ); ?></h6>
+                          <h6>Pendidikan Agama Islam : 
+                          <?php echo ($baris->pai_uas ); ?> </h6>
+                          <h6 class="modal-title" id="gridSystemModalLabel">Rata-rata :
+                          <?php echo ($baris->matematika_uas + $baris->ipa_uas + $baris->bindo_uas + $baris->pai_uas) / 4; ?> </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </td>
+                  <td>
+                  <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#modal-nilai-prestasi-<?= $baris->nisn ?>"> <?php echo ($baris->nilai_prestasi) ; ?></button>
+                  <div class="modal fade" id="modal-nilai-prestasi-<?= $baris->nisn ?>">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Detail Nilai Prestasi</h4>
+                        </div>
+                        <div class="modal-body">
+                         <h6>Nilai Prestasi : 
+                         <?php echo ($baris->nilai_prestasi) ; ?> </h6>  
                         </div>
                       </div>
                     </div>
@@ -75,37 +158,26 @@
                   </td>
 
                   <td>
-                  <button type="button" class="btn btn-sm" data-toggle="popover" title="Nilai USBN/UMBN"
-                  data-content="
-                  Matematika: <?= $baris->matematika_usbn ?>, 
-                  IPA: <?= $baris->ipa_usbn ?>, 
-                  Bhs. Indonesia: <?= $baris->bindo_usbn ?>, 
-                  PAI: <?= $baris->pai_usbn ?>"><?php echo ($baris->matematika_usbn + $baris->ipa_usbn + $baris->bindo_usbn + $baris->pai_usbn) / 4; ?></button>
+                  <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#modal-nilai-seleksi-<?= $baris->nisn ?>"> <?php echo "Proses Ujian" ; ?></button>
+                  <div class="modal fade" id="modal-nilai-seleksi-<?= $baris->nisn ?>">
+                    <div class="modal-dialog modal-sm">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Detail Nilai Ujian Seleksi</h4>
+                        </div>
+                        <div class="modal-body">
+                         <h6>Nilai Seleksi : 
+                         <?php echo "Proses Ujian" ; ?></h6>  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   </td>
-
-                  <td>
-                  <button type="button" class="btn btn-sm" data-toggle="popover" title="Nilai UAS"
-                  data-content="
-                  Matematika: <?= $baris->matematika_uas ?>, 
-                  IPA: <?= $baris->ipa_uas ?>, 
-                  Bhs. Indonesia: <?= $baris->bindo_uas ?>, 
-                  PAI: <?= $baris->pai_uas ?>"><?php echo ($baris->matematika_uas + $baris->ipa_uas + $baris->bindo_uas + $baris->pai_uas) / 4; ?></button>
-                  </td>
-
-                  <td>
-                  <button type="button" class="btn btn-sm" data-toggle="popover" title="Nilai Prestasi"
-                  data-content="
-                  Nilai Prestasi: <?= $baris->nilai_prestasi ?>, 
-                 
-            
-                  ">
-                  <?php echo ($baris->nilai_prestasi) / 4; ?></button>
-                  </td>
-
-
                   <td align="center" style="white-space: nowrap;">
                     <button class="btn btn-xs btn-default" title="Lihat dokumen" data-toggle="modal" data-target="#modalDokumen" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>"><i class="icon-file-text2"></i></button>
-                    <a href="panel_admin/verifikasi/hapus/<?php echo $baris->no_pendaftaran; ?>" class="btn btn-danger btn-xs" title="Ubah" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>" ><i class="icon-bin"></i></a>
+                      <a href="panel_admin/verifikasi/hapus/<?php echo $baris->no_pendaftaran; ?>" class="btn btn-danger btn-xs" title="hapus" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>" ><i class="icon-bin"></i></a>
                   </td>
 
                   <!-- Modal Dokumen -->
@@ -183,7 +255,7 @@
     <script type="text/javascript">
       function thn() {
         var thn = $('[name="thn"]').val();
-        window.location = "panel_admin/verifikasi/thn/" + thn;
+        window.location = "panel_admin/rekap_nilai_admin/thn/" + thn;
       }
 
       $('[name="thn"]').select2({
