@@ -396,6 +396,10 @@ public function rekap_nilai_admin($aksi = '', $id = '')
 			$this->load->view('admin/footer');
 		}
 	}
+	public function data_nilai() {
+		echo $this->siswa->get_nilai();
+		echo $this->admin->get_siswa($no_pendaftaran);
+	}
 
 	public function edit_materi($aksi = '', $id = '')
 	{

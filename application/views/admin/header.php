@@ -149,26 +149,27 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<!-- Main -->
 								<li class="navigation-header"><span>MENU ADMIN</span> <i class="icon-menu" title="Main pages"></i></li>
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == '') {
-												echo 'active';
-											} ?>"><a href="panel_admin"><i class="icon-home4"></i> <span><b>HOME</b></span></a></li>
+								echo 'active';} ?>">
+								<a href="panel_admin"><i class="icon-home4"></i> <span><b>HOME</b></span></a>
+								</li>
 								<li class="<?php if ($sub_menu == 'profile') {
-													echo 'active';
-												} ?>"><a href="panel_admin/ubah_siswa"><i class="icon-user"></i><span><b>DATA SISWA</b></span></a></li> 
+								echo 'active';} ?>">
+								<a href="panel_admin/ubah_siswa"><i class="icon-user"></i><span><b>DATA SISWA</b></span></a>
+								</li> 
 
-								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') {
-												echo 'active';
-											} ?>"><a href="panel_admin/verifikasi"><i class="icon-file-check"></i> <span><b>VERIFIKASI</b></span></a></li>
-											<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') {
-												echo 'active';
-											} ?>">
-											<a href="panel_admin/rekap_nilai_admin"><i class="icon-file-check"></i> <span><b>REKAP NILAI SISWA</b></span></a></li> 
-
-								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'set_pengumuman') {
-												echo 'active';
-											} ?>"><a href="panel_admin/set_pengumuman"><i class="icon-display4"></i> <span><b>STATUS DI TERIMA</b></span></a></li>
+								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
+									<a href="panel_admin/verifikasi"><i class="icon-file-check"></i> <span><b>VERIFIKASI</b></span></a>
+								</li>
+								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
+								<a href="panel_admin/rekap_nilai_admin"><i class="icon-file-check"></i> <span><b>REKAP NILAI SISWA</b></span></a>
+								</li> 
+								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'set_pengumuman') {echo 'active'; } ?>">
+								<a href="panel_admin/set_pengumuman"><i class="icon-display4"></i> <span><b>STATUS DI TERIMA</b></span></a>
+								</li>
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'export') {
-												echo 'active';
-											} ?>"><a href="Siswa"><i class="icon-file-excel"></i> <span><b>EXPORT DATA</b></span></a></li>
+									echo 'active'; } ?>">
+								<a href="Siswa"><i class="icon-file-excel"></i> <span><b>EXPORT DATA</b></span></a>
+								</li>
 
 
 								<!-- /Main -->

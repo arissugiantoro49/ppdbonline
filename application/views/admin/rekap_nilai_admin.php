@@ -11,7 +11,7 @@
       <!-- Basic datatable -->
       <div class="panel panel-flat">
         <div class="panel-heading">
-          <h5 class="panel-title"><b>VERIFIKASI DATA PENDAFTARAN</b></h5>
+          <h5 class="panel-title"><b>REKAPITULASI NILAI PENDAFTAR</b></h5>
           <hr style="margin:0px;">
           <div class="heading-elements">
             <ul class="icons-list">
@@ -20,8 +20,8 @@
           </div>
 
           <br>
- <a href="panel_admin/edit_materi" class="btn btn-danger"><b>INFORMASI JADWAL UJIAN</b></a>
-          <div class="col-md-3" style="float: right; margin-right: 25px;">
+            <a href="panel_admin/rekap_nilai_admin" class="btn btn-danger"></a>
+          <div class="col-md-3" style="float: right; margin-right: 0px;">
             <div class="input-group">
               <div class="input-group-addon"><i class="icon-calendar22"></i></div>
               <select class="form-control" name="thn" onchange="thn()">
@@ -177,7 +177,7 @@
                   </td>
                   <td align="center" style="white-space: nowrap;">
                     <button class="btn btn-xs btn-default" title="Lihat dokumen" data-toggle="modal" data-target="#modalDokumen" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>"><i class="icon-file-text2"></i></button>
-                      <a href="panel_admin/verifikasi/hapus/<?php echo $baris->no_pendaftaran; ?>" class="btn btn-danger btn-xs" title="hapus" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>" ><i class="icon-bin"></i></a>
+                     <a href="panel_admin/verifikasi/hapus/<?php echo $baris->no_pendaftaran; ?>" class="btn btn-danger btn-xs" title="hapus" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>" ><i class="icon-bin"></i></a>
                   </td>
 
                   <!-- Modal Dokumen -->

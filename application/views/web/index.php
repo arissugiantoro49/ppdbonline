@@ -5,6 +5,7 @@ $user = $this->db->get('tbl_user')->row_array();
 ?>
 <?php
 $soa = $this->db->get('tbl_siswa');
+
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +133,7 @@ $soa = $this->db->get('tbl_siswa');
                         <a href="#page-top"></a>
                     </li>
                     <li class="page-scroll">
-                        <a href="#prosedur"><i class="fa fa-random"></i> Alur</a>
+                        <a href="#calon"><i class="fa fa-random"></i> Calon Peserta</a>
                     </li>
                     <li class="page-scroll">
                         <a href="#about"><i class="fa fa-bookmark"></i> Info</a>
@@ -272,23 +273,42 @@ $soa = $this->db->get('tbl_siswa');
     </style>
 
     <!-- About Section -->
-    <section id="prosedur" style="background: url(img/bg.png) repeat; padding: 30px;">
+   <section id="calon" style="background: url(img/bg.png) repeat; padding: 30px;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>Alur PPDB Online</h2>
+                    <h2>Calon Peserta Didik MTs Umar Zahid Semelo 2022/2023</h2>
                     <hr style="width: 150px;">
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12" style="margin-top:-10px;">
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        <img class="img-responsive" src="img/Alur.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div>
+              <table class="table datatable-basic table-sm table-striped" width="100%">
+            <thead>
+              <tr>
+                <th width="30px;" style="text-align:center;">No.</th>
+                <th style="text-align:center;">No. Pendaftaran</th>
+                <th style="text-align:center;" >Nama</th>
+                <th style="text-align:center;" >Tanggal Lahir</th>
+                <th style="text-align:center;" >Jenis Kelamin</th>
+                <th style="text-align:center;">Alamat</th>
+               
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $no = 1;
+              foreach ($lst as $baris) { ?>
+                <tr>
+                  <td><?php echo $no++; ?></td>
+                  <td><?php echo $baris->no_pendaftaran; ?></td>
+                  <td><?php echo $baris->nama_lengkap; ?></td>
+                  <td><?php echo $baris->tgl_lahir; ?></td>
+                  <td><?php echo $baris->jk; ?></td>
+                  <td><?php echo $baris->alamat_siswa; ?></td>
+                </tr>
+              <?php
+              } ?>
+            </tbody>
+          </table>
         </div>
     </section>
 
@@ -335,6 +355,8 @@ $soa = $this->db->get('tbl_siswa');
         </div>
     </section>
 
+    
+
     <!-- Contact Section -->
     <section class="success" id="contact" style="padding: 30px; border-top: solid 2px #fff;">
         <div class="container">
@@ -355,6 +377,7 @@ $soa = $this->db->get('tbl_siswa');
                     </div>
                 </div>
             </div>
+           
               <div class=" text-right page-scroll">
                     <a href="#page-top" class="btn btn-warning" style="border-radius: 5px;">
                         <i class="fa fa-home "></i> Kembali ke Atas
