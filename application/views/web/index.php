@@ -170,10 +170,7 @@ $soa = $this->db->get('tbl_siswa');
                         <br>
                         <?php if ($web_ppdb->status_ppdb == 'buka') { ?>
                             <span>
-                                <a href="files/Panduan_PPDB_Online.pdf" class="btn btn-danger" style="margin: 5px; border-radius: 6px;">
-                                    <i class="fa fa-list faa-pulse"></i> &nbsp;
-                                    <b>PANDUAN PENDAFTARAN</b>
-                                </a>
+                                
                                   <a href="pendaftaran" class="btn btn-warning" style="margin: 5px; border-radius: 6px;">
                                     <i class="fa fa-list faa-pulse"></i> &nbsp;
                                     <b>KLIK DAFTAR</b>
