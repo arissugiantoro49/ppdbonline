@@ -395,7 +395,42 @@ public function rekap_nilai_admin($aksi = '', $id = '')
 			$this->load->view('admin/rekap_nilai_admin', $data);
 			$this->load->view('admin/footer');
 		}
+	} 
+
+	public function perhitungan_moora($aksi = '', $id = '')
+	{
+		$sess = $this->session->userdata('id_admin');
+		if ($sess == NULL) {
+			redirect('panel_admin/log_in');
+		} else {
+			switch ($aksi) {
+
+				case 'thn':
+					$thn = $id;
+					break;
+
+				case 'hapus':
+					$this->admin->hapus($id);
+					redirect('panel_admin/verifikasi');
+					break;
+
+				default:
+					$thn = date('Y');
+					break;
+			}
+			$data = array(
+				'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
+				'judul_web'	=> "REKAP NILAI SISWA",
+				'v_siswa'	=> $this->admin->verifikasi('siswa', $thn)->ori,
+				'v_thn'		=> $thn
+			);
+
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/rekap_nilai_admin', $data);
+			$this->load->view('admin/footer');
+		}
 	}
+
 	public function data_nilai() {
 		echo $this->siswa->get_nilai();
 		echo $this->admin->get_siswa($no_pendaftaran);
