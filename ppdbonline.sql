@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 04 Bulan Mei 2022 pada 08.33
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.2.30
+-- Host: localhost
+-- Generation Time: May 09, 2022 at 03:53 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_komp`
+-- Table structure for table `tbl_komp`
 --
 
 CREATE TABLE `tbl_komp` (
@@ -33,7 +34,7 @@ CREATE TABLE `tbl_komp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_komp`
+-- Dumping data for table `tbl_komp`
 --
 
 INSERT INTO `tbl_komp` (`id_komp`, `kompetensi`) VALUES
@@ -43,7 +44,30 @@ INSERT INTO `tbl_komp` (`id_komp`, `kompetensi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_nilai`
+-- Table structure for table `tbl_kriteria`
+--
+
+CREATE TABLE `tbl_kriteria` (
+  `id_kriteria` int(11) NOT NULL,
+  `nama_kriteria` varchar(100) NOT NULL,
+  `tipe` varchar(100) NOT NULL,
+  `bobot` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_kriteria`
+--
+
+INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `tipe`, `bobot`) VALUES
+(1, 'Nilai Raport', '1', 20),
+(2, 'Nilai USBN', '1', 20),
+(3, 'Nilai UAS', '1', 20),
+(4, 'Nilai Prestasi', '1', 20);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_nilai`
 --
 
 CREATE TABLE `tbl_nilai` (
@@ -69,7 +93,7 @@ CREATE TABLE `tbl_nilai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_nilai`
+-- Dumping data for table `tbl_nilai`
 --
 
 INSERT INTO `tbl_nilai` (`id_nilai`, `no_pendaftaran`, `matematika_raport`, `ipa_raport`, `pai_raport`, `bahasa_indonesia_raport`, `dok_raport`, `matematika_usbn`, `ipa_usbn`, `bindo_usbn`, `pai_usbn`, `dok_usbn`, `matematika_uas`, `ipa_uas`, `bindo_uas`, `pai_uas`, `dok_uas`, `nilai_prestasi`, `dok_prestasi`) VALUES
@@ -79,7 +103,7 @@ INSERT INTO `tbl_nilai` (`id_nilai`, `no_pendaftaran`, `matematika_raport`, `ipa
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pdd`
+-- Table structure for table `tbl_pdd`
 --
 
 CREATE TABLE `tbl_pdd` (
@@ -88,7 +112,7 @@ CREATE TABLE `tbl_pdd` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pdd`
+-- Dumping data for table `tbl_pdd`
 --
 
 INSERT INTO `tbl_pdd` (`id_pdd`, `nama_pdd`) VALUES
@@ -106,7 +130,7 @@ INSERT INTO `tbl_pdd` (`id_pdd`, `nama_pdd`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pekerjaan`
+-- Table structure for table `tbl_pekerjaan`
 --
 
 CREATE TABLE `tbl_pekerjaan` (
@@ -116,7 +140,7 @@ CREATE TABLE `tbl_pekerjaan` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pekerjaan`
+-- Dumping data for table `tbl_pekerjaan`
 --
 
 INSERT INTO `tbl_pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `ket_pekerjaan`) VALUES
@@ -142,7 +166,7 @@ INSERT INTO `tbl_pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `ket_pekerjaan`) 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_penghasilan`
+-- Table structure for table `tbl_penghasilan`
 --
 
 CREATE TABLE `tbl_penghasilan` (
@@ -151,7 +175,7 @@ CREATE TABLE `tbl_penghasilan` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_penghasilan`
+-- Dumping data for table `tbl_penghasilan`
 --
 
 INSERT INTO `tbl_penghasilan` (`id_penghasilan`, `nama_penghasilan`) VALUES
@@ -165,17 +189,17 @@ INSERT INTO `tbl_penghasilan` (`id_penghasilan`, `nama_penghasilan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pengumuman`
+-- Table structure for table `tbl_pengumuman`
 --
 
 CREATE TABLE `tbl_pengumuman` (
   `id_pengumuman` int(10) NOT NULL,
-  `ket_pengumuman` text DEFAULT NULL,
+  `ket_pengumuman` text,
   `tgl_pengumuman` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pengumuman`
+-- Dumping data for table `tbl_pengumuman`
 --
 
 INSERT INTO `tbl_pengumuman` (`id_pengumuman`, `ket_pengumuman`, `tgl_pengumuman`) VALUES
@@ -184,19 +208,19 @@ INSERT INTO `tbl_pengumuman` (`id_pengumuman`, `ket_pengumuman`, `tgl_pengumuman
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_siswa`
+-- Table structure for table `tbl_siswa`
 --
 
 CREATE TABLE `tbl_siswa` (
   `id_siswa` int(100) NOT NULL,
   `no_pendaftaran` varchar(20) NOT NULL,
-  `password` text DEFAULT NULL,
+  `password` text,
   `nis` varchar(10) DEFAULT NULL,
   `nisn` varchar(10) DEFAULT NULL,
-  `nik` text DEFAULT NULL,
+  `nik` text,
   `nama_lengkap` varchar(100) DEFAULT NULL,
   `jk` varchar(12) DEFAULT NULL,
-  `tempat_lahir` text DEFAULT NULL,
+  `tempat_lahir` text,
   `tgl_lahir` varchar(10) DEFAULT NULL,
   `agama` varchar(30) DEFAULT NULL,
   `status_keluarga` varchar(30) DEFAULT NULL,
@@ -206,7 +230,7 @@ CREATE TABLE `tbl_siswa` (
   `cita` varchar(100) DEFAULT NULL,
   `paud` varchar(100) DEFAULT NULL,
   `tk` varchar(100) DEFAULT NULL,
-  `alamat_siswa` text DEFAULT NULL,
+  `alamat_siswa` text,
   `jenis_tinggal` varchar(100) DEFAULT NULL,
   `desa` varchar(100) DEFAULT NULL,
   `kec` varchar(100) DEFAULT NULL,
@@ -258,7 +282,7 @@ CREATE TABLE `tbl_siswa` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_siswa`
+-- Dumping data for table `tbl_siswa`
 --
 
 INSERT INTO `tbl_siswa` (`id_siswa`, `no_pendaftaran`, `password`, `nis`, `nisn`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `anak_ke`, `jml_saudara`, `hobi`, `cita`, `paud`, `tk`, `alamat_siswa`, `jenis_tinggal`, `desa`, `kec`, `kab`, `prov`, `kode_pos`, `jarak`, `trans`, `no_hp_siswa`, `no_kk`, `kepala_keluarga`, `nama_ayah`, `nik_ayah`, `status_ayah`, `th_lahir_ayah`, `pdd_ayah`, `pekerjaan_ayah`, `penghasilan_ayah`, `nama_ibu`, `nik_ibu`, `status_ibu`, `th_lahir_ibu`, `pdd_ibu`, `pekerjaan_ibu`, `penghasilan_ibu`, `nama_wali`, `nik_wali`, `th_lahir_wali`, `pdd_wali`, `pekerjaan_wali`, `penghasilan_wali`, `no_hp_ortu`, `npsn_sekolah`, `nama_sekolah`, `status_sekolah`, `jenjang_sekolah`, `lokasi_sekolah`, `no_kks`, `no_pkh`, `no_kip`, `komp_ahli`, `tgl_siswa`, `status_verifikasi`, `status_pendaftaran`, `dokumen_kk`, `dokumen_akte_kelahiran`, `dokumen_skl`, `dokumen_kartu_bantuan`) VALUES
@@ -268,13 +292,13 @@ INSERT INTO `tbl_siswa` (`id_siswa`, `no_pendaftaran`, `password`, `nis`, `nisn`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(100) DEFAULT NULL,
-  `password` text DEFAULT NULL,
+  `password` text,
   `nama_lengkap` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -292,7 +316,7 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama_lengkap`, `alamat`, `email`, `website`, `telp`, `kab_sekolah`, `ketua_panitia`, `nip_ketua`, `th_pelajaran`, `no_surat`, `kepsek`, `nip_kepsek`, `level`, `tgl_daftar`) VALUES
@@ -301,18 +325,18 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama_lengkap`, `alam
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_verifikasi`
+-- Table structure for table `tbl_verifikasi`
 --
 
 CREATE TABLE `tbl_verifikasi` (
   `id_verifikasi` int(10) NOT NULL,
-  `isi` text DEFAULT NULL,
-  `ket` text DEFAULT NULL,
+  `isi` text,
+  `ket` text,
   `tgl_verifikasi` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_verifikasi`
+-- Dumping data for table `tbl_verifikasi`
 --
 
 INSERT INTO `tbl_verifikasi` (`id_verifikasi`, `isi`, `ket`, `tgl_verifikasi`) VALUES
@@ -321,7 +345,7 @@ INSERT INTO `tbl_verifikasi` (`id_verifikasi`, `isi`, `ket`, `tgl_verifikasi`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_web`
+-- Table structure for table `tbl_web`
 --
 
 CREATE TABLE `tbl_web` (
@@ -331,7 +355,7 @@ CREATE TABLE `tbl_web` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_web`
+-- Dumping data for table `tbl_web`
 --
 
 INSERT INTO `tbl_web` (`id_web`, `status_ppdb`, `tgl_diubah`) VALUES
@@ -342,125 +366,137 @@ INSERT INTO `tbl_web` (`id_web`, `status_ppdb`, `tgl_diubah`) VALUES
 --
 
 --
--- Indeks untuk tabel `tbl_komp`
+-- Indexes for table `tbl_komp`
 --
 ALTER TABLE `tbl_komp`
   ADD PRIMARY KEY (`id_komp`);
 
 --
--- Indeks untuk tabel `tbl_nilai`
+-- Indexes for table `tbl_kriteria`
+--
+ALTER TABLE `tbl_kriteria`
+  ADD PRIMARY KEY (`id_kriteria`);
+
+--
+-- Indexes for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
   ADD PRIMARY KEY (`id_nilai`);
 
 --
--- Indeks untuk tabel `tbl_pdd`
+-- Indexes for table `tbl_pdd`
 --
 ALTER TABLE `tbl_pdd`
   ADD PRIMARY KEY (`id_pdd`);
 
 --
--- Indeks untuk tabel `tbl_pekerjaan`
+-- Indexes for table `tbl_pekerjaan`
 --
 ALTER TABLE `tbl_pekerjaan`
   ADD PRIMARY KEY (`id_pekerjaan`);
 
 --
--- Indeks untuk tabel `tbl_penghasilan`
+-- Indexes for table `tbl_penghasilan`
 --
 ALTER TABLE `tbl_penghasilan`
   ADD PRIMARY KEY (`id_penghasilan`);
 
 --
--- Indeks untuk tabel `tbl_pengumuman`
+-- Indexes for table `tbl_pengumuman`
 --
 ALTER TABLE `tbl_pengumuman`
   ADD PRIMARY KEY (`id_pengumuman`);
 
 --
--- Indeks untuk tabel `tbl_siswa`
+-- Indexes for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   ADD PRIMARY KEY (`id_siswa`) USING BTREE;
 
 --
--- Indeks untuk tabel `tbl_user`
+-- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indeks untuk tabel `tbl_verifikasi`
+-- Indexes for table `tbl_verifikasi`
 --
 ALTER TABLE `tbl_verifikasi`
   ADD PRIMARY KEY (`id_verifikasi`);
 
 --
--- Indeks untuk tabel `tbl_web`
+-- Indexes for table `tbl_web`
 --
 ALTER TABLE `tbl_web`
   ADD PRIMARY KEY (`id_web`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_komp`
+-- AUTO_INCREMENT for table `tbl_komp`
 --
 ALTER TABLE `tbl_komp`
   MODIFY `id_komp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_nilai`
+-- AUTO_INCREMENT for table `tbl_kriteria`
+--
+ALTER TABLE `tbl_kriteria`
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
   MODIFY `id_nilai` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pdd`
+-- AUTO_INCREMENT for table `tbl_pdd`
 --
 ALTER TABLE `tbl_pdd`
   MODIFY `id_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pekerjaan`
+-- AUTO_INCREMENT for table `tbl_pekerjaan`
 --
 ALTER TABLE `tbl_pekerjaan`
   MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_penghasilan`
+-- AUTO_INCREMENT for table `tbl_penghasilan`
 --
 ALTER TABLE `tbl_penghasilan`
   MODIFY `id_penghasilan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pengumuman`
+-- AUTO_INCREMENT for table `tbl_pengumuman`
 --
 ALTER TABLE `tbl_pengumuman`
   MODIFY `id_pengumuman` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_siswa`
+-- AUTO_INCREMENT for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   MODIFY `id_siswa` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_user`
+-- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_verifikasi`
+-- AUTO_INCREMENT for table `tbl_verifikasi`
 --
 ALTER TABLE `tbl_verifikasi`
   MODIFY `id_verifikasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_web`
+-- AUTO_INCREMENT for table `tbl_web`
 --
 ALTER TABLE `tbl_web`
   MODIFY `id_web` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
