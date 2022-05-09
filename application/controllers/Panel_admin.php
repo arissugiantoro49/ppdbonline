@@ -354,7 +354,7 @@ class Panel_admin extends CI_Controller
 			$this->load->view('admin/footer');
 		}
 	}
-public function rekap_nilai_admin($aksi = '', $id = '')
+	public function rekap_nilai_admin($aksi = '', $id = '')
 	{
 		$sess = $this->session->userdata('id_admin');
 		if ($sess == NULL) {
@@ -384,6 +384,7 @@ public function rekap_nilai_admin($aksi = '', $id = '')
 					$thn = date('Y');
 					break;
 			}
+
 			$data = array(
 				'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
 				'judul_web'	=> "REKAP NILAI SISWA",
@@ -395,7 +396,113 @@ public function rekap_nilai_admin($aksi = '', $id = '')
 			$this->load->view('admin/rekap_nilai_admin', $data);
 			$this->load->view('admin/footer');
 		}
-	} 
+	}
+
+	public function data_kriteria($aksi = '', $id = '')	
+	{
+		$sess = $this->session->userdata('id_admin');
+		if ($sess == NULL) {
+			redirect('panel_admin/log_in');
+		}
+
+		if ($aksi != '') {
+			$data_post = array(
+				'nama_kriteria' => $this->input->post('nama_kriteria'),
+				'tipe' => $this->input->post('tipe'),
+				'bobot' => $this->input->post('bobot')
+			);
+			if ($aksi == "tambah") {
+				$this->admin->tambah_kriteria($data_post);
+			} elseif ($aksi == "edit") {
+				$this->admin->edit_kriteria($data_post, $this->input->post('id_kriteria'));
+			} elseif ($aksi == "hapus") {
+				$this->admin->hapus_kriteria($id);
+			}
+			redirect('panel_admin/data_kriteria');
+		}
+
+		$data = array(
+			'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
+			'judul_web'	=> "DATA KRITERIA",
+			'kriteria'	=> $this->admin->get_kriteria()
+		);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/data_kriteria', $data);
+		$this->load->view('admin/footer');
+	}
+	
+	public function data_perhitungan($aksi = '', $id = '')
+	{
+		$sess = $this->session->userdata('id_admin');
+		if ($sess == NULL) {
+			redirect('panel_admin/log_in');
+		} else {
+			switch ($aksi) {
+				case 'thn':
+					$thn = $id;
+					break;
+
+				default:
+					$thn = date('Y');
+					break;
+			}
+
+			$data = array(
+				'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
+				'judul_web'	=> "DATA PEHITUNGAN",
+				'v_thn'		=> $thn,
+				'total_siswa' => $this->admin->verifikasi('siswa', $thn)->ori->num_rows,
+			);
+
+			if ($this->admin->verifikasi('siswa', $thn)->ori->num_rows > 0) {
+				$sqrt = [
+					'c1' => 0,'c2' => 0, 'c3' => 0, 'c4' => 0,'c5' => 0
+				];
+
+				foreach ($this->admin->verifikasi('siswa', $thn)->ori->result() as $row) {
+					$temp = [
+						'nama' => $row->nama_lengkap,
+						'c1' => ($row->matematika_raport + $row->ipa_raport + $row->bahasa_indonesia_raport + $row->pai_raport) / 4,
+						'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
+						'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
+						'c4' => $row->nilai_prestasi,
+						'c5' => 50
+					];
+					$alternatif[$row->id_siswa] = $temp;
+
+					$sqrt['c1'] += pow($temp['c1'], 2);
+					$sqrt['c2'] += pow($temp['c2'], 2);
+					$sqrt['c3'] += pow($temp['c3'], 2);
+					$sqrt['c4'] += pow($temp['c4'], 2);
+					$sqrt['c5'] += pow($temp['c5'], 2);
+				}
+
+				$sqrt['c1'] = sqrt($sqrt['c1']);
+				$sqrt['c2'] = sqrt($sqrt['c2']);
+				$sqrt['c3'] = sqrt($sqrt['c3']);
+				$sqrt['c4'] = sqrt($sqrt['c4']);
+				$sqrt['c5'] = sqrt($sqrt['c5']);
+
+				foreach ($alternatif as $key => $value) {
+					$normalisasi[$key]['c1'] = $value['c1'] / $sqrt['c1'];
+					$normalisasi[$key]['c2'] = $value['c2'] / $sqrt['c2'];
+					$normalisasi[$key]['c3'] = $value['c3'] / $sqrt['c3'];
+					$normalisasi[$key]['c4'] = $value['c4'] / $sqrt['c4'];
+					$normalisasi[$key]['c5'] = $value['c5'] / $sqrt['c5'];
+				}
+
+				$data['alternatif'] = $alternatif;
+				$data['sqrt'] = $sqrt;
+				$data['normalisasi'] = $normalisasi;
+				
+			}
+
+			$this->load->view('admin/header', $data);
+			$this->load->view('admin/data_perhitungan', $data);
+			$this->load->view('admin/footer');
+		}
+	}
 
 	public function perhitungan_moora($aksi = '', $id = '')
 	{
@@ -431,10 +538,10 @@ public function rekap_nilai_admin($aksi = '', $id = '')
 		}
 	}
 
-	public function data_nilai() {
-		echo $this->siswa->get_nilai();
-		echo $this->admin->get_siswa($no_pendaftaran);
-	}
+	// public function data_nilai() {
+	// 	echo $this->siswa->get_nilai();
+	// 	echo $this->admin->get_siswa($no_pendaftaran);
+	// }
 
 	public function edit_materi($aksi = '', $id = '')
 	{

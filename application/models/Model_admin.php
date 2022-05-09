@@ -25,6 +25,10 @@ class Model_admin extends CI_Model
 		}
 	}
 
+	function get_kriteria() {
+		return $this->db->get('tbl_kriteria');
+	}
+
 	function get_siswa($no_pendaftaran) {
 		return json_encode($this->db->get_where('tbl_siswa', "no_pendaftaran='$no_pendaftaran'")->row());
 	}
@@ -52,6 +56,20 @@ class Model_admin extends CI_Model
 				# code...
 				break;
 		}
+	}
+
+	function tambah_kriteria($data) {
+		$this->db->insert('tbl_kriteria', $data);
+	}
+
+	function edit_kriteria($data, $id_kriteria) {
+		$this->db->where('id_kriteria', $id_kriteria);
+		$this->db->update('tbl_kriteria', $data);
+	}
+
+	function hapus_kriteria($id_kriteria) {
+		$this->db->where('id_kriteria', $id_kriteria);
+		$this->db->delete('tbl_kriteria');
 	}
 
 	function auth($data)

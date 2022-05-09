@@ -165,7 +165,10 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<a href="panel_admin/rekap_nilai_admin"><i class="icon-file-check"></i> <span><b>REKAP NILAI SISWA</b></span></a>
 								</li> 
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
-								<a href="panel_admin/--"><i class="icon-file-check"></i> <span><b>DATA PERHITUNGAN</b></span></a>
+								<a href="panel_admin/data_kriteria"><i class="icon-file-check"></i> <span><b>DATA KRITERIA</b></span></a>
+								</li> 
+								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
+								<a href="panel_admin/data_perhitungan"><i class="icon-file-check"></i> <span><b>DATA PERHITUNGAN</b></span></a>
 								</li> 
 
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'set_pengumuman') {echo 'active'; } ?>">
