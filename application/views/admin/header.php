@@ -157,12 +157,14 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								</li>
 								<li class="<?php if ($sub_menu == 'profile') {
 								echo 'active';} ?>">
-								<a href="panel_admin/ubah_siswa"><i class="icon-user"></i><span><b>DATA ALTERNATIF (SISWA)</b></span></a>
+								<a href="panel_admin/ubah_siswa"><i class="icon-user"></i><span><b>DATA SISWA</b></span></a>
 								</li> 
 
 								
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
-								<a href="panel_admin/rekap_nilai_admin"><i class="icon-file-check"></i> <span><b>REKAP NILAI SISWA</b></span></a>
+								
+								<a href="panel_admin/rekap_nilai_admin" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><i class="icon-file-check" class="fas fa-fw fa-cog"></i> <span><b>REKAP NILAI SISWA</b></span></a>
+								
 								</li> 
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
 								<a href="panel_admin/data_kriteria"><i class="icon-file-check"></i> <span><b>DATA KRITERIA</b></span></a>

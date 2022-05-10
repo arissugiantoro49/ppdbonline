@@ -272,7 +272,7 @@
     <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Kartu Bantuan</label>
       <div class="col-sm-9 prepend-icon">
-        <input type="file" name="dokumen_kartu_bantuan" class="form-control bg-blue" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-dokumen_kartu_bantuan"]' accept="application/pdf, image/*">
+        <input type="file" name="dokumen_kartu_bantuan" class="form-control bg-blue" data-parsley-group="block1" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-dokumen_kartu_bantuan"]' accept="application/pdf, image/*">
         <i class="fa fa-file" style="margin-left:15px; margin-top:4px;"></i>
         <div id="error-dokumen_kartu_bantuan" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
         <div id="pesan_komentar">Jika punya kartu bantuan (KIP, KKS, PKH) mohon untuk dilampirkan</div>
