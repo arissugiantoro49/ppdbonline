@@ -124,7 +124,7 @@
           </div>
         </div>
         <div class="table-responsive" style="border-top:0;">
-          <table class="table datatable-basic table-sm table-striped" id="tabelSqrt" width="100%">
+          <table class="table datatable-basic table-sm table-striped" id="tabelNormalisasi" width="100%">
             <thead>
               <tr>
                 <th width="30px;">No.</th>
@@ -171,7 +171,7 @@
           </div>
         </div>
         <div class="table-responsive" style="border-top:0;">
-          <table class="table datatable-basic table-sm table-striped" id="tabelSqrt" width="100%">
+          <table class="table datatable-basic table-sm table-striped" id="tabelTernormalisasi" width="100%">
             <thead>
               <tr>
                 <th width="30px;">No.</th>
@@ -195,6 +195,90 @@
                   <td><?= $value['c3']; ?></td>
                   <td><?= $value['c4']; ?></td>
                   <td><?= $value['c5']; ?></td>
+                </tr>
+              <?php
+              } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /basic datatable -->
+    </div>
+
+    <div class="row">
+      <!-- Basic datatable -->
+      <div class="panel panel-flat">
+        <div class="panel-heading" style="padding-bottom:10px;">
+          <h5 class="panel-title"><b>Melakukan Nilai Optimasi Setiap Alternatif</b></h5>
+          <hr style="margin:0px;">
+          <div class="heading-elements">
+            <ul class="icons-list">
+              <li><a data-action="collapse"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="table-responsive" style="border-top:0;">
+          <table class="table datatable-basic table-sm table-striped" id="tabelOptimasi" width="100%">
+            <thead>
+              <tr>
+                <th width="30px;">No.</th>
+                <th>Kode Alternatif</th>
+                <th>Nilai Maximum</th>
+                <th>Nilai Minimum</th>
+                <th>Nilai Yi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $no = 1;
+              foreach ($optimasi as $key => $value) { ?>
+                <tr>
+                  <td><?= $no++; ?></td>
+                  <td>A<?= $key; ?></td>
+                  <td><?= $value['max']; ?></td>
+                  <td><?= $value['min']; ?></td>
+                  <td><?= $value['yi']; ?></td>
+                </tr>
+              <?php
+              } ?>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /basic datatable -->
+    </div>
+
+    <div class="row">
+      <!-- Basic datatable -->
+      <div class="panel panel-flat">
+        <div class="panel-heading" style="padding-bottom:10px;">
+          <h5 class="panel-title"><b>Menentukan Ranking Setiap Alternatif</b></h5>
+          <hr style="margin:0px;">
+          <div class="heading-elements">
+            <ul class="icons-list">
+              <li><a data-action="collapse"></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="table-responsive" style="border-top:0;">
+          <table class="table datatable-basic table-sm table-striped" id="tabelSqrt" width="100%">
+            <thead>
+              <tr>
+                <th width="30px;">No.</th>
+                <th>Kode Alternatif</th>
+                <th>Nilai Optimasi</th>
+                <th>Ranking</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              $no = 1;
+              foreach ($rank as $key => $value) { ?>
+                <tr>
+                  <td><?= $no++; ?></td>
+                  <td>A<?= $key; ?></td>
+                  <td><?= $value['optimasi']; ?></td>
+                  <td><?= $value['rank']; ?></td>
                 </tr>
               <?php
               } ?>

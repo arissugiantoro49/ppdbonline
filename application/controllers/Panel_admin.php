@@ -502,10 +502,35 @@ class Panel_admin extends CI_Controller
 					$ternormalisasi[$key]['c5'] = $value['c5'] * $kriteria[4]['bobot'];
 				}
 
+				foreach ($ternormalisasi as $key => $value) {
+					$optimasi[$key]['max'] = $value['c1'] + $value['c2'] + $value['c3'];
+					$optimasi[$key]['min'] = $value['c4'] + $value['c5'];
+					$optimasi[$key]['yi'] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
+					$yi[] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
+				}
+				array_unique($yi);
+				rsort($yi);
+				$no = 1;
+				foreach ($yi as $value) {
+					$tabel_yi[] = [
+						'optimasi' => $value,
+						'rank' => $no++
+					];
+				}
+
+				foreach($optimasi as $key => $value) {
+					$rank[$key]['optimasi'] = $value['yi'];
+					$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
+				}
+				// var_dump($rank);
+				// exit();	
+
 				$data['alternatif'] = $alternatif;
 				$data['sqrt'] = $sqrt;
 				$data['normalisasi'] = $normalisasi;
 				$data['ternormalisasi'] = $ternormalisasi;
+				$data['optimasi'] = $optimasi;
+				$data['rank'] = $rank;
 				
 			}
 
