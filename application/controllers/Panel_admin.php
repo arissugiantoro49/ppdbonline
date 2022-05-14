@@ -492,9 +492,20 @@ class Panel_admin extends CI_Controller
 					$normalisasi[$key]['c5'] = $value['c5'] / $sqrt['c5'];
 				}
 
+				$kriteria = $this->admin->get_kriteria()->result_array();
+				
+				foreach ($normalisasi as $key => $value) {
+					$ternormalisasi[$key]['c1'] = $value['c1'] * $kriteria[0]['bobot'];
+					$ternormalisasi[$key]['c2'] = $value['c2'] * $kriteria[1]['bobot'];
+					$ternormalisasi[$key]['c3'] = $value['c3'] * $kriteria[2]['bobot'];
+					$ternormalisasi[$key]['c4'] = $value['c4'] * $kriteria[3]['bobot'];
+					$ternormalisasi[$key]['c5'] = $value['c5'] * $kriteria[4]['bobot'];
+				}
+
 				$data['alternatif'] = $alternatif;
 				$data['sqrt'] = $sqrt;
 				$data['normalisasi'] = $normalisasi;
+				$data['ternormalisasi'] = $ternormalisasi;
 				
 			}
 

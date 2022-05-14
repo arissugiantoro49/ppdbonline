@@ -186,7 +186,7 @@
             <tbody>
               <?php
               $no = 1;
-              foreach ($normalisasi as $key => $value) { ?>
+              foreach ($ternormalisasi as $key => $value) { ?>
                 <tr>
                   <td><?= $no++; ?></td>
                   <td>A<?= $key; ?></td>
