@@ -28,7 +28,15 @@ $user = $this->db->get('tbl_user')->row_array();
               <div class="panel-body">
                 <h3>
                   <center>
-                    Selamat <b><?php echo $nama; ?></b> <span class="label label-success" style="font-size:20px;">di Terima</span> Sebagai Peserta Didik Baru <b><?php echo $user['nama_lengkap']; ?></b>, Silahkan Cetak Surat Pengumuman Sebagai Bukti di Terima.
+                    Selamat <b><?php echo $nama; ?></b> <span class="label label-success" style="font-size:20px;">diTerima di kelas
+                    <?php
+                    $tabel_yi = $this->siswa->get_tabel_yi($id_user);
+                    $rank = $tabel_yi['rank'];
+                    if ($rank <= 15) echo 'A';
+                    elseif ($rank <= 30) echo 'B';
+                    elseif ($rank <= 45) echo 'C';
+                    ?></span> di kelas 
+                    Sebagai Peserta Didik Baru <b><?php echo $user['nama_lengkap']; ?></b>, Silahkan Cetak Surat Pengumuman Sebagai Bukti di Terima.
                     <hr>
                    <a href="panel_siswa/cetak_lulus" class="btn btn-success btn-lg" target="_blank"><i class="icon-printer4"></i> Cetak Bukti di Terima</a>
                   </center>

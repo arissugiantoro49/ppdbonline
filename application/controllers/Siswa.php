@@ -268,11 +268,12 @@ class Siswa extends CI_Controller {
       $excel->setActiveSheetIndex(0)->setCellValue('BD'.$numrow, $data->lokasi_sekolah);
       $excel->setActiveSheetIndex(0)->setCellValue('BE'.$numrow, $data->status_pendaftaran);
       $excel->setActiveSheetIndex(0)->setCellValue('BF'.$numrow, $data->komp_ahli);
-      $excel->setActiveSheetIndex(0)->setCellValue('BG'.$numrow, $data->matematika);
-      $excel->setActiveSheetIndex(0)->setCellValue('BH'.$numrow, $data->ipa);
-      $excel->setActiveSheetIndex(0)->setCellValue('BI'.$numrow, $data->bahasa_indonesia);
-      $excel->setActiveSheetIndex(0)->setCellValue('BJ'.$numrow, $data->pai);
-      $excel->setActiveSheetIndex(0)->setCellValue('BK'.$numrow, intval(($data->matematika + $data->ipa + $data->bahasa_indonesia + $data->pai) / 4));
+
+      $excel->setActiveSheetIndex(0)->setCellValue('BG'.$numrow, $data->matematika_raport);
+      $excel->setActiveSheetIndex(0)->setCellValue('BH'.$numrow, $data->ipa_raport);
+      $excel->setActiveSheetIndex(0)->setCellValue('BI'.$numrow, $data->bahasa_indonesia_raport);
+      $excel->setActiveSheetIndex(0)->setCellValue('BJ'.$numrow, $data->pai_raport);
+      $excel->setActiveSheetIndex(0)->setCellValue('BK'.$numrow, intval(($data->matematika_raport + $data->ipa_raport + $data->bahasa_indonesia_raport + $data->pai_raport) / 4));
 
       $excel->getActiveSheet()->getStyle('C')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
 

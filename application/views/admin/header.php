@@ -180,6 +180,11 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'set_pengumuman') {echo 'active'; } ?>">
 								<a href="panel_admin/set_pengumuman"><i class="icon-display4"></i> <span><b>STATUS DI TERIMA</b></span></a>
 								</li>
+								
+								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'kelas') {echo 'active'; } ?>">
+								<a href="panel_admin/data_kelas"><i class="icon-display4"></i> <span><b>Kelas</b></span></a>
+								</li>
+
 
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'export') {
 									echo 'active'; } ?>">

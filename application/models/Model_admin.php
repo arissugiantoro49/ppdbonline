@@ -302,7 +302,10 @@ class Model_admin extends CI_Model
 				break;
 		}
 	}
+function get_kelas (){
 
+	
+}
 	function verifikasi($menu = '', $thn = '', $status = '')
 	{
 		switch ($menu) {

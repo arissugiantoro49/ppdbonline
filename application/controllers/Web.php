@@ -54,6 +54,8 @@ class Web extends CI_Controller
 		if ($this->session->userdata('no_pendaftaran') != NULL) {
 			redirect('panel_siswa');
 		} else {
+			$thn =date('Y'); 
+			$data['lst']	 =$this->admin->verifikasi('siswa', $thn)->ori->result();
 			$this->load->view('web/index', $data);
 
 			if (isset($_POST['btnlogin'])) {

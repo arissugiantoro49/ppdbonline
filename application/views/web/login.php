@@ -4,7 +4,7 @@
         min-height: 50%;
     }
 </style>
-<div class="layer"></div>
+<div class="layer" style="top: 0;"></div>
 <div class="obox">
     <div class="row">
         <div class="col-lg-12">

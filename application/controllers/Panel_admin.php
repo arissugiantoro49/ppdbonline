@@ -752,6 +752,26 @@ class Panel_admin extends CI_Controller
 			$this->load->view('admin/footer');
 		}
 	}
+	public function data_kelas($aksi = '', $id = '')	
+	{
+		$sess = $this->session->userdata('id_admin');
+		if ($sess == NULL) {
+			redirect('panel_admin/log_in');
+		}
+
+		$data = array(
+			'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
+			'judul_web'	=> "DATA KELAS",
+			'v_siswa'	=> $this->admin->verifikasi('siswa', $id)->ori,
+			'v_thn'		=> $this->admin->set_announce($aksi, $id),
+			'kelas'	=> $this->admin->get_kelas()
+		);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/data_kelas', $data);
+		$this->load->view('admin/footer');
+	}
+	
 
 	public function edit_ket($aksi = '', $id = '')
 	{
