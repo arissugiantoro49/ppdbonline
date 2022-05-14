@@ -161,17 +161,21 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								</li> 
 
 								
-								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
+								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'rekap_nilai_siswa') { echo 'active';} ?>">
 								
 								<a href="panel_admin/rekap_nilai_admin" class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><i class="icon-file-check" class="fas fa-fw fa-cog"></i> <span><b>REKAP NILAI SISWA</b></span></a>
-								
-								</li> 
-								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
-								<a href="panel_admin/data_kriteria"><i class="icon-file-check"></i> <span><b>DATA KRITERIA</b></span></a>
-								</li> 
-								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'verifikasi' or $sub_menu == 'edit_materi') { echo 'active';} ?>">
-								<a href="panel_admin/data_perhitungan"><i class="icon-file-check"></i> <span><b>DATA PERHITUNGAN</b></span></a>
-								</li> 
+
+								<li>
+									<a href="#"><i class="icon-wrench"></i> <span><b>PERHITUNGAN METODE</b></span></a>
+									<ul>
+										<li class="<?php if ($sub_menu == 'data_kriteria') {
+														echo 'active';
+													} ?>"><a href="panel_admin/data_kriteria"><i class="icon-file-check"></i><b>DATA KRITERIA</b></a></li>
+										<li class="<?php if ($sub_menu == 'data_perhitungan') {
+														echo 'active';
+													} ?>"><a href="panel_admin/data_perhitungan"><i class="icon-file-check"></i><b>DATA PERHITUNGAN</b></a></li>
+									</ul>
+								</li>
 
 								<li class="<?php if ($menu == 'panel_admin' and $sub_menu == 'set_pengumuman') {echo 'active'; } ?>">
 								<a href="panel_admin/set_pengumuman"><i class="icon-display4"></i> <span><b>STATUS DI TERIMA</b></span></a>

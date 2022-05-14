@@ -9,7 +9,7 @@
         <!-- Dashboard content -->
         <div class="row">
             <!-- Basic datatable -->
-            <button class="btn btn-primary btn-xs" style="margin-left: 1em" id="tambahKriteria" data-toggle="modal" data-target="#modalTambahKriteria"><i class="icon-add"></i></button>
+            <button class="btn btn-primary btn-xs" style="margin-left: 1em; display: none" id="tambahKriteria" data-toggle="modal" data-target="#modalTambahKriteria"><i class="icon-add"></i></button>
             <div class="panel panel-flat">
                 <div class="panel-heading" style="padding-bottom:10px;">
                     <h5 class="panel-title"><b>DATA KRITERIA</b></h5>
@@ -42,7 +42,7 @@
                                     <td><?php echo $baris->bobot; ?></td>
                                     <td align="center" style="white-space: nowrap;">
                                         <button class="btn btn-warning btn-xs" data-id-kriteria="<?= $baris->id_kriteria ?>" data-nama-kriteria="<?= $baris->nama_kriteria;?>" data-tipe="<?= $baris->tipe ?>" data-bobot="<?= $baris->bobot ?>" onclick="editKriteria(this)"><i class="icon-pencil"></i></button>
-                                        <a href="panel_admin/data_kriteria/hapus/<?php echo $baris->id_kriteria; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin?')"><i class="icon-bin"></i></a>
+                                        <!-- <a href="panel_admin/data_kriteria/hapus/<?php echo $baris->id_kriteria; ?>" class="btn btn-danger btn-xs" onclick="return confirm('Apakah anda yakin?')"><i class="icon-bin"></i></a> -->
                                     </td>
                                 </tr>
                             <?php

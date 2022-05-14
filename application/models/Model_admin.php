@@ -29,6 +29,76 @@ class Model_admin extends CI_Model
 		return $this->db->get('tbl_kriteria');
 	}
 
+	function get_tabel_yi($thn) {
+		$sqrt = [
+			'c1' => 0,'c2' => 0, 'c3' => 0, 'c4' => 0,'c5' => 0
+		];
+
+		foreach ($this->admin->verifikasi('siswa', $thn)->ori->result() as $row) {
+			$temp = [
+				'nama' => $row->nama_lengkap,
+				'c1' => ($row->matematika_raport + $row->ipa_raport + $row->bahasa_indonesia_raport + $row->pai_raport) / 4,
+				'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
+				'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
+				'c4' => $row->nilai_prestasi,
+				'c5' => 50
+			];
+			$alternatif[$row->id_siswa] = $temp;
+
+			$sqrt['c1'] += pow($temp['c1'], 2);
+			$sqrt['c2'] += pow($temp['c2'], 2);
+			$sqrt['c3'] += pow($temp['c3'], 2);
+			$sqrt['c4'] += pow($temp['c4'], 2);
+			$sqrt['c5'] += pow($temp['c5'], 2);
+		}
+
+		$sqrt['c1'] = sqrt($sqrt['c1']);
+		$sqrt['c2'] = sqrt($sqrt['c2']);
+		$sqrt['c3'] = sqrt($sqrt['c3']);
+		$sqrt['c4'] = sqrt($sqrt['c4']);
+		$sqrt['c5'] = sqrt($sqrt['c5']);
+
+		foreach ($alternatif as $key => $value) {
+			$normalisasi[$key]['c1'] = $value['c1'] / $sqrt['c1'];
+			$normalisasi[$key]['c2'] = $value['c2'] / $sqrt['c2'];
+			$normalisasi[$key]['c3'] = $value['c3'] / $sqrt['c3'];
+			$normalisasi[$key]['c4'] = $value['c4'] / $sqrt['c4'];
+			$normalisasi[$key]['c5'] = $value['c5'] / $sqrt['c5'];
+		}
+
+		$kriteria = $this->admin->get_kriteria()->result_array();
+		
+		foreach ($normalisasi as $key => $value) {
+			$ternormalisasi[$key]['c1'] = $value['c1'] * $kriteria[0]['bobot'];
+			$ternormalisasi[$key]['c2'] = $value['c2'] * $kriteria[1]['bobot'];
+			$ternormalisasi[$key]['c3'] = $value['c3'] * $kriteria[2]['bobot'];
+			$ternormalisasi[$key]['c4'] = $value['c4'] * $kriteria[3]['bobot'];
+			$ternormalisasi[$key]['c5'] = $value['c5'] * $kriteria[4]['bobot'];
+		}
+
+		foreach ($ternormalisasi as $key => $value) {
+			$optimasi[$key]['max'] = $value['c1'] + $value['c2'] + $value['c3'];
+			$optimasi[$key]['min'] = $value['c4'] + $value['c5'];
+			$optimasi[$key]['yi'] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
+			$yi[] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
+		}
+		array_unique($yi);
+		rsort($yi);
+		$no = 1;
+		foreach ($yi as $value) {
+			$tabel_yi[] = [
+				'optimasi' => $value,
+				'rank' => $no++
+			];
+		}
+
+		foreach($optimasi as $key => $value) {
+			$rank[$key]['optimasi'] = $value['yi'];
+			$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
+		}
+		return $rank;
+	}
+
 	function get_siswa($no_pendaftaran) {
 		return json_encode($this->db->get_where('tbl_siswa', "no_pendaftaran='$no_pendaftaran'")->row());
 	}

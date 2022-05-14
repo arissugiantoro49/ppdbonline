@@ -522,8 +522,6 @@ class Panel_admin extends CI_Controller
 					$rank[$key]['optimasi'] = $value['yi'];
 					$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
 				}
-				// var_dump($rank);
-				// exit();	
 
 				$data['alternatif'] = $alternatif;
 				$data['sqrt'] = $sqrt;
