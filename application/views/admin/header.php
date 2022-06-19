@@ -163,15 +163,15 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<li>
 									<a href="#"><i class="icon-browser"></i> <span><b>UJIAN SELEKSI</b></span></a>
 									<ul>
-										<li class="<?php if ($sub_menu == 'tambah_soal') {
+										<li class="<?php if ($sub_menu == 'data_soal') {
 														echo 'active';
-													} ?>"><a href="panel_admin/tambah_soal"><i class="icon-browser"></i><b>TAMBAH SOAL</b></a></li>
+													} ?>"><a href="panel_admin/data_soal"><i class="icon-browser"></i><b>DATA SOAL</b></a></li>
 										<li class="<?php if ($sub_menu == 'data_nilai_ujian') {
 														echo 'active';
 													} ?>"><a href="panel_admin/data_nilai_ujian"><i class="icon-file-check"></i><b>NILAI </b></a></li>
 										<li class="<?php if ($sub_menu == 'data_ujian') {
 														echo 'active';
-													} ?>"><a href="panel_admin/data_ujian"><i class="icon-file-check"></i><b>UJIAN</b></a></li>
+													} ?>"><a href="panel_admin/ujian"><i class="icon-file-check"></i><b>UJIAN</b></a></li>
 									</ul>
 								</li>
 

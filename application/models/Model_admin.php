@@ -103,6 +103,22 @@ class Model_admin extends CI_Model
 		return json_encode($this->db->get_where('tbl_siswa', "no_pendaftaran='$no_pendaftaran'")->row());
 	}
 
+	function get_detail_soal($id_soal) {
+		return json_encode($this->db->get_where('tbl_soal', "id_soal='$id_soal'")->row());
+	}
+
+	function get_detail_ujian($id_ujian) {
+		return json_encode($this->db->get_where('tbl_ujian', "id_ujian='$id_ujian'")->row());
+	}
+
+	function get_soal() {
+		return $this->db->get('tbl_soal');
+	}
+
+	function get_ujian() {
+		return $this->db->get('tbl_ujian');
+	}
+
 	function ppdb_status($option, $date)
 	{
 		switch ($option) {
@@ -140,6 +156,34 @@ class Model_admin extends CI_Model
 	function hapus_kriteria($id_kriteria) {
 		$this->db->where('id_kriteria', $id_kriteria);
 		$this->db->delete('tbl_kriteria');
+	}
+
+	function tambah_soal($data) {
+		$this->db->insert('tbl_soal', $data);
+	}
+
+	function edit_soal($data, $id_soal) {
+		$this->db->where('id_soal', $id_soal);
+		$this->db->update('tbl_soal', $data);
+	}
+
+	function hapus_soal($id_soal) {
+		$this->db->where('id_soal', $id_soal);
+		$this->db->delete('tbl_soal');
+	}
+
+	function tambah_ujian($data) {
+		$this->db->insert('tbl_ujian', $data);
+	}
+
+	function edit_ujian($data, $id_ujian) {
+		$this->db->where('id_ujian', $id_ujian);
+		$this->db->update('tbl_ujian', $data);
+	}
+
+	function hapus_ujian($id_ujian) {
+		$this->db->where('id_ujian', $id_ujian);
+		$this->db->delete('tbl_ujian');
 	}
 
 	function auth($data)

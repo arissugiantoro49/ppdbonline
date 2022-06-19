@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 10 Bulan Mei 2022 pada 18.24
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.2.30
+-- Host: localhost
+-- Generation Time: Jun 19, 2022 at 11:46 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_komp`
+-- Table structure for table `tbl_dokumen`
+--
+
+CREATE TABLE `tbl_dokumen` (
+  `id_dokumen` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
+  `no_pendaftaran` int(11) NOT NULL,
+  `nama_berkas` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_komp`
 --
 
 CREATE TABLE `tbl_komp` (
@@ -33,7 +47,7 @@ CREATE TABLE `tbl_komp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_komp`
+-- Dumping data for table `tbl_komp`
 --
 
 INSERT INTO `tbl_komp` (`id_komp`, `kompetensi`) VALUES
@@ -43,32 +57,31 @@ INSERT INTO `tbl_komp` (`id_komp`, `kompetensi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_kriteria`
+-- Table structure for table `tbl_kriteria`
 --
 
 CREATE TABLE `tbl_kriteria` (
   `id_kriteria` int(11) NOT NULL,
-  `kode_kriteria` varchar(155) NOT NULL,
-  `nama_kriteria` varchar(255) NOT NULL,
-  `tipe` varchar(105) NOT NULL,
+  `nama_kriteria` varchar(100) NOT NULL,
+  `tipe` varchar(100) NOT NULL,
   `bobot` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_kriteria`
+-- Dumping data for table `tbl_kriteria`
 --
 
-INSERT INTO `tbl_kriteria` (`id_kriteria`, `kode_kriteria`, `nama_kriteria`, `tipe`, `bobot`) VALUES
-(1, 'C1', 'Nilai Raport', '1', 20),
-(2, 'C2', 'Nilai USBK/UMBK', '1', 20),
-(3, 'C3', 'Nilai Penilaian Akhir Semester', '1', 20),
-(4, 'C4', 'Nilai Tes Ujian Online', '0', 20),
-(5, 'C5', 'Nilai Prestasi', '0', 20);
+INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `tipe`, `bobot`) VALUES
+(1, 'Nilai Raport', '1', 20),
+(2, 'Nilai USBN', '1', 20),
+(3, 'Nilai UAS', '1', 20),
+(4, 'Nilai Prestasi', '1', 20),
+(5, 'Nilai Ujian Seleksi', '1', 20);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_nilai`
+-- Table structure for table `tbl_nilai`
 --
 
 CREATE TABLE `tbl_nilai` (
@@ -94,18 +107,30 @@ CREATE TABLE `tbl_nilai` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `tbl_nilai`
+-- Dumping data for table `tbl_nilai`
 --
 
 INSERT INTO `tbl_nilai` (`id_nilai`, `no_pendaftaran`, `matematika_raport`, `ipa_raport`, `pai_raport`, `bahasa_indonesia_raport`, `dok_raport`, `matematika_usbn`, `ipa_usbn`, `bindo_usbn`, `pai_usbn`, `dok_usbn`, `matematika_uas`, `ipa_uas`, `bindo_uas`, `pai_uas`, `dok_uas`, `nilai_prestasi`, `dok_prestasi`) VALUES
 (1, '2022-019', 90, 95, 90, 86, '_dok_raport.png', 60, 80, 90, 50, '_dok_usbn.jpeg', 40, 90, 70, 90, '_dok_uas.jpeg', 77, '_dok_prestasi.png'),
-(2, '2022-020', 88, 79, 78, 76, '2022-020_dok_raport.jpeg', 80, 87, 76, 87, '2022-020_dok_usbn.jpeg', 90, 77, 90, 85, '2022-020_dok_uas.pdf', 78, '2022-020_dok_prestasi.pdf'),
-(3, '2022-021', 90, 80, 79, 67, '2022-021_dok_raport.jpeg', 80, 87, 77, 66, '2022-021_dok_usbn.jpg', 88, 77, 89, 78, '2022-021_dok_uas.jpg', 90, '2022-021_dok_prestasi.jpg');
+(2, '2022-020', 88, 79, 78, 76, '2022-020_dok_raport.jpeg', 80, 87, 76, 87, '2022-020_dok_usbn.jpeg', 90, 77, 90, 85, '2022-020_dok_uas.pdf', 78, '2022-020_dok_prestasi.pdf');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pdd`
+-- Table structure for table `tbl_nilai_new`
+--
+
+CREATE TABLE `tbl_nilai_new` (
+  `id_nilai` int(11) NOT NULL,
+  `no_pendaftaran` varchar(20) NOT NULL,
+  `id_subkriteria` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_pdd`
 --
 
 CREATE TABLE `tbl_pdd` (
@@ -114,7 +139,7 @@ CREATE TABLE `tbl_pdd` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pdd`
+-- Dumping data for table `tbl_pdd`
 --
 
 INSERT INTO `tbl_pdd` (`id_pdd`, `nama_pdd`) VALUES
@@ -132,7 +157,7 @@ INSERT INTO `tbl_pdd` (`id_pdd`, `nama_pdd`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pekerjaan`
+-- Table structure for table `tbl_pekerjaan`
 --
 
 CREATE TABLE `tbl_pekerjaan` (
@@ -142,7 +167,7 @@ CREATE TABLE `tbl_pekerjaan` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pekerjaan`
+-- Dumping data for table `tbl_pekerjaan`
 --
 
 INSERT INTO `tbl_pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `ket_pekerjaan`) VALUES
@@ -168,7 +193,7 @@ INSERT INTO `tbl_pekerjaan` (`id_pekerjaan`, `nama_pekerjaan`, `ket_pekerjaan`) 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_penghasilan`
+-- Table structure for table `tbl_penghasilan`
 --
 
 CREATE TABLE `tbl_penghasilan` (
@@ -177,7 +202,7 @@ CREATE TABLE `tbl_penghasilan` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_penghasilan`
+-- Dumping data for table `tbl_penghasilan`
 --
 
 INSERT INTO `tbl_penghasilan` (`id_penghasilan`, `nama_penghasilan`) VALUES
@@ -191,17 +216,17 @@ INSERT INTO `tbl_penghasilan` (`id_penghasilan`, `nama_penghasilan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_pengumuman`
+-- Table structure for table `tbl_pengumuman`
 --
 
 CREATE TABLE `tbl_pengumuman` (
   `id_pengumuman` int(10) NOT NULL,
-  `ket_pengumuman` text DEFAULT NULL,
+  `ket_pengumuman` text,
   `tgl_pengumuman` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_pengumuman`
+-- Dumping data for table `tbl_pengumuman`
 --
 
 INSERT INTO `tbl_pengumuman` (`id_pengumuman`, `ket_pengumuman`, `tgl_pengumuman`) VALUES
@@ -210,19 +235,19 @@ INSERT INTO `tbl_pengumuman` (`id_pengumuman`, `ket_pengumuman`, `tgl_pengumuman
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_siswa`
+-- Table structure for table `tbl_siswa`
 --
 
 CREATE TABLE `tbl_siswa` (
   `id_siswa` int(100) NOT NULL,
   `no_pendaftaran` varchar(20) NOT NULL,
-  `password` text DEFAULT NULL,
+  `password` text,
   `nis` varchar(10) DEFAULT NULL,
   `nisn` varchar(10) DEFAULT NULL,
-  `nik` text DEFAULT NULL,
+  `nik` text,
   `nama_lengkap` varchar(100) DEFAULT NULL,
   `jk` varchar(12) DEFAULT NULL,
-  `tempat_lahir` text DEFAULT NULL,
+  `tempat_lahir` text,
   `tgl_lahir` varchar(10) DEFAULT NULL,
   `agama` varchar(30) DEFAULT NULL,
   `status_keluarga` varchar(30) DEFAULT NULL,
@@ -232,7 +257,7 @@ CREATE TABLE `tbl_siswa` (
   `cita` varchar(100) DEFAULT NULL,
   `paud` varchar(100) DEFAULT NULL,
   `tk` varchar(100) DEFAULT NULL,
-  `alamat_siswa` text DEFAULT NULL,
+  `alamat_siswa` text,
   `jenis_tinggal` varchar(100) DEFAULT NULL,
   `desa` varchar(100) DEFAULT NULL,
   `kec` varchar(100) DEFAULT NULL,
@@ -284,24 +309,102 @@ CREATE TABLE `tbl_siswa` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_siswa`
+-- Dumping data for table `tbl_siswa`
 --
 
 INSERT INTO `tbl_siswa` (`id_siswa`, `no_pendaftaran`, `password`, `nis`, `nisn`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `anak_ke`, `jml_saudara`, `hobi`, `cita`, `paud`, `tk`, `alamat_siswa`, `jenis_tinggal`, `desa`, `kec`, `kab`, `prov`, `kode_pos`, `jarak`, `trans`, `no_hp_siswa`, `no_kk`, `kepala_keluarga`, `nama_ayah`, `nik_ayah`, `status_ayah`, `th_lahir_ayah`, `pdd_ayah`, `pekerjaan_ayah`, `penghasilan_ayah`, `nama_ibu`, `nik_ibu`, `status_ibu`, `th_lahir_ibu`, `pdd_ibu`, `pekerjaan_ibu`, `penghasilan_ibu`, `nama_wali`, `nik_wali`, `th_lahir_wali`, `pdd_wali`, `pekerjaan_wali`, `penghasilan_wali`, `no_hp_ortu`, `npsn_sekolah`, `nama_sekolah`, `status_sekolah`, `jenjang_sekolah`, `lokasi_sekolah`, `no_kks`, `no_pkh`, `no_kip`, `komp_ahli`, `tgl_siswa`, `status_verifikasi`, `status_pendaftaran`, `dokumen_kk`, `dokumen_akte_kelahiran`, `dokumen_skl`, `dokumen_kartu_bantuan`) VALUES
-(19, '2022-019', '0058538548', NULL, '0058538548', '3517186408060001', 'Aris Sugiantoro', 'Laki-Laki', 'Banyuwangi', '2010-09-01', 'Kristen', 'Anak Kandung', '2', '1', '2', '1', '1', '1', 'BARONGSAWAHAN', '1', 'klaci', 'Bandarkedungmulyo', 'JOMBANG', NULL, '61462', '1', '4', '085648259815', '3517010111070148', 'Samsul Mu\'In Thohar', 'Mukalil', '3516012203840003', '1', '1984', 'SMP/Sederajat', 'Pensiunan', '< 500rb', 'Yessy Wicahya Ningdyah', '3517011206100006', '2', '1900', 'SMP/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mukalil', '3516012203840003', '1984', 'SD/Sederajat', NULL, '500-1jt', '085648259815', '000000', 'MIN 3 Jombang', 'NEGERI', '21', '1', '2', '-', '-', NULL, '2022-03-19 06:17:53', '1', NULL, '2022-019_kk.pdf', '2022-019_akte_kelahiran.pdf', '2022-019_skl.pdf', '2022-019_kartu_bantuan.pdf'),
-(20, '2022-020', '3050489000', NULL, '3050489000', '3517184804060003', 'ENDAH NUR AHMADA', 'Laki-Laki', 'Kediri', '01-01-2009', 'Islam', 'Anak Kandung', '2', '2', '3', '1', '1', '1', 'PAGERWOJO', '1', 'Perak', 'Bandarkedungmulyo', 'JOMBANG', 'Jawa Timur', '61461', '2', '2', '085648259815', '3517011206100006', 'Khoirul Anam', 'Khoirul Anam', '3517180104700005', '1', '1984', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mutoharoh', '3517011206100006', '1', '1992', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Khoirul Anam', '3517180104700005', '1984', 'SD/Sederajat', NULL, '< 500rb', '', '60717531', 'MI Umar Zahid Semelo', 'SWASTA', '21', '1', '-', '-', '-', NULL, '2022-03-09 21:22:31', '1', NULL, '2022-020_kk.pdf', '2022-020_akte_kelahiran.pdf', '2022-020_skl.pdf', '2022-020_kartu_bantuan.pdf'),
-(21, '2022-021', '3050489000', NULL, '3050489000', '3517014205050003', 'ARIL SETIYOBUDI', 'Laki-Laki', 'Kediri', '03-01-2009', 'Islam', 'Anak Kandung', '2', '2', '1', '1', '1', '1', 'PAGERWOJO', '1', 'Perak', 'perak', 'JOMBANG', 'Jawa Timur', '61461', '3', '2', '085648259815', '3517011206100006', 'Mukalil', 'Mukalil', '3517011206100006', '1', '1984', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mutoharoh', '3517185308730001', '1', '1992', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mukalil', '3517011206100006', '1984', 'SD/Sederajat', NULL, '< 500rb', '085648259815', '60717331', 'MIS SAYID ABDURROHMAN II', 'SWASTA', '21', '1', '-', '-', '-', NULL, '2022-05-10 18:06:21', NULL, NULL, '2022-021_kk.jpg', '2022-021_akte_kelahiran.jpg', '2022-021_skl.jpg', '2022-021_kartu_bantuan.png');
+(19, '2022-019', '0058538548', NULL, '0058538548', '3517186408060001', 'Aris Sugiantoro', 'Laki-Laki', 'Banyuwangi', '2010-09-01', 'Kristen', 'Anak Kandung', '2', '1', '2', '1', '1', '1', 'BARONGSAWAHAN', '1', 'klaci', 'Bandarkedungmulyo', 'JOMBANG', NULL, '61462', '1', '4', '085648259815', '3517010111070148', 'Samsul Mu\'In Thohar', 'Mukalil', '3516012203840003', '1', '1984', 'SMP/Sederajat', 'Pensiunan', '< 500rb', 'Yessy Wicahya Ningdyah', '3517011206100006', '2', '1900', 'SMP/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mukalil', '3516012203840003', '1984', 'SD/Sederajat', NULL, '500-1jt', '085648259815', '000000', 'MIN 3 Jombang', 'NEGERI', '21', '1', '2', '-', '-', NULL, '2022-03-19 06:17:53', '1', 'lulus', '2022-019_kk.pdf', '2022-019_akte_kelahiran.pdf', '2022-019_skl.pdf', '2022-019_kartu_bantuan.pdf'),
+(20, '2022-020', '3050489000', NULL, '3050489000', '3517184804060003', 'ENDAH NUR AHMADA', 'Laki-Laki', 'Kediri', '01-01-2009', 'Islam', 'Anak Kandung', '2', '2', '3', '1', '1', '1', 'PAGERWOJO', '1', 'Perak', 'Bandarkedungmulyo', 'JOMBANG', 'Jawa Timur', '61461', '2', '2', '085648259815', '3517011206100006', 'Khoirul Anam', 'Khoirul Anam', '3517180104700005', '1', '1984', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mutoharoh', '3517011206100006', '1', '1992', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Khoirul Anam', '3517180104700005', '1984', 'SD/Sederajat', NULL, '< 500rb', '', '60717531', 'MI Umar Zahid Semelo', 'SWASTA', '21', '1', '-', '-', '-', NULL, '2022-03-09 21:22:31', '1', 'lulus', '2022-020_kk.pdf', '2022-020_akte_kelahiran.pdf', '2022-020_skl.pdf', '2022-020_kartu_bantuan.pdf');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_user`
+-- Table structure for table `tbl_soal`
+--
+
+CREATE TABLE `tbl_soal` (
+  `id_soal` int(11) NOT NULL,
+  `soal` text NOT NULL,
+  `media` varchar(100) NOT NULL,
+  `opsi_a` text NOT NULL,
+  `opsi_b` text NOT NULL,
+  `opsi_c` text NOT NULL,
+  `opsi_d` text NOT NULL,
+  `opsi_e` text NOT NULL,
+  `jawaban` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_soal`
+--
+
+INSERT INTO `tbl_soal` (`id_soal`, `soal`, `media`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`) VALUES
+(1, '<p>aaaasssss</p>\r\n', '', 'asdf', 'fdsa', 'fdff', 'vddd', '332rq', 'A'),
+(3, '<p>1*1 ?</p>\r\n', '', '1', '3', '2', '2', '3', 'A');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_subkriteria`
+--
+
+CREATE TABLE `tbl_subkriteria` (
+  `id_subkriteria` int(11) NOT NULL,
+  `id_kriteria` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_subkriteria`
+--
+
+INSERT INTO `tbl_subkriteria` (`id_subkriteria`, `id_kriteria`, `nama`) VALUES
+(1, 1, 'Matematika'),
+(2, 1, 'IPA'),
+(3, 1, 'Bahasa Indonesia'),
+(4, 1, 'PAI'),
+(5, 2, 'Matematika'),
+(6, 2, 'IPA'),
+(7, 2, 'Bahasa Indonesia'),
+(8, 2, 'PAI'),
+(9, 3, 'Matematika'),
+(10, 3, 'IPA'),
+(11, 3, 'Bahasa Indonesia'),
+(12, 3, 'PAI'),
+(13, 4, 'Prestasi');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_ujian`
+--
+
+CREATE TABLE `tbl_ujian` (
+  `id_ujian` int(11) NOT NULL,
+  `nama` varchar(100) NOT NULL,
+  `durasi` int(11) NOT NULL,
+  `waktu` datetime NOT NULL,
+  `tahun` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_ujian`
+--
+
+INSERT INTO `tbl_ujian` (`id_ujian`, `nama`, `durasi`, `waktu`, `tahun`) VALUES
+(1, 'Test 12', 30, '2022-05-31 20:00:00', 2022),
+(4, 'satu satu', 30, '2022-06-08 16:44:00', 2022);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_user`
 --
 
 CREATE TABLE `tbl_user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(100) DEFAULT NULL,
-  `password` text DEFAULT NULL,
+  `password` text,
   `nama_lengkap` varchar(100) DEFAULT NULL,
   `alamat` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
@@ -319,7 +422,7 @@ CREATE TABLE `tbl_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_user`
+-- Dumping data for table `tbl_user`
 --
 
 INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama_lengkap`, `alamat`, `email`, `website`, `telp`, `kab_sekolah`, `ketua_panitia`, `nip_ketua`, `th_pelajaran`, `no_surat`, `kepsek`, `nip_kepsek`, `level`, `tgl_daftar`) VALUES
@@ -328,18 +431,18 @@ INSERT INTO `tbl_user` (`id_user`, `username`, `password`, `nama_lengkap`, `alam
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_verifikasi`
+-- Table structure for table `tbl_verifikasi`
 --
 
 CREATE TABLE `tbl_verifikasi` (
   `id_verifikasi` int(10) NOT NULL,
-  `isi` text DEFAULT NULL,
-  `ket` text DEFAULT NULL,
+  `isi` text,
+  `ket` text,
   `tgl_verifikasi` datetime DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_verifikasi`
+-- Dumping data for table `tbl_verifikasi`
 --
 
 INSERT INTO `tbl_verifikasi` (`id_verifikasi`, `isi`, `ket`, `tgl_verifikasi`) VALUES
@@ -348,7 +451,7 @@ INSERT INTO `tbl_verifikasi` (`id_verifikasi`, `isi`, `ket`, `tgl_verifikasi`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tbl_web`
+-- Table structure for table `tbl_web`
 --
 
 CREATE TABLE `tbl_web` (
@@ -358,7 +461,7 @@ CREATE TABLE `tbl_web` (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tbl_web`
+-- Dumping data for table `tbl_web`
 --
 
 INSERT INTO `tbl_web` (`id_web`, `status_ppdb`, `tgl_diubah`) VALUES
@@ -369,140 +472,211 @@ INSERT INTO `tbl_web` (`id_web`, `status_ppdb`, `tgl_diubah`) VALUES
 --
 
 --
--- Indeks untuk tabel `tbl_komp`
+-- Indexes for table `tbl_dokumen`
+--
+ALTER TABLE `tbl_dokumen`
+  ADD PRIMARY KEY (`id_dokumen`);
+
+--
+-- Indexes for table `tbl_komp`
 --
 ALTER TABLE `tbl_komp`
   ADD PRIMARY KEY (`id_komp`);
 
 --
--- Indeks untuk tabel `tbl_kriteria`
+-- Indexes for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
   ADD PRIMARY KEY (`id_kriteria`);
 
 --
--- Indeks untuk tabel `tbl_nilai`
+-- Indexes for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
   ADD PRIMARY KEY (`id_nilai`);
 
 --
--- Indeks untuk tabel `tbl_pdd`
+-- Indexes for table `tbl_nilai_new`
+--
+ALTER TABLE `tbl_nilai_new`
+  ADD PRIMARY KEY (`id_nilai`);
+
+--
+-- Indexes for table `tbl_pdd`
 --
 ALTER TABLE `tbl_pdd`
   ADD PRIMARY KEY (`id_pdd`);
 
 --
--- Indeks untuk tabel `tbl_pekerjaan`
+-- Indexes for table `tbl_pekerjaan`
 --
 ALTER TABLE `tbl_pekerjaan`
   ADD PRIMARY KEY (`id_pekerjaan`);
 
 --
--- Indeks untuk tabel `tbl_penghasilan`
+-- Indexes for table `tbl_penghasilan`
 --
 ALTER TABLE `tbl_penghasilan`
   ADD PRIMARY KEY (`id_penghasilan`);
 
 --
--- Indeks untuk tabel `tbl_pengumuman`
+-- Indexes for table `tbl_pengumuman`
 --
 ALTER TABLE `tbl_pengumuman`
   ADD PRIMARY KEY (`id_pengumuman`);
 
 --
--- Indeks untuk tabel `tbl_siswa`
+-- Indexes for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
   ADD PRIMARY KEY (`id_siswa`) USING BTREE;
 
 --
--- Indeks untuk tabel `tbl_user`
+-- Indexes for table `tbl_soal`
+--
+ALTER TABLE `tbl_soal`
+  ADD PRIMARY KEY (`id_soal`);
+
+--
+-- Indexes for table `tbl_subkriteria`
+--
+ALTER TABLE `tbl_subkriteria`
+  ADD PRIMARY KEY (`id_subkriteria`) USING BTREE,
+  ADD KEY `id_kriteria` (`id_kriteria`);
+
+--
+-- Indexes for table `tbl_ujian`
+--
+ALTER TABLE `tbl_ujian`
+  ADD PRIMARY KEY (`id_ujian`);
+
+--
+-- Indexes for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indeks untuk tabel `tbl_verifikasi`
+-- Indexes for table `tbl_verifikasi`
 --
 ALTER TABLE `tbl_verifikasi`
   ADD PRIMARY KEY (`id_verifikasi`);
 
 --
--- Indeks untuk tabel `tbl_web`
+-- Indexes for table `tbl_web`
 --
 ALTER TABLE `tbl_web`
   ADD PRIMARY KEY (`id_web`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_komp`
+-- AUTO_INCREMENT for table `tbl_dokumen`
+--
+ALTER TABLE `tbl_dokumen`
+  MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_komp`
 --
 ALTER TABLE `tbl_komp`
   MODIFY `id_komp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_kriteria`
+-- AUTO_INCREMENT for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
-  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_kriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_nilai`
+-- AUTO_INCREMENT for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
-  MODIFY `id_nilai` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_nilai` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pdd`
+-- AUTO_INCREMENT for table `tbl_nilai_new`
+--
+ALTER TABLE `tbl_nilai_new`
+  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_pdd`
 --
 ALTER TABLE `tbl_pdd`
   MODIFY `id_pdd` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pekerjaan`
+-- AUTO_INCREMENT for table `tbl_pekerjaan`
 --
 ALTER TABLE `tbl_pekerjaan`
   MODIFY `id_pekerjaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_penghasilan`
+-- AUTO_INCREMENT for table `tbl_penghasilan`
 --
 ALTER TABLE `tbl_penghasilan`
   MODIFY `id_penghasilan` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_pengumuman`
+-- AUTO_INCREMENT for table `tbl_pengumuman`
 --
 ALTER TABLE `tbl_pengumuman`
   MODIFY `id_pengumuman` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_siswa`
+-- AUTO_INCREMENT for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
-  MODIFY `id_siswa` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_siswa` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_user`
+-- AUTO_INCREMENT for table `tbl_soal`
+--
+ALTER TABLE `tbl_soal`
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tbl_subkriteria`
+--
+ALTER TABLE `tbl_subkriteria`
+  MODIFY `id_subkriteria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `tbl_ujian`
+--
+ALTER TABLE `tbl_ujian`
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_verifikasi`
+-- AUTO_INCREMENT for table `tbl_verifikasi`
 --
 ALTER TABLE `tbl_verifikasi`
   MODIFY `id_verifikasi` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tbl_web`
+-- AUTO_INCREMENT for table `tbl_web`
 --
 ALTER TABLE `tbl_web`
   MODIFY `id_web` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tbl_subkriteria`
+--
+ALTER TABLE `tbl_subkriteria`
+  ADD CONSTRAINT `tbl_subkriteria_ibfk_1` FOREIGN KEY (`id_kriteria`) REFERENCES `tbl_kriteria` (`id_kriteria`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

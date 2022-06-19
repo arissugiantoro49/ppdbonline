@@ -1,5 +1,7 @@
 <!-- Main content -->
-
+<?php
+  $precision = 4;
+?>
 <div class="content-wrapper">
   <!-- Content area -->
   <div class="content">
@@ -100,7 +102,7 @@
                 <tr>
                   <td><?= $no++; ?></td>
                   <td><?= strtoupper($key); ?></td>
-                  <td><?= $value; ?></td>
+                  <td><?= number_format((float) $value, $precision, '.', ''); ?></td>
                 </tr>
               <?php
               } ?>
@@ -143,11 +145,11 @@
                 <tr>
                   <td><?= $no++; ?></td>
                   <td>A<?= $key; ?></td>
-                  <td><?= $value['c1']; ?></td>
-                  <td><?= $value['c2']; ?></td>
-                  <td><?= $value['c3']; ?></td>
-                  <td><?= $value['c4']; ?></td>
-                  <td><?= $value['c5']; ?></td>
+                  <td><?= number_format((float) $value['c1'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c2'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c3'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c4'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c5'], $precision, '.', ''); ?></td>
                 </tr>
               <?php
               } ?>
@@ -190,11 +192,11 @@
                 <tr>
                   <td><?= $no++; ?></td>
                   <td>A<?= $key; ?></td>
-                  <td><?= $value['c1']; ?></td>
-                  <td><?= $value['c2']; ?></td>
-                  <td><?= $value['c3']; ?></td>
-                  <td><?= $value['c4']; ?></td>
-                  <td><?= $value['c5']; ?></td>
+                  <td><?= number_format((float) $value['c1'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c2'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c3'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c4'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['c5'], $precision, '.', ''); ?></td>
                 </tr>
               <?php
               } ?>
@@ -235,9 +237,9 @@
                 <tr>
                   <td><?= $no++; ?></td>
                   <td>A<?= $key; ?></td>
-                  <td><?= $value['max']; ?></td>
-                  <td><?= $value['min']; ?></td>
-                  <td><?= $value['yi']; ?></td>
+                  <td><?= number_format((float) $value['max'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['min'], $precision, '.', ''); ?></td>
+                  <td><?= number_format((float) $value['yi'], $precision, '.', ''); ?></td>
                 </tr>
               <?php
               } ?>
@@ -277,7 +279,7 @@
                 <tr>
                   <td><?= $no++; ?></td>
                   <td>A<?= $key; ?></td>
-                  <td><?= $value['optimasi']; ?></td>
+                  <td><?= number_format((float) $value['optimasi'], $precision, '.', ''); ?></td>
                   <td><?= $value['rank']; ?></td>
                 </tr>
               <?php

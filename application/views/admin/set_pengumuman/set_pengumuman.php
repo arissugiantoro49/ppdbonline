@@ -61,7 +61,7 @@
                   <td><?php echo $baris->nisn; ?></td>
                   <td><?php echo $baris->nik; ?></td>
                   <td><?php echo $baris->nama_lengkap; ?></td>              
-                  <td><?= $tabel_yi[$baris->id_siswa]['optimasi'] ?></td>              
+                  <td><?= number_format((float) $tabel_yi[$baris->id_siswa]['optimasi'], 4, '.', '') ?></td>              
                   <td><?= $tabel_yi[$baris->id_siswa]['rank'] ?></td>                         
                  <!-- <td><?php echo intval(($baris->matematika + $baris->ipa + $baris->bahasa_indonesia + $baris->pai) / 4); ?></td>
                   -->

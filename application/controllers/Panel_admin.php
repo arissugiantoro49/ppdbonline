@@ -771,6 +771,87 @@ class Panel_admin extends CI_Controller
 		$this->load->view('admin/data_kelas', $data);
 		$this->load->view('admin/footer');
 	}
+
+	public function data_soal($aksi = '', $id = '') {
+		$sess = $this->session->userdata('id_admin');
+		if ($sess == NULL) {
+			redirect('panel_admin/log_in');
+		}
+
+		if ($aksi != '') {
+			$data_post = array(
+				'soal' => $this->input->post('soal'),
+				'opsi_a' => $this->input->post('opsi_a'),
+				'opsi_b' => $this->input->post('opsi_b'),
+				'opsi_c' => $this->input->post('opsi_c'),
+				'opsi_d' => $this->input->post('opsi_d'),
+				'opsi_e' => $this->input->post('opsi_e'),
+				'jawaban' => $this->input->post('jawaban')
+			);
+			if ($aksi == "tambah") {
+				$this->admin->tambah_soal($data_post);
+			} elseif ($aksi == "edit") {
+				$this->admin->edit_soal($data_post, $this->input->post('id_soal'));
+			} elseif ($aksi == "hapus") {
+				$this->admin->hapus_soal($id);
+			}
+			redirect('panel_admin/data_soal');
+		}
+
+		$data = array(
+			'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
+			'judul_web'	=> "DATA SOAL",
+			'soal'		=> $this->admin->get_soal()
+		);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/data_soal', $data);
+		$this->load->view('admin/footer');
+	}
+
+	public function get_detail_soal($id_soal) {
+		echo $this->admin->get_detail_soal($id_soal);
+	}
+
+	public function ujian($aksi = '', $id = '') {
+		$sess = $this->session->userdata('id_admin');
+		if ($sess == NULL) {
+			redirect('panel_admin/log_in');
+		}
+		$thn = $this->admin->set_announce($aksi, $id);
+
+		if ($aksi != '') {
+			$data_post = array(
+				'nama' => $this->input->post('nama'),
+				'durasi' => $this->input->post('durasi'),
+				'waktu' => $this->input->post('waktu'),
+				'tahun' => $this->input->post('tahun')
+			);
+			if ($aksi == "tambah") {
+				$this->admin->tambah_ujian($data_post);
+			} elseif ($aksi == "edit") {
+				$this->admin->edit_ujian($data_post, $this->input->post('id_ujian'));
+			} elseif ($aksi == "hapus") {
+				$this->admin->hapus_ujian($id);
+			}
+			redirect('panel_admin/ujian');
+		}
+
+		$data = array(
+			'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
+			'judul_web'	=> "DATA UJIAN",
+			'ujian'		=> $this->admin->get_ujian(),
+			'v_thn'		=> $this->admin->set_announce($aksi, $id)
+		);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/ujian', $data);
+		$this->load->view('admin/footer');
+	}
+
+	public function get_detail_ujian($id_ujian) {
+		echo $this->admin->get_detail_ujian($id_ujian);
+	}
 	
 
 	public function edit_ket($aksi = '', $id = '')
