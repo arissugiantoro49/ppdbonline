@@ -786,7 +786,7 @@ class Panel_admin extends CI_Controller
 				'opsi_c' => $this->input->post('opsi_c'),
 				'opsi_d' => $this->input->post('opsi_d'),
 				'opsi_e' => $this->input->post('opsi_e'),
-				'jawaban' => $this->input->post('jawaban')
+				'jawaban' => strtoupper($this->input->post('jawaban'))
 			);
 			if ($aksi == "tambah") {
 				$this->admin->tambah_soal($data_post);
@@ -811,6 +811,25 @@ class Panel_admin extends CI_Controller
 
 	public function get_detail_soal($id_soal) {
 		echo $this->admin->get_detail_soal($id_soal);
+	}
+
+	public function get_list_soal($text) {
+		header('Content-Type: application/json; charset=utf-8');
+		echo $this->admin->get_list_soal($text);
+	}
+
+	public function tambah_daftar_soal_ujian() {
+		header('Content-Type: application/json; charset=utf-8');
+		echo $this->admin->tambah_daftar_soal_ujian($this->input->get("id_ujian"), $this->input->get("id_soal"));
+	}
+
+	public function get_daftar_soal_ujian($id_ujian) {
+		header('Content-Type: application/json; charset=utf-8');
+		echo $this->admin->get_daftar_soal_ujian($id_ujian);
+	}
+
+	public function hapus_daftar_soal_ujian($id_daftar_soal_ujian) {
+		$this->admin->hapus_daftar_soal_ujian($id_daftar_soal_ujian);
 	}
 
 	public function ujian($aksi = '', $id = '') {

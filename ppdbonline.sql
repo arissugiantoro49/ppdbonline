@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 19, 2022 at 11:46 AM
+-- Generation Time: Jun 23, 2022 at 09:41 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -21,6 +21,18 @@ SET time_zone = "+00:00";
 --
 -- Database: `ppdbonline`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_daftar_soal_ujian`
+--
+
+CREATE TABLE `tbl_daftar_soal_ujian` (
+  `id_daftar_soal_ujian` int(11) NOT NULL,
+  `id_ujian` int(11) NOT NULL,
+  `id_soal` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -324,6 +336,7 @@ INSERT INTO `tbl_siswa` (`id_siswa`, `no_pendaftaran`, `password`, `nis`, `nisn`
 
 CREATE TABLE `tbl_soal` (
   `id_soal` int(11) NOT NULL,
+  `kode` text NOT NULL,
   `soal` text NOT NULL,
   `media` varchar(100) NOT NULL,
   `opsi_a` text NOT NULL,
@@ -331,16 +344,36 @@ CREATE TABLE `tbl_soal` (
   `opsi_c` text NOT NULL,
   `opsi_d` text NOT NULL,
   `opsi_e` text NOT NULL,
-  `jawaban` varchar(1) NOT NULL
+  `jawaban` enum('A','B','C','D','E') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_soal`
 --
 
-INSERT INTO `tbl_soal` (`id_soal`, `soal`, `media`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`) VALUES
-(1, '<p>aaaasssss</p>\r\n', '', 'asdf', 'fdsa', 'fdff', 'vddd', '332rq', 'A'),
-(3, '<p>1*1 ?</p>\r\n', '', '1', '3', '2', '2', '3', 'A');
+INSERT INTO `tbl_soal` (`id_soal`, `kode`, `soal`, `media`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`) VALUES
+(1, 'SL1', '<p>Apa kepanjangan SQL?</p>\r\n', 'a', 'a', 'a', 'a', 'a', 'a', 'A'),
+(2, 'SL2', '<p>Siapa pembuat bahasa pemrograman java?</p>\r\n', 'c', 'b', 'b', 'b', 'b', 'b', 'B'),
+(3, 'SL3', '<p>Nullsafe operator diperkenalkan di php versi?</p>\r\n', '', 'c', 'c', 'c', 'c', 'c', 'C');
+
+--
+-- Triggers `tbl_soal`
+--
+DELIMITER $$
+CREATE TRIGGER `before_tbl_soal_insert` BEFORE INSERT ON `tbl_soal` FOR EACH ROW BEGIN
+DECLARE num integer;
+SET @num := (SELECT MAX(id_soal) FROM tbl_soal);
+
+IF @num IS NULL THEN
+  SET NEW.id_soal = 1;
+  SET NEW.kode = CONCAT('SL', 1);
+ELSE
+  SET NEW.id_soal = @num + 1;
+  SET NEW.kode = CONCAT('SL', @num + 1);
+END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -472,6 +505,12 @@ INSERT INTO `tbl_web` (`id_web`, `status_ppdb`, `tgl_diubah`) VALUES
 --
 
 --
+-- Indexes for table `tbl_daftar_soal_ujian`
+--
+ALTER TABLE `tbl_daftar_soal_ujian`
+  ADD PRIMARY KEY (`id_daftar_soal_ujian`);
+
+--
 -- Indexes for table `tbl_dokumen`
 --
 ALTER TABLE `tbl_dokumen`
@@ -536,6 +575,7 @@ ALTER TABLE `tbl_siswa`
 --
 ALTER TABLE `tbl_soal`
   ADD PRIMARY KEY (`id_soal`);
+ALTER TABLE `tbl_soal` ADD FULLTEXT KEY `kode` (`kode`,`soal`,`opsi_a`,`opsi_b`,`opsi_c`,`opsi_d`,`opsi_e`);
 
 --
 -- Indexes for table `tbl_subkriteria`
@@ -571,6 +611,12 @@ ALTER TABLE `tbl_web`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `tbl_daftar_soal_ujian`
+--
+ALTER TABLE `tbl_daftar_soal_ujian`
+  MODIFY `id_daftar_soal_ujian` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_dokumen`
@@ -636,7 +682,7 @@ ALTER TABLE `tbl_siswa`
 -- AUTO_INCREMENT for table `tbl_soal`
 --
 ALTER TABLE `tbl_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_subkriteria`

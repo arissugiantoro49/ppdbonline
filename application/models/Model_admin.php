@@ -107,7 +107,12 @@ class Model_admin extends CI_Model
 		return json_encode($this->db->get_where('tbl_soal', "id_soal='$id_soal'")->row());
 	}
 
+	function get_list_soal($text) {
+		return json_encode($this->db->query("SELECT * FROM tbl_soal WHERE MATCH (kode, soal, opsi_a, opsi_b, opsi_c, opsi_d, opsi_e) AGAINST ('+$text*' IN BOOLEAN MODE)")->result_array());
+	}
+
 	function get_detail_ujian($id_ujian) {
+
 		return json_encode($this->db->get_where('tbl_ujian', "id_ujian='$id_ujian'")->row());
 	}
 
@@ -116,7 +121,41 @@ class Model_admin extends CI_Model
 	}
 
 	function get_ujian() {
-		return $this->db->get('tbl_ujian');
+		return $this->db->query("SELECT u.*, COUNT(d.id_ujian) AS jumlah_soal FROM tbl_ujian u LEFT JOIN tbl_daftar_soal_ujian d USING(id_ujian) GROUP BY u.id_ujian");
+	}
+
+	function tambah_daftar_soal_ujian($id_ujian, $id_soal) {
+		$result['success'] = false;
+		$result['success'] = 'Terjadi kesalahan';
+		$data = array('id_ujian' => $id_ujian, 'id_soal' => $id_soal);
+
+		$this->db->from('tbl_daftar_soal_ujian');
+		$this->db->where($data);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			$result['message'] = 'Daftar soal sudah ada';
+		} else {
+			$this->db->flush_cache();
+			$this->db->insert('tbl_daftar_soal_ujian', $data);
+			$result['success'] = true;
+			$result['message'] = 'Berhasil menambahkan soal';
+		}
+
+		return json_encode($result);
+	}
+
+	public function get_daftar_soal_ujian($id_ujian) {
+		$this->db->select('d.id_daftar_soal_ujian, d.id_soal,s.kode, s.soal');
+		$this->db->from('tbl_daftar_soal_ujian d');
+		$this->db->join('tbl_soal s', 's.id_soal = d.id_soal');
+		$this->db->where('d.id_ujian', $id_ujian);
+		return json_encode($this->db->get()->result_array());
+	}
+
+	function hapus_daftar_soal_ujian($id_daftar_soal_ujian) {
+		$this->db->where('id_daftar_soal_ujian', $id_daftar_soal_ujian);
+		$this->db->delete('tbl_daftar_soal_ujian');
 	}
 
 	function ppdb_status($option, $date)

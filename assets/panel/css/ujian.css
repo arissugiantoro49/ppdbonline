@@ -1,0 +1,75 @@
+
+    .p-1 {
+        padding: 1em;
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown>div {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .by {
+        font-size: 11px;
+        opacity: 0.8;
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .by::before {
+        content: 'Kode: ';
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .name {
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .title {
+        display: block;
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .description {
+        font-size: 12px;
+        display: block;
+        color: #a0a0a0;
+        white-space: nowrap;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .meta {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 10px;
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .meta li {
+        margin: 0;
+        padding: 0;
+        display: inline;
+        margin-right: 10px;
+    }
+
+    .selectize-control.daftar-soal .selectize-dropdown .meta li span {
+        font-weight: bold;
+    }
+
+    .selectize-control.daftar-soal::before {
+        -moz-transition: opacity 0.2s;
+        -webkit-transition: opacity 0.2s;
+        transition: opacity 0.2s;
+        content: ' ';
+        z-index: 2;
+        position: absolute;
+        display: block;
+        top: 12px;
+        right: 34px;
+        width: 16px;
+        height: 16px;
+        background: url(images/spinner.gif);
+        background-size: 16px 16px;
+        opacity: 0;
+    }
+
+    .selectize-control.daftar-soal.loading::before {
+        opacity: 0.4;
+    }

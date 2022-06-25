@@ -40,7 +40,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 	<script type="text/javascript" src="assets/panel/js/plugins/loaders/blockui.min.js"></script>
 	<!-- /core JS files -->
 	<?php
-	if ($sub_menu == "" or $sub_menu == "profile" or $sub_menu == "ubah_pass" or $menu == "laporan" or $sub_menu == "statistik") { ?>
+	if ($sub_menu == "profile" or $sub_menu == "ubah_pass" or $menu == "laporan" or $sub_menu == "statistik") { ?>
 		<!-- Theme JS files -->
 		<script type="text/javascript" src="assets/panel/js/plugins/visualization/d3/d3.min.js"></script>
 		<script type="text/javascript" src="assets/panel/js/plugins/visualization/d3/d3_tooltip.js"></script>

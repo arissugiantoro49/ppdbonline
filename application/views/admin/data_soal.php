@@ -245,8 +245,8 @@
                     document.getElementById("detail_opsi_d").innerHTML = result.opsi_d;
                     document.getElementById("detail_opsi_e").innerHTML = result.opsi_e;
                     document.getElementById("detail_jawaban").innerHTML = result.jawaban;
+                    $('#modal-detail-soal').modal('show');
                 });
-                $('#modal-detail-soal').modal('show');
             }
 
             function editSoal(btn) {
