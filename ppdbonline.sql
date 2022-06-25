@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 23, 2022 at 09:41 PM
+-- Generation Time: Jun 25, 2022 at 03:59 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -33,6 +33,15 @@ CREATE TABLE `tbl_daftar_soal_ujian` (
   `id_ujian` int(11) NOT NULL,
   `id_soal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_daftar_soal_ujian`
+--
+
+INSERT INTO `tbl_daftar_soal_ujian` (`id_daftar_soal_ujian`, `id_ujian`, `id_soal`) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -352,9 +361,9 @@ CREATE TABLE `tbl_soal` (
 --
 
 INSERT INTO `tbl_soal` (`id_soal`, `kode`, `soal`, `media`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`) VALUES
-(1, 'SL1', '<p>Apa kepanjangan SQL?</p>\r\n', 'a', 'a', 'a', 'a', 'a', 'a', 'A'),
-(2, 'SL2', '<p>Siapa pembuat bahasa pemrograman java?</p>\r\n', 'c', 'b', 'b', 'b', 'b', 'b', 'B'),
-(3, 'SL3', '<p>Nullsafe operator diperkenalkan di php versi?</p>\r\n', '', 'c', 'c', 'c', 'c', 'c', 'C');
+(1, 'SL1', '<p>Apa kepanjangan SQL?</p>\r\n', 'a', 'Structured Query Language', 'Susu Qental Lumer', 'SiQiL', 'SaQinah L', 'Dahlah...', 'A'),
+(2, 'SL2', '<p>Siapa pembuat bahasa pemrograman java?</p>\r\n', 'c', 'Bapakmu', 'James Gosling', 'Mbahmu', 'Doi', 'Eyang Sugiono', 'B'),
+(3, 'SL3', '<p>Nullsafe operator diperkenalkan di php versi?</p>\r\n', '', '5.4', '7.0', '8.0', '7.2', '5.1', 'C');
 
 --
 -- Triggers `tbl_soal`
@@ -425,8 +434,8 @@ CREATE TABLE `tbl_ujian` (
 --
 
 INSERT INTO `tbl_ujian` (`id_ujian`, `nama`, `durasi`, `waktu`, `tahun`) VALUES
-(1, 'Test 12', 30, '2022-05-31 20:00:00', 2022),
-(4, 'satu satu', 30, '2022-06-08 16:44:00', 2022);
+(1, 'Gelombang 1', 30, '2022-05-31 09:00:00', 2022),
+(2, 'Gelombang 2', 30, '2022-06-08 08:00:00', 2022);
 
 -- --------------------------------------------------------
 
@@ -616,7 +625,7 @@ ALTER TABLE `tbl_web`
 -- AUTO_INCREMENT for table `tbl_daftar_soal_ujian`
 --
 ALTER TABLE `tbl_daftar_soal_ujian`
-  MODIFY `id_daftar_soal_ujian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_daftar_soal_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_dokumen`
@@ -694,7 +703,7 @@ ALTER TABLE `tbl_subkriteria`
 -- AUTO_INCREMENT for table `tbl_ujian`
 --
 ALTER TABLE `tbl_ujian`
-  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
