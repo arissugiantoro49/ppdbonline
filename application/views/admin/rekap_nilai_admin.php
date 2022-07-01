@@ -158,7 +158,7 @@
                   </td>
 
                   <td>
-                  <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#modal-nilai-seleksi-<?= $baris->nisn ?>"> <?php echo "Proses Ujian" ; ?></button>
+                  <button type="button" class="btn btn-sm" data-toggle="modal" data-target="#modal-nilai-seleksi-<?= $baris->nisn ?>"> <?= $baris->nilai_ujian_seleksi == null ? "Proses Ujian" : $baris->nilai_ujian_seleksi; ?></button>
                   <div class="modal fade" id="modal-nilai-seleksi-<?= $baris->nisn ?>">
                     <div class="modal-dialog modal-sm">
                       <div class="modal-content">
@@ -168,8 +168,8 @@
                         <h4 class="modal-title" id="gridSystemModalLabel">Detail Nilai Ujian Seleksi</h4>
                         </div>
                         <div class="modal-body">
-                         <h6>Nilai Seleksi : 
-                         <?php echo "Proses Ujian" ; ?></h6>  
+                         <h6>Nilai Ujian Seleksi : 
+                         <?= $baris->nilai_ujian_seleksi == null ? "Proses Ujian" : $baris->nilai_ujian_seleksi; ?></h6>  
                         </div>
                       </div>
                     </div>

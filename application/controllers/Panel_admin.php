@@ -467,7 +467,7 @@ class Panel_admin extends CI_Controller
 						'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
 						'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
 						'c4' => $row->nilai_prestasi,
-						'c5' => 50
+						'c5' => $row->nilai_ujian_seleksi == null ? 0 : $row->nilai_ujian_seleksi
 					];
 					$alternatif[$row->id_siswa] = $temp;
 
@@ -865,6 +865,33 @@ class Panel_admin extends CI_Controller
 
 		$this->load->view('admin/header', $data);
 		$this->load->view('admin/ujian', $data);
+		$this->load->view('admin/footer');
+	}
+
+	public function nilai_ujian($aksi = '', $id = '') {
+		$sess = $this->session->userdata('id_admin');
+		if ($sess == NULL) {
+			redirect('panel_admin/log_in');
+		}
+		$thn =
+		$this->siswa->cek_status_ujian();
+		$this->admin->set_announce($aksi, $id);
+
+		if ($aksi == "hapus") {
+			$this->admin->hapus_nilai_ujian($id);
+			redirect('panel_admin/nilai_ujian');
+		}
+		
+
+		$data = array(
+			'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
+			'judul_web'	=> "NILAI UJIAN",
+			'nilai_ujian'		=> $this->admin->get_nilai_ujian(),
+			'v_thn'		=> $this->admin->set_announce($aksi, $id)
+		);
+
+		$this->load->view('admin/header', $data);
+		$this->load->view('admin/nilai_ujian', $data);
 		$this->load->view('admin/footer');
 	}
 

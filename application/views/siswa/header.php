@@ -54,7 +54,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 </head>
 
 <body class="navbar-bottom <?php if ($menu == 'panel_siswa' and $sub_menu == 'biodata') {
-								echo 'sidebar-xs';
+								
 							} ?>">
 
 	<!-- Main navbar -->
@@ -131,7 +131,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<li class="navigation-header"><span><b>Utama</b></span> <i class="icon-menu" title="Main pages"></i></li>
 								<li class="<?php if ($menu == 'panel_siswa' and $sub_menu == '') {
 												echo 'active';
-											} ?>"><a href="panel_siswa"><i class="icon-home4"></i> <span><b>HOME</b></span></a></li>
+											} ?>"><a href="panel_siswa"><i class="icon-home2"></i> <span><b>HOME</b></span></a></li>
 								<li class="<?php if ($menu == 'panel_siswa' and $sub_menu == 'pengumuman') {
 												echo 'active';
 											} ?>"><a href="panel_siswa/pengumuman"><i class="glyphicon glyphicon-bullhorn"></i> <span><b>PENGUMUMAN</b></span></a></li>
@@ -141,8 +141,8 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 								<li class="<?php if ($menu == 'panel_siswa' and $sub_menu == 'biodata') {
 												echo 'active';
 											} ?>">
-			<a href="panel_siswa/"><i class="icon-file-check2"></i> <span><b>UJIAN SELEKSI</b></span></a></li> 
-			<li><a href="panel_siswa/rekap_nilai"><i class="icon-printer4"></i> <span>Rekap Nilai</span></a></li>
+			<a href="panel_siswa/ujian"><i class="icon-pencil4"></i> <span><b>UJIAN SELEKSI</b></span></a></li> 
+			<li><a href="panel_siswa/rekap_nilai"><i class="icon-printer4"></i> <span><b>REKAP NILAI</b></span></a></li>
 								<li><a href="panel_siswa/cetak" target="_blank"><i class="icon-printer2"></i> <span><b>PRINT PENDAFTARAN</b></span></a></li>
 		
 
@@ -150,7 +150,7 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 
 								<!-- Data Lainnya -->
 								<li class="navigation-header"><span><b>Lainnya</b></span> <i class="icon-menu" title="Data visualization"></i></li>
-								<li><a href="files/Panduan_PPDB_Online_2.pdf"><i class="icon-file-download2"></i> <span>Download Panduan</span></a></li>
+								<li><a href="files/Panduan_PPDB_Online_2.pdf"><i class="icon-file-download2"></i> <span><b>DOWNLOAD PANDUAN</b></span></a></li>
 								<li><a href="panel_siswa/logout"><i class="icon-switch2"></i> <span><b>KELUAR</b></span></a></li>
 								<!-- /Data Lainnya -->
 

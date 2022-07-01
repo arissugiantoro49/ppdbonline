@@ -14,9 +14,17 @@ class Model_siswa extends CI_Model
 		return $this->db->get_where('tbl_nilai', "no_pendaftaran='$sess'")->row();
 	}
 
-	function get_tabel_yi($id_siswa) {
+	function cek_nilai_ujian_seleksi()
+	{
+		$id_siswa = $this->session->userdata('id_siswa');
+		return $this->db
+			->query("SELECT u.nama, i.nilai FROM tbl_ujian u LEFT JOIN tbl_ikut_ujian i ON i.id_ujian=u.id_ujian AND i.id_siswa=$id_siswa LIMIT 1");
+	}
+
+	function get_tabel_yi($id_siswa)
+	{
 		$sqrt = [
-			'c1' => 0,'c2' => 0, 'c3' => 0, 'c4' => 0,'c5' => 0
+			'c1' => 0, 'c2' => 0, 'c3' => 0, 'c4' => 0, 'c5' => 0
 		];
 
 		foreach ($this->admin->verifikasi('siswa', '')->ori->result() as $row) {
@@ -26,7 +34,7 @@ class Model_siswa extends CI_Model
 				'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
 				'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
 				'c4' => $row->nilai_prestasi,
-				'c5' => 50
+				'c5' => $row->nilai_ujian_seleksi == null ? 0 : $row->nilai_ujian_seleksi
 			];
 			$alternatif[$row->id_siswa] = $temp;
 
@@ -52,7 +60,7 @@ class Model_siswa extends CI_Model
 		}
 
 		$kriteria = $this->admin->get_kriteria()->result_array();
-		
+
 		foreach ($normalisasi as $key => $value) {
 			$ternormalisasi[$key]['c1'] = $value['c1'] * $kriteria[0]['bobot'];
 			$ternormalisasi[$key]['c2'] = $value['c2'] * $kriteria[1]['bobot'];
@@ -77,7 +85,7 @@ class Model_siswa extends CI_Model
 			];
 		}
 
-		foreach($optimasi as $key => $value) {
+		foreach ($optimasi as $key => $value) {
 			$rank[$key]['optimasi'] = $value['yi'];
 			$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
 		}
@@ -196,6 +204,177 @@ class Model_siswa extends CI_Model
 		}
 
 		return $new_name;
+	}
+
+	function get_ujian()
+	{
+		return $this->db
+			->select("u.*, (SELECT COUNT(d.id_daftar_soal_ujian) FROM tbl_daftar_soal_ujian d WHERE d.id_ujian=u.id_ujian) jumlah_soal, i.status")
+			->from("tbl_ujian u")
+			->join("tbl_ikut_ujian i", "i.id_ujian = u.id_ujian", "left")
+			->limit("1")
+			->get();
+	}
+
+	function cek_ikut_ujian($id_ujian, $id_siswa)
+	{
+		$ujian["id_ujian"] = $id_ujian;
+		$result = $this->db
+			->from("tbl_ikut_ujian")
+			->where("id_siswa", $id_siswa)
+			->where("id_ujian", $id_ujian)
+			->get();
+
+		if ($result->num_rows() == 0) {
+			$result = $this->db
+				->get_where("tbl_ujian", "id_ujian=$id_ujian")
+				->row();
+
+			$dt = new DateTimeImmutable();
+			$waktu_mulai = $dt->format('Y-m-d H:i:s');
+			$waktu_selesai = $dt->modify("+$result->durasi minutes")->format('Y-m-d H:i:s');
+
+			$this->db->insert("tbl_ikut_ujian", array(
+				"id_ujian" => $id_ujian,
+				"id_siswa" => $id_siswa,
+				"waktu_mulai" => $waktu_mulai,
+				"waktu_selesai" => $waktu_selesai,
+				"status" => "progress"
+			));
+
+			$ujian["nama"] = $result->nama;
+			$ujian["status"] = "progress";
+			$ujian["waktu_selesai"] = $waktu_selesai;
+			$ujian["daftar_soal"] = $this->get_daftar_soal_ujian($id_ujian, $id_siswa);
+		} else {
+			$this->cek_status_ujian();
+			$result = $this->db->get_where("tbl_ikut_ujian", "id_ujian=$id_ujian AND id_siswa=$id_siswa")->result()[0];
+			$ujian["nama"] = $this->db
+				->get_where("tbl_ujian", "id_ujian=$id_ujian")
+				->row()->nama;
+			$ujian["status"] = $result->status;
+			if ($result->status == "completed") {
+				$ujian["nilai"] = $result->nilai;
+			} else {
+				$ujian["waktu_selesai"] = $result->waktu_selesai;
+				$ujian["daftar_soal"] = $this->get_daftar_soal_ujian($id_ujian, $id_siswa);
+			}
+		}
+		return $ujian;
+	}
+
+	function get_daftar_soal_ujian($id_ujian, $id_siswa)
+	{
+		$this->db->select("s.id_soal, s.soal, s.media, s.opsi_a, s.opsi_b, s.opsi_c, s.opsi_d, s.opsi_e");
+		$this->db->from("tbl_daftar_soal_ujian d");
+		$this->db->join("tbl_soal s", "s.id_soal=d.id_soal");
+		$this->db->join("tbl_ikut_ujian i", "i.id_ujian=d.id_ujian");
+		$this->db->where(array(
+			"d.id_ujian" => $id_ujian,
+			"i.id_siswa" => $id_siswa
+		));
+		return json_encode($this->db->get()->result_array());
+	}
+
+	function akhiri_ujian($id_ujian, $id_siswa)
+	{
+		$waktu_selesai = (new DateTime())->format('Y-m-d H:i:s');
+		$id_ikut_ujian = $this->db->get_where("tbl_ikut_ujian", "id_ujian=$id_ujian AND id_siswa=$id_siswa")->result()[0]->id_ikut_ujian;
+		$jumlah_soal = $this->db
+			->select("COUNT(*) jumlah_soal")
+			->get_where("tbl_daftar_soal_ujian", "id_ujian=$id_ujian")
+			->result()[0]
+			->jumlah_soal;
+		$jumlah_soal_benar = $this->db
+			->select("COUNT(*) jumlah_soal_benar")
+			->from("tbl_jawaban_ujian_siswa j")
+			->join("tbl_soal s", "s.id_soal=j.id_soal")
+			->where("j.id_ikut_ujian=$id_ikut_ujian AND j.jawaban=s.jawaban")
+			->get()
+			->result()[0]
+			->jumlah_soal_benar;
+		$nilai = ($jumlah_soal_benar / $jumlah_soal) * 100;
+
+		$this->db
+			->set("waktu_selesai", $waktu_selesai)
+			->set("nilai", $nilai)
+			->set("status", "completed")
+			->where("id_ikut_ujian=$id_ikut_ujian")
+			->update("tbl_ikut_ujian");
+	}
+
+	function cek_status_ujian()
+	{
+		$query = $this->db->get_where("tbl_ikut_ujian", "waktu_selesai < NOW() AND status='progress'");
+
+		foreach ($query->result() as $row) {
+			$jumlah_soal = $this->db
+				->select("COUNT(*) jumlah_soal")
+				->get_where("tbl_daftar_soal_ujian", "id_ujian=$row->id_ujian")
+				->result()[0]
+				->jumlah_soal;
+			$jumlah_soal_benar = $this->db
+				->select("COUNT(*) jumlah_soal_benar")
+				->from("tbl_jawaban_ujian_siswa j")
+				->join("tbl_soal s", "s.id_soal=j.id_soal")
+				->where("j.id_ikut_ujian=$row->id_ikut_ujian AND j.jawaban=s.jawaban")
+				->get()
+				->result()[0]
+				->jumlah_soal_benar;
+			$nilai = ($jumlah_soal_benar / $jumlah_soal) * 100;
+
+			$this->db
+				->set("nilai", $nilai)
+				->set("status", "completed")
+				->where("id_ikut_ujian", $row->id_ikut_ujian)
+				->update("tbl_ikut_ujian");
+		}
+	}
+
+	function jumlah_soal_ujian($id_ujian) {
+		return $this->db
+			->from("tbl_daftar_soal_ujian")
+			->where("id_ujian", $id_ujian)
+			->count_all_results();
+	}
+
+	function simpan_jawaban_soal($id_ujian, $id_soal, $jawaban) {
+		$id_siswa = $this->session->userdata('id_siswa');
+		$id_ikut_ujian = $this->db
+			->get_where("tbl_ikut_ujian", "id_ujian=$id_ujian AND id_siswa=$id_siswa")
+			->row()
+			->id_ikut_ujian;
+		$result = $this->db
+			->get_where("tbl_jawaban_ujian_siswa", "id_ikut_ujian=$id_ikut_ujian AND id_soal=$id_soal");
+			
+		if ($result->num_rows() == 0) {
+			$this->db->insert("tbl_jawaban_ujian_siswa", array(
+				"id_ikut_ujian" => $id_ikut_ujian,
+				"id_soal" => $id_soal,
+				"jawaban" => $jawaban
+			));
+		} else {
+			$this->db
+				->set("jawaban", $jawaban)
+				->where("id_ikut_ujian=$id_ikut_ujian AND id_soal=$id_soal")
+				->update("tbl_jawaban_ujian_siswa");
+		}
+	}
+
+	function get_jawaban_soal($id_ujian, $id_soal) {
+		$id_siswa = $this->session->userdata('id_siswa');
+		$id_ikut_ujian = $this->db
+			->get_where("tbl_ikut_ujian", "id_ujian=$id_ujian AND id_siswa=$id_siswa")
+			->row()
+			->id_ikut_ujian;
+		$result = $this->db
+			->get_where("tbl_jawaban_ujian_siswa", "id_ikut_ujian=$id_ikut_ujian AND id_soal=$id_soal");
+		if ($result->num_rows() > 0) {
+			$res["jawaban"] = $result->row()->jawaban;
+		} else {
+			$res["jawaban"] = null;
+		}
+		return json_encode($res);
 	}
 
 	function get_data()

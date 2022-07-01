@@ -41,7 +41,7 @@ class Model_admin extends CI_Model
 				'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
 				'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
 				'c4' => $row->nilai_prestasi,
-				'c5' => 50
+				'c5' => $row->nilai_ujian_seleksi == null ? 0 : $row->nilai_ujian_seleksi
 			];
 			$alternatif[$row->id_siswa] = $temp;
 
@@ -143,6 +143,19 @@ class Model_admin extends CI_Model
 		}
 
 		return json_encode($result);
+	}
+
+	public function get_nilai_ujian() {
+		$this->db->select('i.id_ikut_ujian, s.nisn,s.nama_lengkap, u.nama nama_ujian, i.nilai');
+		$this->db->from('tbl_ikut_ujian i');
+		$this->db->join('tbl_ujian u', 'u.id_ujian = i.id_ujian');
+		$this->db->join('tbl_siswa s', 's.id_siswa = i.id_siswa');
+		return $this->db->get();
+	}
+	
+	function hapus_nilai_ujian($id_ikut_ujian) {
+		$this->db->where('id_ikut_ujian', $id_ikut_ujian);
+		$this->db->delete('tbl_ikut_ujian');
 	}
 
 	public function get_daftar_soal_ujian($id_ujian) {
@@ -380,7 +393,7 @@ class Model_admin extends CI_Model
 				return $this->db->update('tbl_siswa', $data, array('no_pendaftaran' => $old_user));
 				break;
 
-			default:
+			default: 
 				# code...
 				break;
 		}
@@ -393,7 +406,14 @@ function get_kelas (){
 	{
 		switch ($menu) {
 			case 'siswa':
-				$res = $this->db->like('tgl_siswa', "$thn", 'after')->order_by('id_siswa', 'DESC')->from('tbl_siswa')->join('tbl_nilai', 'tbl_nilai.no_pendaftaran=tbl_siswa.no_pendaftaran')->get();
+				$res = $this->db
+					->select("s.*, n.*, i.nilai nilai_ujian_seleksi")
+					->like('tgl_siswa', "$thn", 'after')
+					->order_by('id_siswa', 'DESC')
+					->from('tbl_siswa s')
+					->join('tbl_nilai n', 'n.no_pendaftaran=s.no_pendaftaran')
+					->join("tbl_ikut_ujian i", "i.id_siswa=s.id_siswa", "left")
+					->get();
 				return (object) array(
 					'bar'	=> $res->row(),
 					'sum'	=> $res->num_rows(),

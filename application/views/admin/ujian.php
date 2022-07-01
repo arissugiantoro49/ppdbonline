@@ -56,7 +56,6 @@
                                         <button class="btn btn-primary" data-id-ujian="<?= $baris->id_ujian ?>" title="Daftar soal" onclick="daftarSoal(this)"><i class="icon-list2"></i></button>
                                         <button class="btn btn-warning" data-id-ujian="<?= $baris->id_ujian ?>" title="Edit ujian" onclick="editUjian(this)"><i class="icon-pencil"></i></button>
                                         <a href="panel_admin/ujian/hapus/<?php echo $baris->id_ujian; ?>" class="btn btn-danger" title="Hapus ujian" onclick="return confirm('Apakah anda yakin?')"><i class="icon-bin"></i></a>
-                                        <a data-toggle="modal" href="#myModal" class="btn btn-primary">Launch modal</a>
 
                                     </td>
                                 </tr>

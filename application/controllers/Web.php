@@ -60,16 +60,17 @@ class Web extends CI_Controller
 
 			if (isset($_POST['btnlogin'])) {
 				$send = array(
-					'username' => $this->input->post('username'),
+					'no_pendaftaran' => $this->input->post('username'),
 					'password' => $this->input->post('password')
 				);
 				$auth = $this->web->auth('cek-masuk', $send);
 
 				if ($auth['sum'] == 0) {
-					$this->session->set_flashdata('msg', $this->err->wrong_auth());
+					$this->session->set_flashdata('msg', $auth['sum']);
 					redirect('logcs');
 				} else {
 					$this->session->set_userdata('no_pendaftaran', $auth['res']->no_pendaftaran);
+					$this->session->set_userdata('id_siswa', $auth['res']->id_siswa);
 					redirect('panel_siswa');
 				}
 			}

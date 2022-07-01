@@ -166,9 +166,9 @@ $sub_menu3 = strtolower($this->uri->segment(3));
 										<li class="<?php if ($sub_menu == 'data_soal') {
 														echo 'active';
 													} ?>"><a href="panel_admin/data_soal"><i class="icon-browser"></i><b>DATA SOAL</b></a></li>
-										<li class="<?php if ($sub_menu == 'data_nilai_ujian') {
+										<li class="<?php if ($sub_menu == 'nilai_ujian') {
 														echo 'active';
-													} ?>"><a href="panel_admin/data_nilai_ujian"><i class="icon-file-check"></i><b>NILAI </b></a></li>
+													} ?>"><a href="panel_admin/nilai_ujian"><i class="icon-file-check"></i><b>NILAI </b></a></li>
 										<li class="<?php if ($sub_menu == 'data_ujian') {
 														echo 'active';
 													} ?>"><a href="panel_admin/ujian"><i class="icon-file-check"></i><b>UJIAN</b></a></li>

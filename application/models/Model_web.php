@@ -174,7 +174,7 @@ class Model_web extends CI_Model
 	{
 		switch ($menu) {
 			case 'cek-masuk':
-				$query = $this->db->where("no_pendaftaran", $data['username'])->where("password", $data['password'])->get('tbl_siswa');
+				$query = $this->db->where($data)->get('tbl_siswa');
 				return array(
 					'res'	=> $query->row(),
 					'sum'	=> $query->num_rows()

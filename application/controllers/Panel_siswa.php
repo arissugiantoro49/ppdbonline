@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set("Asia/Jakarta");
 
 class Panel_siswa extends CI_Controller
 {
@@ -53,15 +54,18 @@ class Panel_siswa extends CI_Controller
 		}
 	}
 
-	public function dataku() {
+	public function dataku()
+	{
 		echo $this->siswa->get_data();
 	}
 
-	public function data_nilai() {
+	public function data_nilai()
+	{
 		echo $this->siswa->get_nilai();
 	}
 
-	public function ubah_biodata() {
+	public function ubah_biodata()
+	{
 		if ($this->session->userdata('no_pendaftaran') == NULL) {
 			redirect('logcs');
 		} else {
@@ -70,7 +74,8 @@ class Panel_siswa extends CI_Controller
 		}
 	}
 
-	public function ubah_nilai() {
+	public function ubah_nilai()
+	{
 		if ($this->session->userdata('no_pendaftaran') == NULL) {
 			redirect('logcs');
 		} else {
@@ -79,10 +84,12 @@ class Panel_siswa extends CI_Controller
 		}
 	}
 
-	public function download_dokumen() {
+	public function download_dokumen()
+	{
 		$data = json_decode($this->siswa->get_data());
 		$id = $data->no_pendaftaran;
-		if (empty($data->dokumen_kk) &&
+		if (
+			empty($data->dokumen_kk) &&
 			empty($data->dokumen_akte_kelahiran) &&
 			empty($data->dokumen_skl) &&
 			empty($data->dokumen_kartu_bantuan)
@@ -95,17 +102,17 @@ class Panel_siswa extends CI_Controller
 		$zip = new ZipArchive();
 		$zip->open($dir . $id . ".zip", ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-		if (!empty($data->dokumen_kk)) 
+		if (!empty($data->dokumen_kk))
 			$zip->addFile($dir . $data->dokumen_kk, "kk." . pathinfo($data->dokumen_kk, PATHINFO_EXTENSION));
-		if (!empty($data->dokumen_akte_kelahiran)) 
+		if (!empty($data->dokumen_akte_kelahiran))
 			$zip->addFile($dir . $data->dokumen_akte_kelahiran, "akte_kelahiran." . pathinfo($data->dokumen_akte_kelahiran, PATHINFO_EXTENSION));
-		if (!empty($data->dokumen_skl)) 
+		if (!empty($data->dokumen_skl))
 			$zip->addFile($dir . $data->dokumen_skl, "skl." . pathinfo($data->dokumen_skl, PATHINFO_EXTENSION));
-		if (!empty($data->dokumen_kartu_bantuan)) 
+		if (!empty($data->dokumen_kartu_bantuan))
 			$zip->addFile($dir . $data->dokumen_kartu_bantuan, "kartu_bantuan." . pathinfo($data->dokumen_kartu_bantuan, PATHINFO_EXTENSION));
 
 		$zip->close();
-		
+
 		header("Content-type: application/zip");
 		header("Content-Disposition: attachment; filename=" . $id . ".zip");
 		header("Pragma: no-cache");
@@ -140,6 +147,7 @@ class Panel_siswa extends CI_Controller
 			$data = array(
 				'user'		=> $this->siswa->base_biodata($sess),
 				'nilai'		=> $this->siswa->cek_nilai($sess),
+				'nilai_ujian_seleksi'		=> $this->siswa->cek_nilai_ujian_seleksi(),
 				'judul_web'	=> "BIODATA"
 			);
 
@@ -147,6 +155,74 @@ class Panel_siswa extends CI_Controller
 			$this->load->view('siswa/rekap_nilai', $data);
 			$this->load->view('siswa/footer');
 		}
+	}
+
+	public function ujian()
+	{
+		if ($this->session->userdata('no_pendaftaran') == NULL) {
+			redirect('logcs');
+		} else {
+			$this->siswa->cek_status_ujian();
+			$sess = $this->session->userdata('no_pendaftaran');
+			$data = array(
+				'user'		=> $this->siswa->base_biodata($sess),
+				'ujian'		=> $this->siswa->get_ujian(),
+				'judul_web'	=> "BIODATA"
+			);
+
+			$this->load->view('siswa/header', $data);
+			$this->load->view('siswa/ujian', $data);
+			$this->load->view('siswa/footer');
+		}
+	}
+
+	public function akhiri_ujian($id_ujian)
+	{
+		if ($this->session->userdata('no_pendaftaran') == NULL) {
+			redirect('logcs');
+		} else {
+			$this->siswa->akhiri_ujian($id_ujian, $this->session->userdata('id_siswa'));
+		}
+	}
+
+	public function simpan_jawaban_soal($id_ujian) {
+		if ($this->session->userdata('no_pendaftaran') == NULL) {
+			redirect('logcs');
+		} else {
+			$this->siswa->simpan_jawaban_soal($id_ujian, $this->input->get("id_soal"), $this->input->get("jawaban"));
+		}
+	}
+
+	public function get_jawaban_soal($id_ujian) {
+		if ($this->session->userdata('no_pendaftaran') == NULL) {
+			redirect('logcs');
+		} else {
+			header('Content-Type: application/json; charset=utf-8');
+			echo $this->siswa->get_jawaban_soal($id_ujian, $this->input->get("id_soal"));
+		}
+	}
+
+	public function ikut_ujian($id_ujian)
+	{
+		if ($this->session->userdata('no_pendaftaran') == NULL) {
+			redirect('logcs');
+		} elseif ($this->siswa->jumlah_soal_ujian($id_ujian) == 0) {
+			redirect('panel_siswa/ujian');
+		} else {
+			$sess = $this->session->userdata('no_pendaftaran');
+			$data = array(
+				'user'		=> $this->siswa->base_biodata($sess),
+				"ujian" => $this->siswa->cek_ikut_ujian($id_ujian, $this->session->userdata('id_siswa')),
+				'judul_web'	=> "UJIAN"
+			);
+
+			$this->load->view('siswa/ikut_ujian', $data);
+		}
+	}
+
+	public function cek_status_ujian()
+	{
+		$this->siswa->cek_status_ujian();
 	}
 
 	public function cetak_lulus()
