@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 25, 2022 at 03:59 AM
+-- Generation Time: Jul 01, 2022 at 02:27 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -40,8 +40,10 @@ CREATE TABLE `tbl_daftar_soal_ujian` (
 
 INSERT INTO `tbl_daftar_soal_ujian` (`id_daftar_soal_ujian`, `id_ujian`, `id_soal`) VALUES
 (1, 1, 1),
-(2, 1, 2),
-(3, 2, 3);
+(8, 1, 2),
+(9, 2, 3),
+(10, 2, 2),
+(11, 1, 3);
 
 -- --------------------------------------------------------
 
@@ -55,6 +57,51 @@ CREATE TABLE `tbl_dokumen` (
   `no_pendaftaran` int(11) NOT NULL,
   `nama_berkas` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_ikut_ujian`
+--
+
+CREATE TABLE `tbl_ikut_ujian` (
+  `id_ikut_ujian` int(11) NOT NULL,
+  `id_ujian` int(11) NOT NULL,
+  `id_siswa` int(11) NOT NULL,
+  `waktu_mulai` datetime NOT NULL,
+  `waktu_selesai` datetime NOT NULL,
+  `nilai` int(11) DEFAULT NULL,
+  `status` enum('progress','completed') NOT NULL DEFAULT 'progress'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_ikut_ujian`
+--
+
+INSERT INTO `tbl_ikut_ujian` (`id_ikut_ujian`, `id_ujian`, `id_siswa`, `waktu_mulai`, `waktu_selesai`, `nilai`, `status`) VALUES
+(17, 1, 20, '2022-07-01 06:07:34', '2022-07-01 06:07:46', 67, 'completed');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_jawaban_ujian_siswa`
+--
+
+CREATE TABLE `tbl_jawaban_ujian_siswa` (
+  `id_jawaban_ujian_siswa` int(11) NOT NULL,
+  `id_ikut_ujian` int(11) NOT NULL,
+  `id_soal` int(11) NOT NULL,
+  `jawaban` enum('A','B','C','D','E') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_jawaban_ujian_siswa`
+--
+
+INSERT INTO `tbl_jawaban_ujian_siswa` (`id_jawaban_ujian_siswa`, `id_ikut_ujian`, `id_soal`, `jawaban`) VALUES
+(9, 17, 1, 'A'),
+(10, 17, 2, 'B'),
+(11, 17, 3, 'A');
 
 -- --------------------------------------------------------
 
@@ -335,7 +382,7 @@ CREATE TABLE `tbl_siswa` (
 
 INSERT INTO `tbl_siswa` (`id_siswa`, `no_pendaftaran`, `password`, `nis`, `nisn`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `anak_ke`, `jml_saudara`, `hobi`, `cita`, `paud`, `tk`, `alamat_siswa`, `jenis_tinggal`, `desa`, `kec`, `kab`, `prov`, `kode_pos`, `jarak`, `trans`, `no_hp_siswa`, `no_kk`, `kepala_keluarga`, `nama_ayah`, `nik_ayah`, `status_ayah`, `th_lahir_ayah`, `pdd_ayah`, `pekerjaan_ayah`, `penghasilan_ayah`, `nama_ibu`, `nik_ibu`, `status_ibu`, `th_lahir_ibu`, `pdd_ibu`, `pekerjaan_ibu`, `penghasilan_ibu`, `nama_wali`, `nik_wali`, `th_lahir_wali`, `pdd_wali`, `pekerjaan_wali`, `penghasilan_wali`, `no_hp_ortu`, `npsn_sekolah`, `nama_sekolah`, `status_sekolah`, `jenjang_sekolah`, `lokasi_sekolah`, `no_kks`, `no_pkh`, `no_kip`, `komp_ahli`, `tgl_siswa`, `status_verifikasi`, `status_pendaftaran`, `dokumen_kk`, `dokumen_akte_kelahiran`, `dokumen_skl`, `dokumen_kartu_bantuan`) VALUES
 (19, '2022-019', '0058538548', NULL, '0058538548', '3517186408060001', 'Aris Sugiantoro', 'Laki-Laki', 'Banyuwangi', '2010-09-01', 'Kristen', 'Anak Kandung', '2', '1', '2', '1', '1', '1', 'BARONGSAWAHAN', '1', 'klaci', 'Bandarkedungmulyo', 'JOMBANG', NULL, '61462', '1', '4', '085648259815', '3517010111070148', 'Samsul Mu\'In Thohar', 'Mukalil', '3516012203840003', '1', '1984', 'SMP/Sederajat', 'Pensiunan', '< 500rb', 'Yessy Wicahya Ningdyah', '3517011206100006', '2', '1900', 'SMP/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mukalil', '3516012203840003', '1984', 'SD/Sederajat', NULL, '500-1jt', '085648259815', '000000', 'MIN 3 Jombang', 'NEGERI', '21', '1', '2', '-', '-', NULL, '2022-03-19 06:17:53', '1', 'lulus', '2022-019_kk.pdf', '2022-019_akte_kelahiran.pdf', '2022-019_skl.pdf', '2022-019_kartu_bantuan.pdf'),
-(20, '2022-020', '3050489000', NULL, '3050489000', '3517184804060003', 'ENDAH NUR AHMADA', 'Laki-Laki', 'Kediri', '01-01-2009', 'Islam', 'Anak Kandung', '2', '2', '3', '1', '1', '1', 'PAGERWOJO', '1', 'Perak', 'Bandarkedungmulyo', 'JOMBANG', 'Jawa Timur', '61461', '2', '2', '085648259815', '3517011206100006', 'Khoirul Anam', 'Khoirul Anam', '3517180104700005', '1', '1984', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mutoharoh', '3517011206100006', '1', '1992', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Khoirul Anam', '3517180104700005', '1984', 'SD/Sederajat', NULL, '< 500rb', '', '60717531', 'MI Umar Zahid Semelo', 'SWASTA', '21', '1', '-', '-', '-', NULL, '2022-03-09 21:22:31', '1', 'lulus', '2022-020_kk.pdf', '2022-020_akte_kelahiran.pdf', '2022-020_skl.pdf', '2022-020_kartu_bantuan.pdf');
+(20, '2022-020', '123', NULL, '3050489000', '3517184804060003', 'ENDAH NUR AHMADA', 'Laki-Laki', 'Kediri', '01-01-2009', 'Islam', 'Anak Kandung', '2', '2', '3', '1', '1', '1', 'PAGERWOJO', '1', 'Perak', 'Bandarkedungmulyo', 'JOMBANG', 'Jawa Timur', '61461', '2', '2', '085648259815', '3517011206100006', 'Khoirul Anam', 'Khoirul Anam', '3517180104700005', '1', '1984', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mutoharoh', '3517011206100006', '1', '1992', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Khoirul Anam', '3517180104700005', '1984', 'SD/Sederajat', NULL, '< 500rb', '', '60717531', 'MI Umar Zahid Semelo', 'SWASTA', '21', '1', '-', '-', '-', NULL, '2022-03-09 21:22:31', '1', 'lulus', '2022-020_kk.pdf', '2022-020_akte_kelahiran.pdf', '2022-020_skl.pdf', '2022-020_kartu_bantuan.pdf');
 
 -- --------------------------------------------------------
 
@@ -361,8 +408,8 @@ CREATE TABLE `tbl_soal` (
 --
 
 INSERT INTO `tbl_soal` (`id_soal`, `kode`, `soal`, `media`, `opsi_a`, `opsi_b`, `opsi_c`, `opsi_d`, `opsi_e`, `jawaban`) VALUES
-(1, 'SL1', '<p>Apa kepanjangan SQL?</p>\r\n', 'a', 'Structured Query Language', 'Susu Qental Lumer', 'SiQiL', 'SaQinah L', 'Dahlah...', 'A'),
-(2, 'SL2', '<p>Siapa pembuat bahasa pemrograman java?</p>\r\n', 'c', 'Bapakmu', 'James Gosling', 'Mbahmu', 'Doi', 'Eyang Sugiono', 'B'),
+(1, 'SL1', '<p>Apa kepanjangan SQL?</p>\r\n', '', 'Structured Query Language', 'Susu Qental Lumer', 'SiQiL', 'SaQinah L', 'Dahlah...', 'A'),
+(2, 'SL2', '<p>Siapa pembuat bahasa pemrograman java?</p>\r\n', '', 'Bapakmu', 'James Gosling', 'Mbahmu', 'Doi', 'Eyang Sugiono', 'B'),
 (3, 'SL3', '<p>Nullsafe operator diperkenalkan di php versi?</p>\r\n', '', '5.4', '7.0', '8.0', '7.2', '5.1', 'C');
 
 --
@@ -434,8 +481,8 @@ CREATE TABLE `tbl_ujian` (
 --
 
 INSERT INTO `tbl_ujian` (`id_ujian`, `nama`, `durasi`, `waktu`, `tahun`) VALUES
-(1, 'Gelombang 1', 30, '2022-05-31 09:00:00', 2022),
-(2, 'Gelombang 2', 30, '2022-06-08 08:00:00', 2022);
+(1, 'Test 1', 30, '2022-05-31 09:00:00', 2022),
+(2, 'Test 2', 30, '2022-06-08 08:00:00', 2022);
 
 -- --------------------------------------------------------
 
@@ -524,6 +571,18 @@ ALTER TABLE `tbl_daftar_soal_ujian`
 --
 ALTER TABLE `tbl_dokumen`
   ADD PRIMARY KEY (`id_dokumen`);
+
+--
+-- Indexes for table `tbl_ikut_ujian`
+--
+ALTER TABLE `tbl_ikut_ujian`
+  ADD PRIMARY KEY (`id_ikut_ujian`);
+
+--
+-- Indexes for table `tbl_jawaban_ujian_siswa`
+--
+ALTER TABLE `tbl_jawaban_ujian_siswa`
+  ADD PRIMARY KEY (`id_jawaban_ujian_siswa`);
 
 --
 -- Indexes for table `tbl_komp`
@@ -625,13 +684,25 @@ ALTER TABLE `tbl_web`
 -- AUTO_INCREMENT for table `tbl_daftar_soal_ujian`
 --
 ALTER TABLE `tbl_daftar_soal_ujian`
-  MODIFY `id_daftar_soal_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_daftar_soal_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_dokumen`
 --
 ALTER TABLE `tbl_dokumen`
   MODIFY `id_dokumen` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tbl_ikut_ujian`
+--
+ALTER TABLE `tbl_ikut_ujian`
+  MODIFY `id_ikut_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `tbl_jawaban_ujian_siswa`
+--
+ALTER TABLE `tbl_jawaban_ujian_siswa`
+  MODIFY `id_jawaban_ujian_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tbl_komp`
@@ -691,7 +762,7 @@ ALTER TABLE `tbl_siswa`
 -- AUTO_INCREMENT for table `tbl_soal`
 --
 ALTER TABLE `tbl_soal`
-  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_soal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_subkriteria`
