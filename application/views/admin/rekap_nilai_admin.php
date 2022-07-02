@@ -46,7 +46,7 @@
                 <th>Nilai UAS</th>
                 <th>Nilai Prestasi</th>
                 <th>Nilai Ujian Seleksi</th>
-                <th class="text-center" width="180">Aksi</th>
+           <!--     <th class="text-center" width="180">Aksi</th> -->
               </tr>
             </thead>
             <tbody>
@@ -175,12 +175,12 @@
                     </div>
                   </div>
                   </td>
-                  <td align="center" style="white-space: nowrap;">
+                   <!-- <td align="center" style="white-space: nowrap;">
                     <button class="btn btn-xs btn-default" title="Lihat dokumen" data-toggle="modal" data-target="#modalDokumen" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>"><i class="icon-file-text2"></i></button>
                      <a href="panel_admin/verifikasi/hapus/<?php echo $baris->no_pendaftaran; ?>" class="btn btn-danger btn-xs" title="hapus" data-no-pendaftaran="<?= $baris->no_pendaftaran ?>" ><i class="icon-bin"></i></a>
                   </td>
 
-                  <!-- Modal Dokumen -->
+                   Modal Dokumen 
                   <div class="modal fade" id="modalDokumen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -241,6 +241,7 @@
                         })
                     })
                   </script>
+                  -->
                 </tr>
               <?php
               } ?>
