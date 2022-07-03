@@ -1,44 +1,63 @@
-
-
+<style>
+  .d-none {
+    display: none;
+  }
+</style>
 <div class="panel">
   <div class="panel-heading" style="background: #275555ff; color: honeydew;">
     <h2 align="center" style="margin-top: 10px;">FORM ISIAN<br><b>DATA NILAI UJIAN</b> </h2>
     <!-- <hr> -->
   </div>
   <div class="panel-body">
-      
-  <!-- Nilai RAPORT -->
-  <h3 style="text-align:left; margin-top:6px;"><br><b>1. DATA NILAI RAPORT</b> </h3>
-   <div class="form-group" style="padding-bottom:30px;">
+
+    <!-- Nilai RAPORT -->
+    <h3 style="text-align:left; margin-top:6px;"><br><b>1. DATA NILAI RAPORT</b> </h3>
+    <div class="form-group" style="padding-bottom:30px;">
+      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Rata rata nilai raport <span class="text-danger">*</span></label>
+      <div class="col-sm-9 prepend-icon">
+        <input type="text" name="rata_rata_raport" class="form-control bg-blue" placeholder="Rata rata nilai raport" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-rata_rata_nilai_raport"]' required>
+        <i class="fa fa-book" style="margin-left:15px;"></i>
+        <div id="error-rata_rata_nilai_raport" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
+      </div>
+    </div>
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Matematika <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="matematika_raport" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika_raport"]' required>
+        <input type="text" name="matematika_raport" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika_raport"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-matematika_raport" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
+      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Matematika <span class="text-danger">*</span></label>
+      <div class="col-sm-9 prepend-icon">
+        <input type="text" name="matematika_raport" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika_raport"]'>
+        <i class="fa fa-book" style="margin-left:15px;"></i>
+        <div id="error-matematika_raport" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
+      </div>
+    </div>
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">IPA <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="ipa_raport" class="form-control bg-blue" placeholder="Nilai IPA" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-ipa_raport"]' required>
+        <input type="text" name="ipa_raport" class="form-control bg-blue" placeholder="Nilai IPA" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-ipa_raport"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-ipa_raport" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
 
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Bahasa Indonesia <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="bahasa_indonesia_raport" class="form-control bg-blue" placeholder="Nilai Bahasa Indonesia" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-bahasa_indonesia_raport"]' required>
+        <input type="text" name="bahasa_indonesia_raport" class="form-control bg-blue" placeholder="Nilai Bahasa Indonesia" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-bahasa_indonesia_raport"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-bahasa_indonesia_raport" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
 
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">PAI <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="pai_raport" class="form-control bg-blue" placeholder="Nilai PAI" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-pai_raport"]' required>
+        <input type="text" name="pai_raport" class="form-control bg-blue" placeholder="Nilai PAI" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-pai_raport"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-pai_raport" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
@@ -53,45 +72,50 @@
       </div>
     </div>
 
-  
+
     <h3 style="text-align:left; margin-top:6px;"><br><b>2. DATA NILAI USBN/UMBN</b> </h3>
-   <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group" style="padding-bottom:30px;">
+      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Rata rata nilai usbn <span class="text-danger">*</span></label>
+      <div class="col-sm-9 prepend-icon">
+        <input type="text" name="rata_rata_usbn" class="form-control bg-blue" placeholder="Rata rata nilai usbn" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-rata_rata_nilai_usbn"]' required>
+        <i class="fa fa-book" style="margin-left:15px;"></i>
+        <div id="error-rata_rata_nilai_usbn" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
+      </div>
+    </div>
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Matematika <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="matematika_usbn" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika_usbn"]' required>
+        <input type="text" name="matematika_usbn" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika_usbn"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-matematika_usbn" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">IPA <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="ipa_usbn" class="form-control bg-blue" placeholder="Nilai IPA" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-ipa_usbn"]' required>
+        <input type="text" name="ipa_usbn" class="form-control bg-blue" placeholder="Nilai IPA" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-ipa_usbn"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-ipa_usbn" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Bahasa Indonesia <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="bindo_usbn" class="form-control bg-blue" placeholder="Nilai Bahasa Indonesia" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-bindo_usbn"]' required>
+        <input type="text" name="bindo_usbn" class="form-control bg-blue" placeholder="Nilai Bahasa Indonesia" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-bindo_usbn"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-bindo_usbn" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">PAI <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="pai_usbn" class="form-control bg-blue" placeholder="Nilai PAI" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-pai_usbn"]' required>
+        <input type="text" name="pai_usbn" class="form-control bg-blue" placeholder="Nilai PAI" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-pai_usbn"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-pai_usbn" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-
-
-   Lampiran Upload Berkas Nilai USBN/UMBN  
-
-<div class="form-group" style="padding-bottom:30px;">
+  
+    <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Lampiran Dok. Nilai USBN/UMBN <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
         <input type="file" name="dok_usbn" class="form-control bg-blue" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-dok_usbn"]' accept="application/pdf, image/*" required>
@@ -99,42 +123,50 @@
         <div id="error-dok_usbn" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-  
+
     <h3 style="text-align:left; margin-top:6px;"><br><b>3. DATA NILAI UJIAN AKHIR SEMESTER</b> </h3>
-   <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group" style="padding-bottom:30px;">
+      <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Rata rata nilai uas <span class="text-danger">*</span></label>
+      <div class="col-sm-9 prepend-icon">
+        <input type="text" name="rata_rata_uas" class="form-control bg-blue" placeholder="Rata rata nilai uas" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-rata_rata_nilai_uas"]' required>
+        <i class="fa fa-book" style="margin-left:15px;"></i>
+        <div id="error-rata_rata_nilai_uas" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
+      </div>
+    </div>
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Matematika <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="matematika_uas" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika_uas"]' required>
+        <input type="text" name="matematika_uas" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-matematika_uas"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-matematika_uas" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">IPA <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="ipa_uas" class="form-control bg-blue" placeholder="Nilai IPA" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-ipa_uas"]' required>
+        <input type="text" name="ipa_uas" class="form-control bg-blue" placeholder="Nilai IPA" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-ipa_uas"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-ipa_uas" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Bahasa Indonesia <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="bindo_uas" class="form-control bg-blue" placeholder="Nilai Bahasa Indonesia" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-bindo_uas"]' required>
+        <input type="text" name="bindo_uas" class="form-control bg-blue" placeholder="Nilai Bahasa Indonesia" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-bindo_uas"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-bindo_uas" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-    <div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group d-none" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">PAI <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
-        <input type="text" name="pai_uas" class="form-control bg-blue" placeholder="Nilai PAI" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-pai_uas"]' required>
+        <input type="text" name="pai_uas" class="form-control bg-blue" placeholder="Nilai PAI" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-pai_uas"]'>
         <i class="fa fa-book" style="margin-left:15px;"></i>
         <div id="error-pai_uas" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
 
-<div class="form-group" style="padding-bottom:30px;">
+    <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px">Lampiran Dok. Nilai Ujian Akhir Semester <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
         <input type="file" name="dok_uas" class="form-control bg-blue" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-dok_uas"]' accept="application/pdf, image/*" required>
@@ -142,8 +174,8 @@
         <div id="error-dok_uas" style=" background:#FFBABA;color: #D8000C; width:auto;border-radius:5px;padding-left:10px;"></div>
       </div>
     </div>
-  <h3 style="text-align:left; margin-top:6px;"><br><b>4. DATA NILAI PRESTASI</b> </h3>
-   <div class="form-group" style="padding-bottom:30px;">
+    <h3 style="text-align:left; margin-top:6px;"><br><b>4. DATA NILAI PRESTASI</b> </h3>
+    <div class="form-group" style="padding-bottom:30px;">
       <label class="col-sm-3 control-label" style="text-align:right; margin-top:6px"> Nilai Prestasi <span class="text-danger">*</span></label>
       <div class="col-sm-9 prepend-icon">
         <input type="text" name="nilai_prestasi" class="form-control bg-blue" placeholder="Nilai Matematika" maxlength="100" data-parsley-group="block2" data-radio="iradio_square-blue" data-parsley-errors-container='div[id="error-nilai_prestasi"]' required>
@@ -160,5 +192,5 @@
       </div>
     </div>
 
-   </div>
+  </div>
 </div>

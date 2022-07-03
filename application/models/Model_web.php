@@ -82,6 +82,10 @@ class Model_web extends CI_Model
 				);
 
 				$data1 = array(
+					'rata_rata_raport'				=> $data_temp->post('rata_rata_raport'),
+					'rata_rata_usbn'				=> $data_temp->post('rata_rata_usbn'),
+					'rata_rata_uas'				=> $data_temp->post('rata_rata_uas'),
+
 					'matematika_raport'				=> $data_temp->post('matematika_raport'),
 					'ipa_raport'					=> $data_temp->post('ipa_raport'),
 					'pai_raport'					=> $data_temp->post('pai_raport'),
