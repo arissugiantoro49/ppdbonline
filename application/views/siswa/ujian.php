@@ -40,7 +40,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <td><?= $row->jumlah_soal ?></td>
                                             <td><?= $row->durasi ?> Menit</td>
                                             <td>
-
+                                                
                                                 <?php
                                                     if ($row->status === null) {
                                                 ?>

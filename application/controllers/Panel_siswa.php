@@ -202,6 +202,11 @@ class Panel_siswa extends CI_Controller
 		}
 	}
 
+	public function cek_total_jawaban_ujian($id_ujian) {
+		header('Content-Type: application/json; charset=utf-8');
+		echo $this->siswa->cek_total_jawaban_ujian($id_ujian);
+	}
+
 	public function ikut_ujian($id_ujian)
 	{
 		if ($this->session->userdata('no_pendaftaran') == NULL) {

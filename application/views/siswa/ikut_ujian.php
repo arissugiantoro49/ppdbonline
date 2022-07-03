@@ -234,8 +234,8 @@ $nama_sekolah = $this->db->get('tbl_user')->row_array()["nama_lengkap"];
                         document.forms[0]["jawaban"].value = result.jawaban;
                     }
 
-                    document.getElementById("btnSoalSebelumnya").style.display = "block";
-                    document.getElementById("btnSoalSelanjutnya").style.display = "block";
+                    document.getElementById("btnSoalSebelumnya").style.display = "inline-block";
+                    document.getElementById("btnSoalSelanjutnya").style.display = "inline-block";
 
                     if (indexSoal == 0) {
                         document.getElementById("btnSoalSebelumnya").style.display = "none";
@@ -252,18 +252,29 @@ $nama_sekolah = $this->db->get('tbl_user')->row_array()["nama_lengkap"];
         <?php } ?>
 
         function akhiriUjian() {
-            Swal.fire({
-                title: 'Anda yakin akan mengakhiri ujian ini?',
-                icon: 'question',
-                focusConfirm: false,
-                confirmButtonText: 'Oke',
-                showCancelButton: true,
-                cancelButtonText: 'Batal',
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch("panel_siswa/akhiri_ujian/<?= $ujian["id_ujian"] ?>").then(response => response.text()).then(result => location.reload());
+            fetch("panel_siswa/cek_total_jawaban_ujian/<?= $ujian["id_ujian"] ?>").then(response => response.json()).then(result => {
+                if (result.akhiriUjian) {
+                    Swal.fire({
+                        title: 'Anda yakin akan mengakhiri ujian ini?',
+                        icon: 'question',
+                        focusConfirm: false,
+                        confirmButtonText: 'Oke',
+                        showCancelButton: true,
+                        cancelButtonText: 'Batal',
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch("panel_siswa/akhiri_ujian/<?= $ujian["id_ujian"] ?>").then(response => response.text()).then(result => location.reload());
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Jawab semua soal terlebih dahulu',
+                        icon: 'info',
+                        confirmButtonText: 'Oke',
+                    })
                 }
             })
+
         }
 
         function startTime() {

@@ -208,12 +208,9 @@ class Model_siswa extends CI_Model
 
 	function get_ujian()
 	{
+		$id_siswa = $this->session->userdata('id_siswa');
 		return $this->db
-			->select("u.*, (SELECT COUNT(d.id_daftar_soal_ujian) FROM tbl_daftar_soal_ujian d WHERE d.id_ujian=u.id_ujian) jumlah_soal, i.status")
-			->from("tbl_ujian u")
-			->join("tbl_ikut_ujian i", "i.id_ujian = u.id_ujian", "left")
-			->limit("1")
-			->get();
+			->query("SELECT u.*, (SELECT COUNT(d.id_daftar_soal_ujian) FROM tbl_daftar_soal_ujian d WHERE d.id_ujian=u.id_ujian) jumlah_soal, i.status FROM tbl_ujian u LEFT JOIN tbl_ikut_ujian i ON i.id_ujian=u.id_ujian AND i.id_siswa=$id_siswa LIMIT 1");
 	}
 
 	function cek_ikut_ujian($id_ujian, $id_siswa)
@@ -301,6 +298,28 @@ class Model_siswa extends CI_Model
 			->set("status", "completed")
 			->where("id_ikut_ujian=$id_ikut_ujian")
 			->update("tbl_ikut_ujian");
+	}
+
+	function cek_total_jawaban_ujian($id_ujian) {
+		$id_siswa = $this->session->userdata('id_siswa');
+		$id_ikut_ujian = $this->db->get_where("tbl_ikut_ujian", "id_ujian=$id_ujian AND id_siswa=$id_siswa")->result()[0]->id_ikut_ujian;
+		$jumlah_soal = $this->db
+			->select("COUNT(*) jumlah_soal")
+			->get_where("tbl_daftar_soal_ujian", "id_ujian=$id_ujian")
+			->result()[0]
+			->jumlah_soal;
+		$jumlah_soal_terjawab = $this->db
+			->select("COUNT(*) jumlah_soal_terjawab")
+			->from("tbl_jawaban_ujian_siswa j")
+			->join("tbl_soal s", "s.id_soal=j.id_soal")
+			->where("j.id_ikut_ujian=$id_ikut_ujian")
+			->get()
+			->result()[0]
+			->jumlah_soal_terjawab;
+		$result = array(
+			"akhiriUjian" => $jumlah_soal == $jumlah_soal_terjawab
+		);
+		return json_encode($result);
 	}
 
 	function cek_status_ujian()
