@@ -10,7 +10,7 @@ $user = $this->db->get('tbl_user')->row_array();
     <!-- <hr> -->
   </div>
   <!-- <div class="panel-body"> -->
-  <img src="img/kontak.png" width="100%">
+  <!-- <img src="img/kontak.png" width="100%"> -->
   <!-- <ol style="color:#275555ff; line-height: 10px;">
       <li style="line-height: 15px;">Setiap calon peserta didik wajib mengisi form pendaftaran dengan lengkap. </li>
       <li style="line-height: 15px;">Data-data yang diisikan pada form PPDB Online harus sesuai dengan data asli dan benar adanya.</li>

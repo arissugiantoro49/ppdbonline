@@ -33,6 +33,11 @@ $user = $this->db->get('tbl_user')->row_array();
     font-size: 10px;
     margin-bottom: 5px;
   }
+  ul.sf-nav.clearfix {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 </style>
 
 <body class="fixed-topbar sidebar-hover theme-sltl color-green">
