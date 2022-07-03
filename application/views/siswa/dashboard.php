@@ -70,7 +70,16 @@ $user = $this->db->get('tbl_user')->row_array();
               </div>
               <div class="panel-body">
                 <h3>
-                  <left>Belum ada pengumuman dari Panitia PPDB Online <?php echo $user['nama_lengkap']; ?></left>
+                  <left>Belum ada pengumuman dari Panitia PPDB Online, <br>
+                Jadwal Pelaksanaan Ujian Seleksi online : <br>
+                Gelombang 1 : 18 Juli 2022 <br>
+                Gelombang 2 : 20 Juli 2022 <br>
+
+                Pengumuman di Terima dilaksanakan pada tanggal 25 Juli 2022 <br>
+
+                Terima Kasih <br>
+
+               <?php echo $user['nama_lengkap']; ?></left>
                 </h3>
               </div>
             </div>

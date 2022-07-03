@@ -130,12 +130,7 @@ class Siswa extends CI_Controller {
     $excel->setActiveSheetIndex(0)->setCellValue('BD3', "LOKASI SEKOLAH");
     $excel->setActiveSheetIndex(0)->setCellValue('BE3', "STATUS PENERIMAAN");
     $excel->setActiveSheetIndex(0)->setCellValue('BF3', "JURUSAN");
-    $excel->setActiveSheetIndex(0)->setCellValue('BG3', "NILAI MATEMATIKA");
-    $excel->setActiveSheetIndex(0)->setCellValue('BH3', "NILAI IPA");
-    $excel->setActiveSheetIndex(0)->setCellValue('BI3', "NILAI BAHASA INDONESIA");
-    $excel->setActiveSheetIndex(0)->setCellValue('BJ3', "NILAI PAI");
-    $excel->setActiveSheetIndex(0)->setCellValue('BK3', "RATA RATA NILAI RAPOR");
-    
+  
 
     // Apply style header yang telah kita buat tadi ke masing-masing kolom header
     $excel->getActiveSheet()->getStyle('A3')->applyFromArray($style_col);
@@ -196,11 +191,7 @@ class Siswa extends CI_Controller {
     $excel->getActiveSheet()->getStyle('BD3')->applyFromArray($style_col);
     $excel->getActiveSheet()->getStyle('BE3')->applyFromArray($style_col);
     $excel->getActiveSheet()->getStyle('BF3')->applyFromArray($style_col);
-    $excel->getActiveSheet()->getStyle('BG3')->applyFromArray($style_col);
-    $excel->getActiveSheet()->getStyle('BH3')->applyFromArray($style_col);
-    $excel->getActiveSheet()->getStyle('BI3')->applyFromArray($style_col);
-    $excel->getActiveSheet()->getStyle('BJ3')->applyFromArray($style_col);
-    $excel->getActiveSheet()->getStyle('BK3')->applyFromArray($style_col);
+  
     
 
 
@@ -268,13 +259,6 @@ class Siswa extends CI_Controller {
       $excel->setActiveSheetIndex(0)->setCellValue('BD'.$numrow, $data->lokasi_sekolah);
       $excel->setActiveSheetIndex(0)->setCellValue('BE'.$numrow, $data->status_pendaftaran);
       $excel->setActiveSheetIndex(0)->setCellValue('BF'.$numrow, $data->komp_ahli);
-
-      $excel->setActiveSheetIndex(0)->setCellValue('BG'.$numrow, $data->matematika_raport);
-      $excel->setActiveSheetIndex(0)->setCellValue('BH'.$numrow, $data->ipa_raport);
-      $excel->setActiveSheetIndex(0)->setCellValue('BI'.$numrow, $data->bahasa_indonesia_raport);
-      $excel->setActiveSheetIndex(0)->setCellValue('BJ'.$numrow, $data->pai_raport);
-      $excel->setActiveSheetIndex(0)->setCellValue('BK'.$numrow, intval(($data->matematika_raport + $data->ipa_raport + $data->bahasa_indonesia_raport + $data->pai_raport) / 4));
-
       $excel->getActiveSheet()->getStyle('C')->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
 
       
