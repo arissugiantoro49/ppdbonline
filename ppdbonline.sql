@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 01, 2022 at 02:27 AM
+-- Generation Time: Jul 03, 2022 at 10:52 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -79,7 +79,7 @@ CREATE TABLE `tbl_ikut_ujian` (
 --
 
 INSERT INTO `tbl_ikut_ujian` (`id_ikut_ujian`, `id_ujian`, `id_siswa`, `waktu_mulai`, `waktu_selesai`, `nilai`, `status`) VALUES
-(17, 1, 20, '2022-07-01 06:07:34', '2022-07-01 06:07:46', 67, 'completed');
+(22, 1, 19, '2022-07-03 15:08:16', '2022-07-03 15:08:24', 100, 'completed');
 
 -- --------------------------------------------------------
 
@@ -101,26 +101,16 @@ CREATE TABLE `tbl_jawaban_ujian_siswa` (
 INSERT INTO `tbl_jawaban_ujian_siswa` (`id_jawaban_ujian_siswa`, `id_ikut_ujian`, `id_soal`, `jawaban`) VALUES
 (9, 17, 1, 'A'),
 (10, 17, 2, 'B'),
-(11, 17, 3, 'A');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_komp`
---
-
-CREATE TABLE `tbl_komp` (
-  `id_komp` int(11) NOT NULL,
-  `kompetensi` varchar(100) CHARACTER SET latin1 DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_komp`
---
-
-INSERT INTO `tbl_komp` (`id_komp`, `kompetensi`) VALUES
-(1, 'IPA'),
-(2, 'IPS');
+(11, 17, 3, 'A'),
+(12, 18, 1, 'D'),
+(13, 18, 2, 'E'),
+(15, 18, 3, 'D'),
+(16, 19, 1, 'A'),
+(17, 19, 2, 'B'),
+(18, 19, 3, 'B'),
+(19, 22, 1, 'A'),
+(20, 22, 2, 'B'),
+(21, 22, 3, 'C');
 
 -- --------------------------------------------------------
 
@@ -140,11 +130,11 @@ CREATE TABLE `tbl_kriteria` (
 --
 
 INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `tipe`, `bobot`) VALUES
-(1, 'Nilai Raport', '1', 20),
-(2, 'Nilai USBN', '1', 20),
-(3, 'Nilai UAS', '1', 20),
-(4, 'Nilai Prestasi', '1', 20),
-(5, 'Nilai Ujian Seleksi', '1', 20);
+(1, 'Nilai Raport', '1', 10),
+(2, 'Nilai USBN', '1', 10),
+(3, 'Nilai UAS', '1', 10),
+(4, 'Nilai Prestasi', '0', 10),
+(5, 'Nilai Ujian Seleksi', '0', 20);
 
 -- --------------------------------------------------------
 
@@ -155,6 +145,9 @@ INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `tipe`, `bobot`) VAL
 CREATE TABLE `tbl_nilai` (
   `id_nilai` int(20) NOT NULL,
   `no_pendaftaran` varchar(20) NOT NULL,
+  `rata_rata_raport` int(11) NOT NULL,
+  `rata_rata_usbn` int(11) NOT NULL,
+  `rata_rata_uas` int(11) NOT NULL,
   `matematika_raport` int(20) NOT NULL,
   `ipa_raport` int(20) NOT NULL,
   `pai_raport` int(20) NOT NULL,
@@ -178,22 +171,12 @@ CREATE TABLE `tbl_nilai` (
 -- Dumping data for table `tbl_nilai`
 --
 
-INSERT INTO `tbl_nilai` (`id_nilai`, `no_pendaftaran`, `matematika_raport`, `ipa_raport`, `pai_raport`, `bahasa_indonesia_raport`, `dok_raport`, `matematika_usbn`, `ipa_usbn`, `bindo_usbn`, `pai_usbn`, `dok_usbn`, `matematika_uas`, `ipa_uas`, `bindo_uas`, `pai_uas`, `dok_uas`, `nilai_prestasi`, `dok_prestasi`) VALUES
-(1, '2022-019', 90, 95, 90, 86, '_dok_raport.png', 60, 80, 90, 50, '_dok_usbn.jpeg', 40, 90, 70, 90, '_dok_uas.jpeg', 77, '_dok_prestasi.png'),
-(2, '2022-020', 88, 79, 78, 76, '2022-020_dok_raport.jpeg', 80, 87, 76, 87, '2022-020_dok_usbn.jpeg', 90, 77, 90, 85, '2022-020_dok_uas.pdf', 78, '2022-020_dok_prestasi.pdf');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_nilai_new`
---
-
-CREATE TABLE `tbl_nilai_new` (
-  `id_nilai` int(11) NOT NULL,
-  `no_pendaftaran` varchar(20) NOT NULL,
-  `id_subkriteria` int(11) NOT NULL,
-  `nilai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `tbl_nilai` (`id_nilai`, `no_pendaftaran`, `rata_rata_raport`, `rata_rata_usbn`, `rata_rata_uas`, `matematika_raport`, `ipa_raport`, `pai_raport`, `bahasa_indonesia_raport`, `dok_raport`, `matematika_usbn`, `ipa_usbn`, `bindo_usbn`, `pai_usbn`, `dok_usbn`, `matematika_uas`, `ipa_uas`, `bindo_uas`, `pai_uas`, `dok_uas`, `nilai_prestasi`, `dok_prestasi`) VALUES
+(1, '2022-019', 30, 70, 54, 90, 95, 90, 86, '_dok_raport.png', 60, 80, 90, 50, '_dok_usbn.jpeg', 40, 90, 70, 90, '_dok_uas.jpeg', 77, '_dok_prestasi.png'),
+(2, '2022-020', 12, 55, 66, 88, 79, 78, 76, '2022-020_dok_raport.jpeg', 80, 87, 76, 87, '2022-020_dok_usbn.jpeg', 90, 77, 90, 85, '2022-020_dok_uas.pdf', 78, '2022-020_dok_prestasi.pdf'),
+(3, '2022-021', 65, 66, 66, 0, 0, 0, 0, '2022-021_dok_raport.pdf', 0, 0, 0, 0, '2022-021_dok_usbn.pdf', 0, 0, 0, 0, '2022-021_dok_uas.pdf', 66, '2022-021_dok_prestasi.pdf'),
+(4, '2022-022', 66, 65, 66, 0, 0, 0, 0, '2022-022_dok_raport.pdf', 0, 0, 0, 0, '2022-022_dok_usbn.pdf', 0, 0, 0, 0, '2022-022_dok_uas.pdf', 66, '2022-022_dok_prestasi.pdf'),
+(5, '2022-023', 88, 88, 88, 0, 0, 0, 0, '2022-023_dok_raport.pdf', 0, 0, 0, 0, '2022-023_dok_usbn.pdf', 0, 0, 0, 0, '2022-023_dok_uas.pdf', 44, '2022-023_dok_prestasi.pdf');
 
 -- --------------------------------------------------------
 
@@ -382,7 +365,8 @@ CREATE TABLE `tbl_siswa` (
 
 INSERT INTO `tbl_siswa` (`id_siswa`, `no_pendaftaran`, `password`, `nis`, `nisn`, `nik`, `nama_lengkap`, `jk`, `tempat_lahir`, `tgl_lahir`, `agama`, `status_keluarga`, `anak_ke`, `jml_saudara`, `hobi`, `cita`, `paud`, `tk`, `alamat_siswa`, `jenis_tinggal`, `desa`, `kec`, `kab`, `prov`, `kode_pos`, `jarak`, `trans`, `no_hp_siswa`, `no_kk`, `kepala_keluarga`, `nama_ayah`, `nik_ayah`, `status_ayah`, `th_lahir_ayah`, `pdd_ayah`, `pekerjaan_ayah`, `penghasilan_ayah`, `nama_ibu`, `nik_ibu`, `status_ibu`, `th_lahir_ibu`, `pdd_ibu`, `pekerjaan_ibu`, `penghasilan_ibu`, `nama_wali`, `nik_wali`, `th_lahir_wali`, `pdd_wali`, `pekerjaan_wali`, `penghasilan_wali`, `no_hp_ortu`, `npsn_sekolah`, `nama_sekolah`, `status_sekolah`, `jenjang_sekolah`, `lokasi_sekolah`, `no_kks`, `no_pkh`, `no_kip`, `komp_ahli`, `tgl_siswa`, `status_verifikasi`, `status_pendaftaran`, `dokumen_kk`, `dokumen_akte_kelahiran`, `dokumen_skl`, `dokumen_kartu_bantuan`) VALUES
 (19, '2022-019', '0058538548', NULL, '0058538548', '3517186408060001', 'Aris Sugiantoro', 'Laki-Laki', 'Banyuwangi', '2010-09-01', 'Kristen', 'Anak Kandung', '2', '1', '2', '1', '1', '1', 'BARONGSAWAHAN', '1', 'klaci', 'Bandarkedungmulyo', 'JOMBANG', NULL, '61462', '1', '4', '085648259815', '3517010111070148', 'Samsul Mu\'In Thohar', 'Mukalil', '3516012203840003', '1', '1984', 'SMP/Sederajat', 'Pensiunan', '< 500rb', 'Yessy Wicahya Ningdyah', '3517011206100006', '2', '1900', 'SMP/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mukalil', '3516012203840003', '1984', 'SD/Sederajat', NULL, '500-1jt', '085648259815', '000000', 'MIN 3 Jombang', 'NEGERI', '21', '1', '2', '-', '-', NULL, '2022-03-19 06:17:53', '1', 'lulus', '2022-019_kk.pdf', '2022-019_akte_kelahiran.pdf', '2022-019_skl.pdf', '2022-019_kartu_bantuan.pdf'),
-(20, '2022-020', '123', NULL, '3050489000', '3517184804060003', 'ENDAH NUR AHMADA', 'Laki-Laki', 'Kediri', '01-01-2009', 'Islam', 'Anak Kandung', '2', '2', '3', '1', '1', '1', 'PAGERWOJO', '1', 'Perak', 'Bandarkedungmulyo', 'JOMBANG', 'Jawa Timur', '61461', '2', '2', '085648259815', '3517011206100006', 'Khoirul Anam', 'Khoirul Anam', '3517180104700005', '1', '1984', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mutoharoh', '3517011206100006', '1', '1992', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Khoirul Anam', '3517180104700005', '1984', 'SD/Sederajat', NULL, '< 500rb', '', '60717531', 'MI Umar Zahid Semelo', 'SWASTA', '21', '1', '-', '-', '-', NULL, '2022-03-09 21:22:31', '1', 'lulus', '2022-020_kk.pdf', '2022-020_akte_kelahiran.pdf', '2022-020_skl.pdf', '2022-020_kartu_bantuan.pdf');
+(20, '2022-020', '123', NULL, '3050489000', '3517184804060003', 'ENDAH NUR AHMADA', 'Laki-Laki', 'Kediri', '01-01-2009', 'Islam', 'Anak Kandung', '2', '2', '3', '1', '1', '1', 'PAGERWOJO', '1', 'Perak', 'Bandarkedungmulyo', 'JOMBANG', 'Jawa Timur', '61461', '2', '2', '085648259815', '3517011206100006', 'Khoirul Anam', 'Khoirul Anam', '3517180104700005', '1', '1984', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Mutoharoh', '3517011206100006', '1', '1992', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', 'Khoirul Anam', '3517180104700005', '1984', 'SD/Sederajat', NULL, '< 500rb', '', '60717531', 'MI Umar Zahid Semelo', 'SWASTA', '21', '1', '-', '-', '-', NULL, '2022-03-09 21:22:31', '1', 'lulus', '2022-020_kk.pdf', '2022-020_akte_kelahiran.pdf', '2022-020_skl.pdf', '2022-020_kartu_bantuan.pdf'),
+(21, '2022-021', '2', NULL, '2', '345345', 'ARIL SETIYOBUDI', 'Laki-Laki', '1', '01-01-1990', 'Islam', 'Anak Kandung', '1', '1', '1', '1', '1', '1', 'Dusun Pojok RT 04 RW 02, Desa Sugihwaras', '1', '2', '2', 'Jombang', '2', '67153', '1', '4', '081333026995', '67', '4', '1', '2323232323232323', '1', '6', 'SD/Sederajat', 'Tidak Bekerja', '< 500rb', '1', '2323232323232323', '1', '1', 'SD/Sederajat', 'Pensiunan', '< 500rb', '1', '2323232323232323', '6', 'SD/Sederajat', NULL, '< 500rb', '081333026995', '7', 'MIN 3 Jombang23', 'SWASTA', '21', '1', '1', '1', '-', NULL, '2022-07-03 06:21:06', NULL, 'lulus', '2022-021_kk.pdf', '2022-021_akte_kelahiran.pdf', '2022-021_skl.pdf', '2022-021_kartu_bantuan.pdf');
 
 -- --------------------------------------------------------
 
@@ -585,12 +569,6 @@ ALTER TABLE `tbl_jawaban_ujian_siswa`
   ADD PRIMARY KEY (`id_jawaban_ujian_siswa`);
 
 --
--- Indexes for table `tbl_komp`
---
-ALTER TABLE `tbl_komp`
-  ADD PRIMARY KEY (`id_komp`);
-
---
 -- Indexes for table `tbl_kriteria`
 --
 ALTER TABLE `tbl_kriteria`
@@ -600,12 +578,6 @@ ALTER TABLE `tbl_kriteria`
 -- Indexes for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
-  ADD PRIMARY KEY (`id_nilai`);
-
---
--- Indexes for table `tbl_nilai_new`
---
-ALTER TABLE `tbl_nilai_new`
   ADD PRIMARY KEY (`id_nilai`);
 
 --
@@ -696,19 +668,13 @@ ALTER TABLE `tbl_dokumen`
 -- AUTO_INCREMENT for table `tbl_ikut_ujian`
 --
 ALTER TABLE `tbl_ikut_ujian`
-  MODIFY `id_ikut_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id_ikut_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `tbl_jawaban_ujian_siswa`
 --
 ALTER TABLE `tbl_jawaban_ujian_siswa`
-  MODIFY `id_jawaban_ujian_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT for table `tbl_komp`
---
-ALTER TABLE `tbl_komp`
-  MODIFY `id_komp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_jawaban_ujian_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `tbl_kriteria`
@@ -720,13 +686,7 @@ ALTER TABLE `tbl_kriteria`
 -- AUTO_INCREMENT for table `tbl_nilai`
 --
 ALTER TABLE `tbl_nilai`
-  MODIFY `id_nilai` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_nilai_new`
---
-ALTER TABLE `tbl_nilai_new`
-  MODIFY `id_nilai` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_nilai` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_pdd`
@@ -756,7 +716,7 @@ ALTER TABLE `tbl_pengumuman`
 -- AUTO_INCREMENT for table `tbl_siswa`
 --
 ALTER TABLE `tbl_siswa`
-  MODIFY `id_siswa` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_siswa` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_soal`
