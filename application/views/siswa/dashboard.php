@@ -32,9 +32,9 @@ $user = $this->db->get('tbl_user')->row_array();
                     <?php
                     $tabel_yi = $this->siswa->get_tabel_yi($id_user);
                     $rank = $tabel_yi['rank'];
-                    if ($rank <= 15) echo 'A';
-                    elseif ($rank <= 30) echo 'B';
-                    elseif ($rank <= 45) echo 'C';
+                    if ($rank <= 2) echo 'A';
+                    elseif ($rank <= 4) echo 'B';
+                    elseif ($rank <= 6) echo 'C';
                     ?></span> di kelas 
                     Sebagai Peserta Didik Baru <b><?php echo $user['nama_lengkap']; ?></b>, Silahkan Cetak Surat Pengumuman Sebagai Bukti di Terima.
                     <hr>

@@ -144,7 +144,7 @@
               foreach ($normalisasi as $key => $value) { ?>
                 <tr>
                   <td><?= $no++; ?></td>
-                  <td>A<?= $key; ?></td>
+                  <td><?= $key; ?></td>
                   <td><?= number_format((float) $value['c1'], $precision, '.', ''); ?></td>
                   <td><?= number_format((float) $value['c2'], $precision, '.', ''); ?></td>
                   <td><?= number_format((float) $value['c3'], $precision, '.', ''); ?></td>
@@ -191,7 +191,7 @@
               foreach ($ternormalisasi as $key => $value) { ?>
                 <tr>
                   <td><?= $no++; ?></td>
-                  <td>A<?= $key; ?></td>
+                  <td><?= $key; ?></td>
                   <td><?= number_format((float) $value['c1'], $precision, '.', ''); ?></td>
                   <td><?= number_format((float) $value['c2'], $precision, '.', ''); ?></td>
                   <td><?= number_format((float) $value['c3'], $precision, '.', ''); ?></td>
@@ -236,7 +236,7 @@
               foreach ($optimasi as $key => $value) { ?>
                 <tr>
                   <td><?= $no++; ?></td>
-                  <td>A<?= $key; ?></td>
+                  <td><?= $key; ?></td>
                   <td><?= number_format((float) $value['max'], $precision, '.', ''); ?></td>
                   <td><?= number_format((float) $value['min'], $precision, '.', ''); ?></td>
                   <td><?= number_format((float) $value['yi'], $precision, '.', ''); ?></td>
@@ -278,7 +278,7 @@
               foreach ($rank as $key => $value) { ?>
                 <tr>
                   <td><?= $no++; ?></td>
-                  <td>A<?= $key; ?></td>
+                  <td><?= $key; ?></td>
                   <td><?= number_format((float) $value['optimasi'], $precision, '.', ''); ?></td>
                   <td><?= $value['rank']; ?></td>
                 </tr>

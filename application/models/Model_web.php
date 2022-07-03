@@ -152,9 +152,7 @@ class Model_web extends CI_Model
 				return $this->db->where('ket_pekerjaan', 'ayah')->order_by('id_pekerjaan', 'ASC')->get('tbl_pekerjaan')->result();
 				break;
 
-			case 'v_komp':
-				return $this->db->order_by('id_komp', 'ASC')->get('tbl_komp')->result();
-				break;
+			
 
 			case 'v_pekerjaan_ibu':
 				return $this->db->where('ket_pekerjaan', 'ibu')->order_by('id_pekerjaan', 'ASC')->get('tbl_pekerjaan')->result();

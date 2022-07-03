@@ -191,7 +191,7 @@ class Panel_admin extends CI_Controller
 			$this->load->view('admin/header', $data);
 			$this->load->view('admin/edit', $data);
 			$this->load->view('admin/footer');
-			
+
 
 			if (isset($_POST['btnupdate'])) {
 
@@ -269,6 +269,11 @@ class Panel_admin extends CI_Controller
 	public function info_siswa($no_pendaftaran)
 	{
 		echo $this->admin->get_siswa($no_pendaftaran);
+	}
+
+	public function info_nilai_siswa($no_pendaftaran)
+	{
+		echo $this->admin->get_nilai_siswa($no_pendaftaran);
 	}
 
 	public function ubah_pass()
@@ -398,7 +403,7 @@ class Panel_admin extends CI_Controller
 		}
 	}
 
-	public function data_kriteria($aksi = '', $id = '')	
+	public function data_kriteria($aksi = '', $id = '')
 	{
 		$sess = $this->session->userdata('id_admin');
 		if ($sess == NULL) {
@@ -431,7 +436,7 @@ class Panel_admin extends CI_Controller
 		$this->load->view('admin/data_kriteria', $data);
 		$this->load->view('admin/footer');
 	}
-	
+
 	public function data_perhitungan($aksi = '', $id = '')
 	{
 		$sess = $this->session->userdata('id_admin');
@@ -457,19 +462,19 @@ class Panel_admin extends CI_Controller
 
 			if ($this->admin->verifikasi('siswa', $thn)->ori->num_rows > 0) {
 				$sqrt = [
-					'c1' => 0,'c2' => 0, 'c3' => 0, 'c4' => 0,'c5' => 0
+					'c1' => 0, 'c2' => 0, 'c3' => 0, 'c4' => 0, 'c5' => 0
 				];
 
 				foreach ($this->admin->verifikasi('siswa', $thn)->ori->result() as $row) {
 					$temp = [
 						'nama' => $row->nama_lengkap,
-						'c1' => ($row->matematika_raport + $row->ipa_raport + $row->bahasa_indonesia_raport + $row->pai_raport) / 4,
-						'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
-						'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
+						'c1' => $row->rata_rata_raport,
+						'c2' => $row->rata_rata_usbn,
+						'c3' => $row->rata_rata_uas,
 						'c4' => $row->nilai_prestasi,
 						'c5' => $row->nilai_ujian_seleksi == null ? 0 : $row->nilai_ujian_seleksi
 					];
-					$alternatif[$row->id_siswa] = $temp;
+					$alternatif[$row->nama_lengkap] = $temp;
 
 					$sqrt['c1'] += pow($temp['c1'], 2);
 					$sqrt['c2'] += pow($temp['c2'], 2);
@@ -478,28 +483,28 @@ class Panel_admin extends CI_Controller
 					$sqrt['c5'] += pow($temp['c5'], 2);
 				}
 
-				$sqrt['c1'] = sqrt($sqrt['c1']);
-				$sqrt['c2'] = sqrt($sqrt['c2']);
-				$sqrt['c3'] = sqrt($sqrt['c3']);
-				$sqrt['c4'] = sqrt($sqrt['c4']);
-				$sqrt['c5'] = sqrt($sqrt['c5']);
+				$sqrt['c1'] = number_format(sqrt($sqrt['c1']), 2);
+				$sqrt['c2'] = number_format(sqrt($sqrt['c2']), 2);
+				$sqrt['c3'] = number_format(sqrt($sqrt['c3']), 2);
+				$sqrt['c4'] = number_format(sqrt($sqrt['c4']), 2);
+				$sqrt['c5'] = number_format(sqrt($sqrt['c5']), 2);
 
 				foreach ($alternatif as $key => $value) {
-					$normalisasi[$key]['c1'] = $value['c1'] / $sqrt['c1'];
-					$normalisasi[$key]['c2'] = $value['c2'] / $sqrt['c2'];
-					$normalisasi[$key]['c3'] = $value['c3'] / $sqrt['c3'];
-					$normalisasi[$key]['c4'] = $value['c4'] / $sqrt['c4'];
-					$normalisasi[$key]['c5'] = $value['c5'] / $sqrt['c5'];
+					$normalisasi[$key]['c1'] = number_format($value['c1'] / $sqrt['c1'], 2);
+					$normalisasi[$key]['c2'] = number_format($value['c2'] / $sqrt['c2'], 2);
+					$normalisasi[$key]['c3'] = number_format($value['c3'] / $sqrt['c3'], 2);
+					$normalisasi[$key]['c4'] = number_format($value['c4'] / $sqrt['c4'], 2);
+					$normalisasi[$key]['c5'] = number_format($value['c5'] / max($sqrt['c5'], 1), 2);
 				}
 
 				$kriteria = $this->admin->get_kriteria()->result_array();
-				
+
 				foreach ($normalisasi as $key => $value) {
-					$ternormalisasi[$key]['c1'] = $value['c1'] * $kriteria[0]['bobot'];
-					$ternormalisasi[$key]['c2'] = $value['c2'] * $kriteria[1]['bobot'];
-					$ternormalisasi[$key]['c3'] = $value['c3'] * $kriteria[2]['bobot'];
-					$ternormalisasi[$key]['c4'] = $value['c4'] * $kriteria[3]['bobot'];
-					$ternormalisasi[$key]['c5'] = $value['c5'] * $kriteria[4]['bobot'];
+					$ternormalisasi[$key]['c1'] = number_format($value['c1'] * $kriteria[0]['bobot'], 2);
+					$ternormalisasi[$key]['c2'] = number_format($value['c2'] * $kriteria[1]['bobot'], 2);
+					$ternormalisasi[$key]['c3'] = number_format($value['c3'] * $kriteria[2]['bobot'], 2);
+					$ternormalisasi[$key]['c4'] = number_format($value['c4'] * $kriteria[3]['bobot'], 2);
+					$ternormalisasi[$key]['c5'] = number_format($value['c5'] * $kriteria[4]['bobot'], 2);
 				}
 
 				foreach ($ternormalisasi as $key => $value) {
@@ -508,19 +513,51 @@ class Panel_admin extends CI_Controller
 					$optimasi[$key]['yi'] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
 					$yi[] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
 				}
-				array_unique($yi);
-				rsort($yi);
-				$no = 1;
-				foreach ($yi as $value) {
-					$tabel_yi[] = [
-						'optimasi' => $value,
-						'rank' => $no++
-					];
+
+				foreach ($optimasi as $key => $value) {
+					$temp2["id"] = $key;
+					$temp2["max"] = $optimasi[$key]["max"];
+					$temp2["min"] = $optimasi[$key]["min"];
+					$temp2["yi"] = $optimasi[$key]["yi"];
+					$temp2["c5"] = $alternatif[$key]["c5"];
+					$temp2["c1"] = $alternatif[$key]["c1"];
+					$siswa[] = $temp2;
 				}
 
-				foreach($optimasi as $key => $value) {
-					$rank[$key]['optimasi'] = $value['yi'];
-					$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
+				usort($siswa, function ($a, $b) {
+					if ($a['yi'] == $b['yi']) {
+						if ($a['c5'] == $b['c5']) {
+							return $a['c1'] - $b['c1'];
+						} else {
+							return $a['c5'] - $b['c5'];
+						}
+					} else {
+						return $a['yi'] - $b['yi'];
+					}
+				});
+
+				// array_unique($yi);
+				// rsort($yi);
+				// $no = 1;
+				// foreach ($yi as $value) {
+				// 	$tabel_yi[] = [
+				// 		'optimasi' => $value,
+				// 		'rank' => $no++
+				// 	];
+				// }
+
+				// foreach ($optimasi as $key => $value) {
+				// 	$rank[$key]['optimasi'] = $value['yi'];
+				// 	$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
+				// }
+
+				$no = count($siswa);
+				foreach ($siswa as $row) {
+					$rank[$row["id"]]["id"] = $row["id"];
+					$rank[$row["id"]]["optimasi"] = $row["yi"];
+					$rank[$row["id"]]["c5"] = $row["c5"];
+					$rank[$row["id"]]["c1"] = $row["c1"];
+					$rank[$row["id"]]["rank"] = $no--;
 				}
 
 				$data['alternatif'] = $alternatif;
@@ -529,7 +566,6 @@ class Panel_admin extends CI_Controller
 				$data['ternormalisasi'] = $ternormalisasi;
 				$data['optimasi'] = $optimasi;
 				$data['rank'] = $rank;
-				
 			}
 
 			$this->load->view('admin/header', $data);
@@ -608,7 +644,8 @@ class Panel_admin extends CI_Controller
 	public function download_dokumen($id)
 	{
 		$data = $this->siswa->base_biodata($id);
-		if (empty($data->dokumen_kk) &&
+		if (
+			empty($data->dokumen_kk) &&
 			empty($data->dokumen_akte_kelahiran) &&
 			empty($data->dokumen_skl) &&
 			empty($data->dokumen_kartu_bantuan)
@@ -621,17 +658,17 @@ class Panel_admin extends CI_Controller
 		$zip = new ZipArchive();
 		$zip->open($dir . $id . ".zip", ZipArchive::CREATE | ZipArchive::OVERWRITE);
 
-		if (!empty($data->dokumen_kk)) 
+		if (!empty($data->dokumen_kk))
 			$zip->addFile($dir . $data->dokumen_kk, "kk." . pathinfo($data->dokumen_kk, PATHINFO_EXTENSION));
-		if (!empty($data->dokumen_akte_kelahiran)) 
+		if (!empty($data->dokumen_akte_kelahiran))
 			$zip->addFile($dir . $data->dokumen_akte_kelahiran, "akte_kelahiran." . pathinfo($data->dokumen_akte_kelahiran, PATHINFO_EXTENSION));
-		if (!empty($data->dokumen_skl)) 
+		if (!empty($data->dokumen_skl))
 			$zip->addFile($dir . $data->dokumen_skl, "skl." . pathinfo($data->dokumen_skl, PATHINFO_EXTENSION));
-		if (!empty($data->dokumen_kartu_bantuan)) 
+		if (!empty($data->dokumen_kartu_bantuan))
 			$zip->addFile($dir . $data->dokumen_kartu_bantuan, "kartu_bantuan." . pathinfo($data->dokumen_kartu_bantuan, PATHINFO_EXTENSION));
 
 		$zip->close();
-		
+
 		header("Content-type: application/zip");
 		header("Content-Disposition: attachment; filename=" . $id . ".zip");
 		header("Pragma: no-cache");
@@ -752,7 +789,7 @@ class Panel_admin extends CI_Controller
 			$this->load->view('admin/footer');
 		}
 	}
-	public function data_kelas($aksi = '', $id = '')	
+	public function data_kelas($aksi = '', $id = '')
 	{
 		$sess = $this->session->userdata('id_admin');
 		if ($sess == NULL) {
@@ -772,7 +809,8 @@ class Panel_admin extends CI_Controller
 		$this->load->view('admin/footer');
 	}
 
-	public function data_soal($aksi = '', $id = '') {
+	public function data_soal($aksi = '', $id = '')
+	{
 		$sess = $this->session->userdata('id_admin');
 		if ($sess == NULL) {
 			redirect('panel_admin/log_in');
@@ -809,30 +847,36 @@ class Panel_admin extends CI_Controller
 		$this->load->view('admin/footer');
 	}
 
-	public function get_detail_soal($id_soal) {
+	public function get_detail_soal($id_soal)
+	{
 		echo $this->admin->get_detail_soal($id_soal);
 	}
 
-	public function get_list_soal($text) {
+	public function get_list_soal($text)
+	{
 		header('Content-Type: application/json; charset=utf-8');
 		echo $this->admin->get_list_soal($text);
 	}
 
-	public function tambah_daftar_soal_ujian() {
+	public function tambah_daftar_soal_ujian()
+	{
 		header('Content-Type: application/json; charset=utf-8');
 		echo $this->admin->tambah_daftar_soal_ujian($this->input->get("id_ujian"), $this->input->get("id_soal"));
 	}
 
-	public function get_daftar_soal_ujian($id_ujian) {
+	public function get_daftar_soal_ujian($id_ujian)
+	{
 		header('Content-Type: application/json; charset=utf-8');
 		echo $this->admin->get_daftar_soal_ujian($id_ujian);
 	}
 
-	public function hapus_daftar_soal_ujian($id_daftar_soal_ujian) {
+	public function hapus_daftar_soal_ujian($id_daftar_soal_ujian)
+	{
 		$this->admin->hapus_daftar_soal_ujian($id_daftar_soal_ujian);
 	}
 
-	public function ujian($aksi = '', $id = '') {
+	public function ujian($aksi = '', $id = '')
+	{
 		$sess = $this->session->userdata('id_admin');
 		if ($sess == NULL) {
 			redirect('panel_admin/log_in');
@@ -868,20 +912,21 @@ class Panel_admin extends CI_Controller
 		$this->load->view('admin/footer');
 	}
 
-	public function nilai_ujian($aksi = '', $id = '') {
+	public function nilai_ujian($aksi = '', $id = '')
+	{
 		$sess = $this->session->userdata('id_admin');
 		if ($sess == NULL) {
 			redirect('panel_admin/log_in');
 		}
 		$thn =
-		$this->siswa->cek_status_ujian();
+			$this->siswa->cek_status_ujian();
 		$this->admin->set_announce($aksi, $id);
 
 		if ($aksi == "hapus") {
 			$this->admin->hapus_nilai_ujian($id);
 			redirect('panel_admin/nilai_ujian');
 		}
-		
+
 
 		$data = array(
 			'user' 		=> $this->admin->base('bio', $this->session->userdata('id_admin')),
@@ -895,10 +940,11 @@ class Panel_admin extends CI_Controller
 		$this->load->view('admin/footer');
 	}
 
-	public function get_detail_ujian($id_ujian) {
+	public function get_detail_ujian($id_ujian)
+	{
 		echo $this->admin->get_detail_ujian($id_ujian);
 	}
-	
+
 
 	public function edit_ket($aksi = '', $id = '')
 	{

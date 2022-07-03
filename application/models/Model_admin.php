@@ -25,21 +25,23 @@ class Model_admin extends CI_Model
 		}
 	}
 
-	function get_kriteria() {
+	function get_kriteria()
+	{
 		return $this->db->get('tbl_kriteria');
 	}
 
-	function get_tabel_yi($thn) {
+	function get_tabel_yi($thn)
+	{
 		$sqrt = [
-			'c1' => 0,'c2' => 0, 'c3' => 0, 'c4' => 0,'c5' => 0
+			'c1' => 0, 'c2' => 0, 'c3' => 0, 'c4' => 0, 'c5' => 0
 		];
 
 		foreach ($this->admin->verifikasi('siswa', $thn)->ori->result() as $row) {
 			$temp = [
 				'nama' => $row->nama_lengkap,
-				'c1' => ($row->matematika_raport + $row->ipa_raport + $row->bahasa_indonesia_raport + $row->pai_raport) / 4,
-				'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
-				'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
+				'c1' => $row->rata_rata_raport,
+				'c2' => $row->rata_rata_usbn,
+				'c3' => $row->rata_rata_uas,
 				'c4' => $row->nilai_prestasi,
 				'c5' => $row->nilai_ujian_seleksi == null ? 0 : $row->nilai_ujian_seleksi
 			];
@@ -52,28 +54,28 @@ class Model_admin extends CI_Model
 			$sqrt['c5'] += pow($temp['c5'], 2);
 		}
 
-		$sqrt['c1'] = sqrt($sqrt['c1']);
-		$sqrt['c2'] = sqrt($sqrt['c2']);
-		$sqrt['c3'] = sqrt($sqrt['c3']);
-		$sqrt['c4'] = sqrt($sqrt['c4']);
-		$sqrt['c5'] = sqrt($sqrt['c5']);
+		$sqrt['c1'] = number_format(sqrt($sqrt['c1']), 2);
+		$sqrt['c2'] = number_format(sqrt($sqrt['c2']), 2);
+		$sqrt['c3'] = number_format(sqrt($sqrt['c3']), 2);
+		$sqrt['c4'] = number_format(sqrt($sqrt['c4']), 2);
+		$sqrt['c5'] = number_format(sqrt($sqrt['c5']), 2);
 
 		foreach ($alternatif as $key => $value) {
-			$normalisasi[$key]['c1'] = $value['c1'] / $sqrt['c1'];
-			$normalisasi[$key]['c2'] = $value['c2'] / $sqrt['c2'];
-			$normalisasi[$key]['c3'] = $value['c3'] / $sqrt['c3'];
-			$normalisasi[$key]['c4'] = $value['c4'] / $sqrt['c4'];
-			$normalisasi[$key]['c5'] = $value['c5'] / $sqrt['c5'];
+			$normalisasi[$key]['c1'] = number_format($value['c1'] / $sqrt['c1'], 2);
+			$normalisasi[$key]['c2'] = number_format($value['c2'] / $sqrt['c2'], 2);
+			$normalisasi[$key]['c3'] = number_format($value['c3'] / $sqrt['c3'], 2);
+			$normalisasi[$key]['c4'] = number_format($value['c4'] / $sqrt['c4'], 2);
+			$normalisasi[$key]['c5'] = number_format($value['c5'] / max($sqrt['c5'], 1), 2);
 		}
 
 		$kriteria = $this->admin->get_kriteria()->result_array();
-		
+
 		foreach ($normalisasi as $key => $value) {
-			$ternormalisasi[$key]['c1'] = $value['c1'] * $kriteria[0]['bobot'];
-			$ternormalisasi[$key]['c2'] = $value['c2'] * $kriteria[1]['bobot'];
-			$ternormalisasi[$key]['c3'] = $value['c3'] * $kriteria[2]['bobot'];
-			$ternormalisasi[$key]['c4'] = $value['c4'] * $kriteria[3]['bobot'];
-			$ternormalisasi[$key]['c5'] = $value['c5'] * $kriteria[4]['bobot'];
+			$ternormalisasi[$key]['c1'] = number_format($value['c1'] * $kriteria[0]['bobot'], 2);
+			$ternormalisasi[$key]['c2'] = number_format($value['c2'] * $kriteria[1]['bobot'], 2);
+			$ternormalisasi[$key]['c3'] = number_format($value['c3'] * $kriteria[2]['bobot'], 2);
+			$ternormalisasi[$key]['c4'] = number_format($value['c4'] * $kriteria[3]['bobot'], 2);
+			$ternormalisasi[$key]['c5'] = number_format($value['c5'] * $kriteria[4]['bobot'], 2);
 		}
 
 		foreach ($ternormalisasi as $key => $value) {
@@ -82,49 +84,93 @@ class Model_admin extends CI_Model
 			$optimasi[$key]['yi'] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
 			$yi[] = $optimasi[$key]['max'] - $optimasi[$key]['min'];
 		}
-		array_unique($yi);
-		rsort($yi);
-		$no = 1;
-		foreach ($yi as $value) {
-			$tabel_yi[] = [
-				'optimasi' => $value,
-				'rank' => $no++
-			];
-		}
 
 		foreach($optimasi as $key => $value) {
-			$rank[$key]['optimasi'] = $value['yi'];
-			$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
+			$temp2["id"] = $key;
+			$temp2["max"] = $optimasi[$key]["max"];
+			$temp2["min"] = $optimasi[$key]["min"];
+			$temp2["yi"] = $optimasi[$key]["yi"];
+			$temp2["c5"] = $alternatif[$key]["c5"];
+			$temp2["c1"] = $alternatif[$key]["c1"];
+			$siswa[] = $temp2;
 		}
+
+		usort($siswa, function($a, $b) {
+			if ($a['yi'] == $b['yi']) {
+				if ($a['c5'] == $b['c5']) {
+					return $a['c1'] - $b['c1'];
+				} else {
+					return $a['c5'] - $b['c5'];
+				}
+			} else {
+				return $a['yi'] - $b['yi'];
+			}
+		});
+
+		// array_unique($yi);
+		// rsort($yi);
+		// $no = 1;
+		// foreach ($yi as $value) {
+		// 	$tabel_yi[] = [
+		// 		'optimasi' => $value,
+		// 		'rank' => $no++
+		// 	];
+		// }
+
+		// foreach ($optimasi as $key => $value) {
+		// 	$rank[$key]['optimasi'] = $value['yi'];
+		// 	$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
+		// }
+
+		$no = count($siswa);
+		foreach ($siswa as $row) {
+			$rank[$row["id"]]["id"] = $row["id"];
+			$rank[$row["id"]]["optimasi"] = $row["yi"];
+			$rank[$row["id"]]["c5"] = $row["c5"];
+			$rank[$row["id"]]["c1"] = $row["c1"];
+			$rank[$row["id"]]["rank"] = $no--;
+		}
+		
 		return $rank;
 	}
 
-	function get_siswa($no_pendaftaran) {
+	function get_siswa($no_pendaftaran)
+	{
 		return json_encode($this->db->get_where('tbl_siswa', "no_pendaftaran='$no_pendaftaran'")->row());
 	}
 
-	function get_detail_soal($id_soal) {
+	function get_detail_soal($id_soal)
+	{
 		return json_encode($this->db->get_where('tbl_soal', "id_soal='$id_soal'")->row());
 	}
 
-	function get_list_soal($text) {
+	function get_list_soal($text)
+	{
 		return json_encode($this->db->query("SELECT * FROM tbl_soal WHERE MATCH (kode, soal, opsi_a, opsi_b, opsi_c, opsi_d, opsi_e) AGAINST ('+$text*' IN BOOLEAN MODE)")->result_array());
 	}
 
-	function get_detail_ujian($id_ujian) {
+	function get_detail_ujian($id_ujian)
+	{
 
 		return json_encode($this->db->get_where('tbl_ujian', "id_ujian='$id_ujian'")->row());
 	}
 
-	function get_soal() {
+	function get_soal()
+	{
 		return $this->db->get('tbl_soal');
 	}
 
-	function get_ujian() {
+	function get_ujian()
+	{
 		return $this->db->query("SELECT u.*, COUNT(d.id_ujian) AS jumlah_soal FROM tbl_ujian u LEFT JOIN tbl_daftar_soal_ujian d USING(id_ujian) GROUP BY u.id_ujian");
 	}
 
-	function tambah_daftar_soal_ujian($id_ujian, $id_soal) {
+	function get_nilai_siswa($no_pendaftaran) {
+		return json_encode($this->db->get_where('tbl_nilai', "no_pendaftaran='$no_pendaftaran'")->row());
+	}
+
+	function tambah_daftar_soal_ujian($id_ujian, $id_soal)
+	{
 		$result['success'] = false;
 		$result['success'] = 'Terjadi kesalahan';
 		$data = array('id_ujian' => $id_ujian, 'id_soal' => $id_soal);
@@ -145,20 +191,23 @@ class Model_admin extends CI_Model
 		return json_encode($result);
 	}
 
-	public function get_nilai_ujian() {
+	public function get_nilai_ujian()
+	{
 		$this->db->select('i.id_ikut_ujian, s.nisn,s.nama_lengkap, u.nama nama_ujian, i.nilai');
 		$this->db->from('tbl_ikut_ujian i');
 		$this->db->join('tbl_ujian u', 'u.id_ujian = i.id_ujian');
 		$this->db->join('tbl_siswa s', 's.id_siswa = i.id_siswa');
 		return $this->db->get();
 	}
-	
-	function hapus_nilai_ujian($id_ikut_ujian) {
+
+	function hapus_nilai_ujian($id_ikut_ujian)
+	{
 		$this->db->where('id_ikut_ujian', $id_ikut_ujian);
 		$this->db->delete('tbl_ikut_ujian');
 	}
 
-	public function get_daftar_soal_ujian($id_ujian) {
+	public function get_daftar_soal_ujian($id_ujian)
+	{
 		$this->db->select('d.id_daftar_soal_ujian, d.id_soal,s.kode, s.soal');
 		$this->db->from('tbl_daftar_soal_ujian d');
 		$this->db->join('tbl_soal s', 's.id_soal = d.id_soal');
@@ -166,7 +215,8 @@ class Model_admin extends CI_Model
 		return json_encode($this->db->get()->result_array());
 	}
 
-	function hapus_daftar_soal_ujian($id_daftar_soal_ujian) {
+	function hapus_daftar_soal_ujian($id_daftar_soal_ujian)
+	{
 		$this->db->where('id_daftar_soal_ujian', $id_daftar_soal_ujian);
 		$this->db->delete('tbl_daftar_soal_ujian');
 	}
@@ -196,44 +246,53 @@ class Model_admin extends CI_Model
 		}
 	}
 
-	function tambah_kriteria($data) {
+	function tambah_kriteria($data)
+	{
 		$this->db->insert('tbl_kriteria', $data);
 	}
 
-	function edit_kriteria($data, $id_kriteria) {
+	function edit_kriteria($data, $id_kriteria)
+	{
 		$this->db->where('id_kriteria', $id_kriteria);
 		$this->db->update('tbl_kriteria', $data);
 	}
 
-	function hapus_kriteria($id_kriteria) {
+	function hapus_kriteria($id_kriteria)
+	{
 		$this->db->where('id_kriteria', $id_kriteria);
 		$this->db->delete('tbl_kriteria');
 	}
 
-	function tambah_soal($data) {
+	function tambah_soal($data)
+	{
 		$this->db->insert('tbl_soal', $data);
 	}
 
-	function edit_soal($data, $id_soal) {
+	function edit_soal($data, $id_soal)
+	{
 		$this->db->where('id_soal', $id_soal);
 		$this->db->update('tbl_soal', $data);
 	}
 
-	function hapus_soal($id_soal) {
+	function hapus_soal($id_soal)
+	{
 		$this->db->where('id_soal', $id_soal);
 		$this->db->delete('tbl_soal');
 	}
 
-	function tambah_ujian($data) {
+	function tambah_ujian($data)
+	{
 		$this->db->insert('tbl_ujian', $data);
 	}
 
-	function edit_ujian($data, $id_ujian) {
+	function edit_ujian($data, $id_ujian)
+	{
 		$this->db->where('id_ujian', $id_ujian);
 		$this->db->update('tbl_ujian', $data);
 	}
 
-	function hapus_ujian($id_ujian) {
+	function hapus_ujian($id_ujian)
+	{
 		$this->db->where('id_ujian', $id_ujian);
 		$this->db->delete('tbl_ujian');
 	}
@@ -393,15 +452,14 @@ class Model_admin extends CI_Model
 				return $this->db->update('tbl_siswa', $data, array('no_pendaftaran' => $old_user));
 				break;
 
-			default: 
+			default:
 				# code...
 				break;
 		}
 	}
-function get_kelas (){
-
-	
-}
+	function get_kelas()
+	{
+	}
 	function verifikasi($menu = '', $thn = '', $status = '')
 	{
 		switch ($menu) {
@@ -492,7 +550,8 @@ function get_kelas (){
 		}
 	}
 
-	function hapus($id) {
+	function hapus($id)
+	{
 		$this->db->delete('tbl_siswa', array('no_pendaftaran' => $id));
 	}
 }

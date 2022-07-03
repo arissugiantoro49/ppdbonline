@@ -30,9 +30,9 @@ class Model_siswa extends CI_Model
 		foreach ($this->admin->verifikasi('siswa', '')->ori->result() as $row) {
 			$temp = [
 				'nama' => $row->nama_lengkap,
-				'c1' => ($row->matematika_raport + $row->ipa_raport + $row->bahasa_indonesia_raport + $row->pai_raport) / 4,
-				'c2' => ($row->matematika_usbn + $row->ipa_usbn + $row->bindo_usbn + $row->pai_usbn) / 4,
-				'c3' => ($row->matematika_uas + $row->ipa_uas + $row->bindo_uas + $row->pai_uas) / 4,
+				'c1' => $row->rata_rata_raport,
+				'c2' => $row->rata_rata_usbn,
+				'c3' => $row->rata_rata_uas,
 				'c4' => $row->nilai_prestasi,
 				'c5' => $row->nilai_ujian_seleksi == null ? 0 : $row->nilai_ujian_seleksi
 			];
@@ -45,28 +45,28 @@ class Model_siswa extends CI_Model
 			$sqrt['c5'] += pow($temp['c5'], 2);
 		}
 
-		$sqrt['c1'] = sqrt($sqrt['c1']);
-		$sqrt['c2'] = sqrt($sqrt['c2']);
-		$sqrt['c3'] = sqrt($sqrt['c3']);
-		$sqrt['c4'] = sqrt($sqrt['c4']);
-		$sqrt['c5'] = sqrt($sqrt['c5']);
+		$sqrt['c1'] = number_format(sqrt($sqrt['c1']), 2);
+		$sqrt['c2'] = number_format(sqrt($sqrt['c2']), 2);
+		$sqrt['c3'] = number_format(sqrt($sqrt['c3']), 2);
+		$sqrt['c4'] = number_format(sqrt($sqrt['c4']), 2);
+		$sqrt['c5'] = number_format(sqrt($sqrt['c5']), 2);
 
 		foreach ($alternatif as $key => $value) {
-			$normalisasi[$key]['c1'] = $value['c1'] / $sqrt['c1'];
-			$normalisasi[$key]['c2'] = $value['c2'] / $sqrt['c2'];
-			$normalisasi[$key]['c3'] = $value['c3'] / $sqrt['c3'];
-			$normalisasi[$key]['c4'] = $value['c4'] / $sqrt['c4'];
-			$normalisasi[$key]['c5'] = $value['c5'] / $sqrt['c5'];
+			$normalisasi[$key]['c1'] = number_format($value['c1'] / $sqrt['c1'], 2);
+			$normalisasi[$key]['c2'] = number_format($value['c2'] / $sqrt['c2'], 2);
+			$normalisasi[$key]['c3'] = number_format($value['c3'] / $sqrt['c3'], 2);
+			$normalisasi[$key]['c4'] = number_format($value['c4'] / $sqrt['c4'], 2);
+			$normalisasi[$key]['c5'] = number_format($value['c5'] / max($sqrt['c5'], 1), 2);
 		}
 
 		$kriteria = $this->admin->get_kriteria()->result_array();
 
 		foreach ($normalisasi as $key => $value) {
-			$ternormalisasi[$key]['c1'] = $value['c1'] * $kriteria[0]['bobot'];
-			$ternormalisasi[$key]['c2'] = $value['c2'] * $kriteria[1]['bobot'];
-			$ternormalisasi[$key]['c3'] = $value['c3'] * $kriteria[2]['bobot'];
-			$ternormalisasi[$key]['c4'] = $value['c4'] * $kriteria[3]['bobot'];
-			$ternormalisasi[$key]['c5'] = $value['c5'] * $kriteria[4]['bobot'];
+			$ternormalisasi[$key]['c1'] = number_format($value['c1'] * $kriteria[0]['bobot'], 2);
+			$ternormalisasi[$key]['c2'] = number_format($value['c2'] * $kriteria[1]['bobot'], 2);
+			$ternormalisasi[$key]['c3'] = number_format($value['c3'] * $kriteria[2]['bobot'], 2);
+			$ternormalisasi[$key]['c4'] = number_format($value['c4'] * $kriteria[3]['bobot'], 2);
+			$ternormalisasi[$key]['c5'] = number_format($value['c5'] * $kriteria[4]['bobot'], 2);
 		}
 
 		foreach ($ternormalisasi as $key => $value) {
