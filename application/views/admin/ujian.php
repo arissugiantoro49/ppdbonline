@@ -35,7 +35,8 @@
                                 <th>Nama</th>
                                 <th>Jumlah soal</th>
                                 <th>Durasi</th>
-                                <th>Waktu</th>
+                                <th>Waktu Mulai</th>
+                                <th>Tenggat Waktu</th>
                                 <th>Tahun</th>
                                 <th>Aksi</th>
                             </tr>
@@ -51,6 +52,7 @@
                                     <td><?php echo $baris->jumlah_soal; ?></td>
                                     <td><?php echo $baris->durasi; ?> Menit</td>
                                     <td><?php echo $baris->waktu; ?></td>
+                                    <td><?php echo $baris->tenggat_waktu; ?></td>
                                     <td><?php echo $baris->tahun; ?></td>
                                     <td>
                                         <button class="btn btn-primary" data-id-ujian="<?= $baris->id_ujian ?>" title="Daftar soal" onclick="daftarSoal(this)"><i class="icon-list2"></i></button>
@@ -99,8 +101,12 @@
                                         <input type="text" name="durasi" class="form-control" placeholder="Menit" required="">
                                     </div>
                                     <div class="form-group">
-                                        <label for="waktu">Waktu :</label>
+                                        <label for="waktu">Waktu mulai:</label>
                                         <input type="datetime-local" class="form-control" placeholder="Waktu ujian" name="waktu">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="waktu">Tenggat waktu:</label>
+                                        <input type="datetime-local" class="form-control" placeholder="Tenggat waktu" name="tenggat_waktu">
                                     </div>
                                 </div>
                                 <div class="box-footer">
@@ -144,12 +150,16 @@
                                         <input type="text" name="durasi" class="form-control" placeholder="Menit" required="">
                                     </div>
                                     <div class="form-group">
-                                        <label for="waktu">Waktu :</label>
+                                        <label for="waktu">Waktu mulai:</label>
                                         <input type="datetime-local" class="form-control" placeholder="Waktu ujian" name="waktu">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="waktu">Tenggat waktu:</label>
+                                        <input type="datetime-local" class="form-control" placeholder="Tenggat waktu" name="tenggat_waktu">
                                     </div>
                                 </div>
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="submit" class="btn btn-success" >Submit</button>
                                 </div>
                             </form>
                         </div>
@@ -366,8 +376,27 @@
                     form["nama"].value = result.nama;
                     form["durasi"].value = result.durasi;
                     form["waktu"].value = (new Date(result.waktu)).toISOString().substring(0, 16);
+                    form["tenggat_waktu"].value = (new Date(result.tenggat_waktu)).toISOString().substring(0, 16);
                     form["tahun"].value = result.tahun;
                     $('#modal-edit-ujian').modal('show');
                 });
             }
+
+            document.forms[0].addEventListener("submit", evt => {
+                evt.preventDefault();
+                if (new Date(document.forms[0]['waktu'].value) < new Date(document.forms[0]['tenggat_waktu'].value)) {
+                    document.forms[0].submit();
+                } else {
+                    showToast(false, "Tenggat waktu harus lebih besar dari waktu mulai");
+                }
+            })
+
+            document.forms[1].addEventListener("submit", evt => {
+                evt.preventDefault();
+                if (new Date(document.forms[1]['waktu'].value) < new Date(document.forms[1]['tenggat_waktu'].value)) {
+                    document.forms[1].submit();
+                } else {
+                    showToast(false, "Tenggat waktu harus lebih besar dari waktu mulai");
+                }
+            })
         </script>

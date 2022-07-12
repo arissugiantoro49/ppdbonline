@@ -888,6 +888,7 @@ class Panel_admin extends CI_Controller
 				'nama' => $this->input->post('nama'),
 				'durasi' => $this->input->post('durasi'),
 				'waktu' => $this->input->post('waktu'),
+				'tenggat_waktu' => $this->input->post('tenggat_waktu'),
 				'tahun' => $this->input->post('tahun')
 			);
 			if ($aksi == "tambah") {

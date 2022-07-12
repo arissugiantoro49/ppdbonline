@@ -227,6 +227,18 @@ class Model_siswa extends CI_Model
 				->get_where("tbl_ujian", "id_ujian=$id_ujian")
 				->row();
 
+			if (time() < strtotime($result->waktu)) {
+				$ujian["nama"] = $result->nama;
+				$ujian["status"] = "not_available";
+				$ujian["waktu"] = $result->waktu;
+				return $ujian;
+			} else if (time() > strtotime($result->tenggat_waktu)) {
+				$ujian["nama"] = $result->nama;
+				$ujian["status"] = "missed";
+				$ujian["tenggat_waktu"] = $result->tenggat_waktu;
+				return $ujian;
+			}
+
 			$dt = new DateTimeImmutable();
 			$waktu_mulai = $dt->format('Y-m-d H:i:s');
 			$waktu_selesai = $dt->modify("+$result->durasi minutes")->format('Y-m-d H:i:s');
@@ -399,6 +411,10 @@ class Model_siswa extends CI_Model
 	function get_data()
 	{
 		return json_encode($this->db->get_where('tbl_siswa', "no_pendaftaran='" . $this->session->userdata('no_pendaftaran') . "'")->row());
+	}
+
+	function get_detail_ujian($id_ujian) {
+		return $this->db->get_where('tbl_ujian', "id_ujian='$id_ujian'")->row();
 	}
 
 	function get_nilai()

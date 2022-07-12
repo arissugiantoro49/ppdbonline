@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 03, 2022 at 10:52 AM
+-- Generation Time: Jul 12, 2022 at 03:01 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -457,16 +457,18 @@ CREATE TABLE `tbl_ujian` (
   `nama` varchar(100) NOT NULL,
   `durasi` int(11) NOT NULL,
   `waktu` datetime NOT NULL,
-  `tahun` int(11) NOT NULL
+  `tenggat_waktu` datetime NOT NULL,
+  `tahun` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tbl_ujian`
 --
 
-INSERT INTO `tbl_ujian` (`id_ujian`, `nama`, `durasi`, `waktu`, `tahun`) VALUES
-(1, 'Test 1', 30, '2022-05-31 09:00:00', 2022),
-(2, 'Test 2', 30, '2022-06-08 08:00:00', 2022);
+INSERT INTO `tbl_ujian` (`id_ujian`, `nama`, `durasi`, `waktu`, `tenggat_waktu`, `tahun`, `status`) VALUES
+(1, 'Test 1', 30, '2022-07-13 00:00:00', '2022-07-13 01:00:00', 2022, 0),
+(2, 'Test 2', 30, '2022-07-13 00:00:00', '2022-07-13 01:00:00', 2022, 0);
 
 -- --------------------------------------------------------
 
@@ -668,7 +670,7 @@ ALTER TABLE `tbl_dokumen`
 -- AUTO_INCREMENT for table `tbl_ikut_ujian`
 --
 ALTER TABLE `tbl_ikut_ujian`
-  MODIFY `id_ikut_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_ikut_ujian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tbl_jawaban_ujian_siswa`

@@ -26,6 +26,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                             <th>Nama Ujian</th>
                                             <th>Jumlah Soal</th>
                                             <th>Durasi</th>
+                                            <th>Waktu mulai</th>
+                                            <th>Tenggat waktu</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -33,18 +35,26 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                         <?php
                                             $no = 0;
                                             foreach($ujian->result() as $row) {
+                                                $status = "";
+                                                if (time() > strtotime($row->tenggat_waktu)) {
+                                                    $status = "disabled title='Tenggat waktu terlewat'";
+                                                } elseif (time() < strtotime($row->waktu)) {
+                                                    $status = "disabled title='Ujian belum dimulai'";
+                                                }
                                         ?>
                                         <tr>
                                             <td><?= ++$no ?></td>
                                             <td><?= $row->nama ?></td>
                                             <td><?= $row->jumlah_soal ?></td>
                                             <td><?= $row->durasi ?> Menit</td>
+                                            <td><?= $row->waktu ?></td>
+                                            <td><?= $row->tenggat_waktu ?></td>
                                             <td>
                                                 
                                                 <?php
                                                     if ($row->status === null) {
                                                 ?>
-                                                <button type="button" class="btn btn-sm btn-primary" data-id-ujian="<?= $row->id_ujian ?>" data-nama-ujian="<?= $row->nama ?>" onclick="ikutUjian(this)"><i class="icon-redo2"></i> Ikut Ujian</button>
+                                                <button type="button" class="btn btn-sm btn-primary" data-id-ujian="<?= $row->id_ujian ?>" data-nama-ujian="<?= $row->nama ?>" onclick="ikutUjian(this)" <?= $status ?>><i class="icon-redo2"></i> Ikut Ujian</button>
                                                 <?php 
                                                     } elseif ($row->status === "progress") {
                                                 ?>

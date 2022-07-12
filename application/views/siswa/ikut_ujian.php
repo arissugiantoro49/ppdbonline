@@ -114,7 +114,7 @@ $nama_sekolah = $this->db->get('tbl_user')->row_array()["nama_lengkap"];
                     </div>
                 </div>
 
-            <?php } else { ?>
+            <?php } elseif ($ujian["status"] == "completed") { ?>
 
                 <div class="row">
                     <div class="col-md-12">
@@ -132,6 +132,57 @@ $nama_sekolah = $this->db->get('tbl_user')->row_array()["nama_lengkap"];
                                     <img src="img/task-check.png" width="200px">
                                     <h1>Ujian telah selesai!</h1>
                                     <p>Anda telah menyelesaikan ujian <?= $ujian["nama"] ?> dengan nilai <strong><?= $ujian["nilai"] ?></strong></p>
+                                </div>
+                            </div>
+                            <div class="panel-footer" style="padding-left:1em; padding-right:1em;">
+                                <a href="panel_siswa/ujian" class="btn btn-primary" style="float: right"> <i class="icon-enter" style="transform: scaleX(-1);"></i> Kembali</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } elseif ($ujian["status"] == "missed") {?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="display: inline-block"><?= $ujian["nama"] ?></h4>
+                        <ol class="breadcrumb" style="float:right; position: relative; top: 1em">
+                            <li><a href="panel_siswa"><i class="icon-home2"></i> Panel</a></li>
+                            <li><a href="panel_siswa/ujian"><i class="icon-pencil4"></i> Ujian</a></li>
+                            <li class="active"><?= $ujian["nama"] ?></li>
+                        </ol>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="panel panel-flat">
+                            <div class="panel-body">
+                                <div class="div" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                                    <img src="img/stop.png" width="200px">
+                                    <h1>Tenggat waktu ujian telah terlewat</h1>
+                                    <p>Anda tidak bisa ikut ujian karena tenggat waktu telah terlewat</p>
+                                    <p><strong>Tenggat waktu : <?= $ujian["tenggat_waktu"] ?><strong></p>
+                                </div>
+                            </div>
+                            <div class="panel-footer" style="padding-left:1em; padding-right:1em;">
+                                <a href="panel_siswa/ujian" class="btn btn-primary" style="float: right"> <i class="icon-enter" style="transform: scaleX(-1);"></i> Kembali</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php } elseif ($ujian["status"] == "not_available") {?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 style="display: inline-block"><?= $ujian["nama"] ?></h4>
+                        <ol class="breadcrumb" style="float:right; position: relative; top: 1em">
+                            <li><a href="panel_siswa"><i class="icon-home2"></i> Panel</a></li>
+                            <li><a href="panel_siswa/ujian"><i class="icon-pencil4"></i> Ujian</a></li>
+                            <li class="active"><?= $ujian["nama"] ?></li>
+                        </ol>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="panel panel-flat">
+                            <div class="panel-body">
+                                <div class="div" style="display: flex; flex-direction: column; justify-content: center; align-items: center">
+                                    <img src="img/stop.png" width="200px">
+                                    <h1>Ujian belum dimulai</h1>
+                                    <p>Waktu mulai ujian : <?= $ujian["waktu"] ?></p>
                                 </div>
                             </div>
                             <div class="panel-footer" style="padding-left:1em; padding-right:1em;">
