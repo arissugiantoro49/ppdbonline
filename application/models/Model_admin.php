@@ -95,32 +95,17 @@ class Model_admin extends CI_Model
 			$siswa[] = $temp2;
 		}
 
-		usort($siswa, function($a, $b) {
+		usort($siswa, function ($a, $b) {
 			if ($a['yi'] == $b['yi']) {
 				if ($a['c5'] == $b['c5']) {
-					return $a['c1'] - $b['c1'];
+					return $a['c1'] < $b['c1'] ? -1 : 1;
 				} else {
-					return $a['c5'] - $b['c5'];
+					return $a['c5'] < $b['c5'] ? -1 : 1;
 				}
 			} else {
-				return $a['yi'] - $b['yi'];
+				return $a['yi'] < $b['yi'] ? -1 : 1;
 			}
 		});
-
-		// array_unique($yi);
-		// rsort($yi);
-		// $no = 1;
-		// foreach ($yi as $value) {
-		// 	$tabel_yi[] = [
-		// 		'optimasi' => $value,
-		// 		'rank' => $no++
-		// 	];
-		// }
-
-		// foreach ($optimasi as $key => $value) {
-		// 	$rank[$key]['optimasi'] = $value['yi'];
-		// 	$rank[$key]['rank'] = array_search($value['yi'], array_column($tabel_yi, 'optimasi')) + 1;
-		// }
 
 		$no = count($siswa);
 		foreach ($siswa as $row) {
