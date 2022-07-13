@@ -38,8 +38,9 @@ class Web extends CI_Controller
 		$this->load->view('web/pendaftaran', $data);
 
 		if (isset($_POST['btndaftar'])) {
-			$this->web->pendaftaran('daftar', $this->input);
+			$id = $this->web->pendaftaran('daftar', $this->input);
 			$this->session->set_userdata('no_pendaftaran', $this->input->post('nis'));
+			$this->session->set_userdata('id_siswa', $id);
 			redirect('panel_siswa');
 		}
 	}

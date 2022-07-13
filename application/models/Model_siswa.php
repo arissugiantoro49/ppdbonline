@@ -152,22 +152,10 @@ class Model_siswa extends CI_Model
 	function ubah_nilai()
 	{
 		$data = array(
-			'matematika_raport'		=> $this->input->post('matematika_raport'),
-			'ipa_raport'					=> $this->input->post('ipa_raport'),
-			'pai_raport'					=> $this->input->post('pai_raport'),
-			'bahasa_indonesia_raport'		=> $this->input->post('bahasa_indonesia_raport'),
-
-			'matematika_usbn'			=> $this->input->post('matematika_usbn'),
-			'ipa_usbn'					=> $this->input->post('ipa_usbn'),
-			'pai_usbn'					=> $this->input->post('pai_usbn'),
-			'bindo_usbn'				=> $this->input->post('bindo_usbn'),
-
-			'matematika_uas'			=> $this->input->post('matematika_uas'),
-			'ipa_uas'					=> $this->input->post('ipa_uas'),
-			'pai_uas'					=> $this->input->post('pai_uas'),
-			'bindo_uas'					=> $this->input->post('bindo_uas'),
-
-			'nilai_prestasi'			=> $this->input->post('nilai_prestasi'),
+			'rata_rata_raport'	=> $this->input->post('rata_rata_raport'),
+			'rata_rata_uas'	=> $this->input->post('rata_rata_uas'),
+			'rata_rata_usbn'	=> $this->input->post('rata_rata_usbn'),
+			'nilai_prestasi'	=> $this->input->post('nilai_prestasi'),
 		);
 
 		$no_pendaftaran = $this->input->post('no_pendaftaran');

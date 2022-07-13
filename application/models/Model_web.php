@@ -86,21 +86,6 @@ class Model_web extends CI_Model
 					'rata_rata_usbn'				=> $data_temp->post('rata_rata_usbn'),
 					'rata_rata_uas'				=> $data_temp->post('rata_rata_uas'),
 
-					'matematika_raport'				=> $data_temp->post('matematika_raport'),
-					'ipa_raport'					=> $data_temp->post('ipa_raport'),
-					'pai_raport'					=> $data_temp->post('pai_raport'),
-					'bahasa_indonesia_raport'		=> $data_temp->post('bahasa_indonesia_raport'),
-
-					'matematika_usbn'			=> $data_temp->post('matematika_usbn'),
-					'ipa_usbn'					=> $data_temp->post('ipa_usbn'),
-					'pai_usbn'					=> $data_temp->post('pai_usbn'),
-					'bindo_usbn'				=> $data_temp->post('bindo_usbn'),
-
-					'matematika_uas'			=> $data_temp->post('matematika_uas'),
-					'ipa_uas'					=> $data_temp->post('ipa_uas'),
-					'pai_uas'					=> $data_temp->post('pai_uas'),
-					'bindo_uas'					=> $data_temp->post('bindo_uas'),
-
 					'nilai_prestasi'			=> $data_temp->post('nilai_prestasi'),
 					'no_pendaftaran'			=> $data['no_pendaftaran']
 				);
@@ -130,7 +115,8 @@ class Model_web extends CI_Model
 				}
 
 				$this->db->insert('tbl_nilai', $data1);
-				return $this->db->insert('tbl_siswa', $data);
+				$this->db->insert('tbl_siswa', $data);
+				return $this->db->insert_id();
 				break;
 
 			case 'id_baru':

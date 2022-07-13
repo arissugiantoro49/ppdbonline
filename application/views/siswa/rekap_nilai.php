@@ -118,119 +118,29 @@ $user = $user; ?>
                 <br>
                 <div class="table-responsive">
                   <table class="table table-bordered table-striped">
-                    <br>
-                    <span class="mr-1 text-bold">Nilai Raport</span>
-                    <br>
                     <input type="hidden" name="no_pendaftaran" value="<?php echo $user->no_pendaftaran; ?>">
+                    
                     <tr>
-                      <th width="20%">Matematika</th>
+                      <th width="20%">Nilai Raport</th>
                       <th width="1%">:</th>
-                      <td><input type="text" name="matematika_raport" class="form-control" value="<?php echo $nilai->matematika_raport; ?>" disabled></td>
+                      <td><input type="text" name="rata_rata_raport" class="form-control" value="<?= $nilai->rata_rata_raport ?>" disabled></td>
                     </tr>
                     <tr>
-                      <th width="20%">IPA</th>
+                      <th width="20%">Nilai USBN</th>
                       <th width="1%">:</th>
-                      <td><input type="text" name="ipa_raport" class="form-control" value="<?php echo $nilai->ipa_raport; ?>" disabled></td>
+                      <td><input type="text" name="rata_rata_usbn" class="form-control" value="<?= $nilai->rata_rata_usbn ?>" disabled></td>
                     </tr>
                     <tr>
-                      <th width="20%">Bahasa Indonesia</th>
+                      <th width="20%">Nilai UAS</th>
                       <th width="1%">:</th>
-                      <td><input type="text" name="bahasa_indonesia_raport" class="form-control" value="<?php echo $nilai->bahasa_indonesia_raport; ?>" disabled></td>
+                      <td><input type="text" name="rata_rata_uas" class="form-control" value="<?= $nilai->rata_rata_uas ?>" disabled></td>
                     </tr>
                     <tr>
-                      <th width="20%">PAI</th>
+                      <th width="20%">Nilai Prestasi</th>
                       <th width="1%">:</th>
-                      <td><input type="text" name="pai_raport" class="form-control" value="<?php echo $nilai->pai_raport; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">Rata Rata</th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="avg_raport" class="form-control" value="<?php echo ($nilai->matematika_raport + $nilai->ipa_raport + $nilai->bahasa_indonesia_raport + $nilai->pai_raport) / 4; ?>" disabled></td>
+                      <td><input type="text" name="nilai_prestasi" class="form-control" value="<?= $nilai->nilai_prestasi ?>" disabled></td>
                     </tr>
 
-
-
-
-                  </table>
-                  <table class="table table-bordered table-striped">
-                    <br>
-                    <span class="mr-1 text-bold">BIODATA NILAI USBN/UMBK</span>
-                    <br>
-
-                    <tr>
-                      <th width="20%">Matematika </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="matematika_usbn" class="form-control" value="<?php echo $nilai->matematika_usbn; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">IPA </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="ipa_usbn" class="form-control" value="<?php echo $nilai->ipa_usbn; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">Bahasa Indonesia </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="bindo_usbn" class="form-control" value="<?php echo $nilai->bindo_usbn; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">PAI </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="pai_usbn" class="form-control" value="<?php echo $nilai->pai_usbn; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">Rata Rata</th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="avg_usbn" class="form-control" value="<?php echo ($nilai->matematika_usbn + $nilai->ipa_usbn + $nilai->bindo_usbn + $nilai->pai_usbn) / 4; ?>" disabled></td>
-                    </tr>
-
-                  </table>
-                  <table class="table table-bordered table-striped">
-                    <br>
-                    <span class="mr-1 text-bold">BIODATA NILAI UAS</span>
-                    <br>
-
-                    <tr>
-                      <th width="20%">Matematika </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="matematika_uas" class="form-control" value="<?php echo $nilai->matematika_uas; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">IPA </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="ipa_uas" class="form-control" value="<?php echo $nilai->ipa_uas; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">Bahasa Indonesia </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="bindo_uas" class="form-control" value="<?php echo $nilai->bindo_uas; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">PAI </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="pai_uas" class="form-control" value="<?php echo $nilai->pai_uas; ?>" disabled></td>
-                    </tr>
-                    <tr>
-                      <th width="20%">Rata Rata</th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="avg_uas" class="form-control" value="<?php echo ($nilai->matematika_uas + $nilai->ipa_uas + $nilai->bindo_uas + $nilai->pai_uas) / 4; ?>" disabled></td>
-                    </tr>
-
-                  </table>
-                  <table class="table table-bordered table-striped">
-                    <br>
-                    <span class="mr-1 text-bold">BIODATA NILAI PRESTASI</span>
-                    <br>
-                    <tr>
-                      <th width="20%">Nilai Prestasi </th>
-                      <th width="1%">:</th>
-                      <td><input type="text" name="nilai_prestasi" class="form-control" value="<?php echo $nilai->nilai_prestasi; ?>" disabled></td>
-                    </tr>
-                  </table>
-
-                  <table class="table table-bordered table-striped">
-                    <br>
-                    <span class="mr-1 text-bold">NILAI UJIAN SELEKSI</span>
-                    <br>
                     <?php foreach ($nilai_ujian_seleksi->result() as $ujian) { ?>
                     <tr>
                       <th width="20%"><?= $ujian->nama ?></th>
@@ -238,8 +148,6 @@ $user = $user; ?>
                       <td><input type="text" class="form-control" value="<?= $ujian->nilai == null ? 0 : $ujian->nilai; ?>" disabled></td>
                     </tr>
                     <?php } ?>
-                  </table>
-
                   </table>
                 </div>
               </fieldset>
@@ -320,7 +228,7 @@ $user = $user; ?>
         btnBatal.classList.toggle("d-none")
         btnSimpan.classList.toggle("d-none")
 
-        const list = ["matematika_raport", "ipa_raport", "bahasa_indonesia_raport", "pai_raport", "matematika_usbn", "ipa_usbn", "bindo_usbn", "pai_usbn", "matematika_uas", "ipa_uas", "bindo_uas", "pai_uas", "nilai_prestasi", "dok_uas", "dok_usbn", "dok_raport", "dok_prestasi"]
+        const list = ["rata_rata_raport", "rata_rata_usbn", "rata_rata_uas", "nilai_prestasi", "dok_uas", "dok_usbn", "dok_raport", "dok_prestasi"]
         list.forEach(e => {
           form[e].toggleAttribute("disabled")
         })
