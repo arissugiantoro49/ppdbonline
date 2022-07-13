@@ -54,9 +54,9 @@
                   <td><?php echo $baris->tgl_lahir; ?></td>
                   <td><?php 
                   $rank = $tabel_yi[$baris->id_siswa]['rank'];
-                  if ($rank <= 2) echo 'A';
-                  elseif ($rank <= 4) echo 'B';
-                  elseif ($rank <= 6) echo 'C';
+                  if ($rank <= 15) echo 'A';
+                  elseif ($rank <= 30) echo 'B';
+                  elseif ($rank <= 45) echo 'C';
                   ?></td>
                 </tr>
               <?php

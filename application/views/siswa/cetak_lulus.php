@@ -117,7 +117,15 @@ $id = $this->db->get('tbl_user')->row_array();
 
   <center>
     <div style="border:1px solid black; color:green;width:30%;padding:10px;">
-      <b style="font-size:20px;">di Terima</b>
+      <b style="font-size:20px;">Terima di Kelas
+        <?php
+        $tabel_yi = $this->siswa->get_tabel_yi($user->id_siswa);
+        $rank = $tabel_yi['rank'];
+        if ($rank <= 15) echo 'A';
+        elseif ($rank <= 30) echo 'B';
+        elseif ($rank <= 45) echo 'C';
+        ?>
+      </b>
     </div>
   </center>
   <br>
