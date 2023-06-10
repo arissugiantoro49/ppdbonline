@@ -1,7 +1,7 @@
 -- phpMyAdmin SQL Dump
 -- version 4.8.5
 -- https://www.phpmyadmin.net/
---
+
 -- Host: localhost
 -- Generation Time: Jul 12, 2022 at 03:01 AM
 -- Server version: 10.1.38-MariaDB
@@ -66,7 +66,7 @@ CREATE TABLE `tbl_dokumen` (
 
 CREATE TABLE `tbl_ikut_ujian` (
   `id_ikut_ujian` int(11) NOT NULL,
-  `id_ujian` int(11) NOT NULL,
+  `id_ujian` int(11) NOT NULL
   `id_siswa` int(11) NOT NULL,
   `waktu_mulai` datetime NOT NULL,
   `waktu_selesai` datetime NOT NULL,
@@ -75,7 +75,7 @@ CREATE TABLE `tbl_ikut_ujian` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_ikut_ujian`
+-- Dumping data for table `tbl_ikut_ujian
 --
 
 INSERT INTO `tbl_ikut_ujian` (`id_ikut_ujian`, `id_ujian`, `id_siswa`, `waktu_mulai`, `waktu_selesai`, `nilai`, `status`) VALUES
@@ -97,8 +97,7 @@ CREATE TABLE `tbl_jawaban_ujian_siswa` (
 --
 -- Dumping data for table `tbl_jawaban_ujian_siswa`
 --
-
-INSERT INTO `tbl_jawaban_ujian_siswa` (`id_jawaban_ujian_siswa`, `id_ikut_ujian`, `id_soal`, `jawaban`) VALUES
+` (`id_jawaban_ujian_siswa`, `id_ikut_ujian`, `id_soal`, `jawaban`) VALUES
 (9, 17, 1, 'A'),
 (10, 17, 2, 'B'),
 (11, 17, 3, 'A'),
@@ -117,23 +116,20 @@ INSERT INTO `tbl_jawaban_ujian_siswa` (`id_jawaban_ujian_siswa`, `id_ikut_ujian`
 --
 -- Table structure for table `tbl_kriteria`
 --
-
-CREATE TABLE `tbl_kriteria` (
+⁹
   `id_kriteria` int(11) NOT NULL,
-  `nama_kriteria` varchar(100) NOT NULL,
-  `tipe` varchar(100) NOT NULL,
-  `bobot` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+ LL,
+ 
+ 
+
 
 --
 -- Dumping data for table `tbl_kriteria`
 --
 
 INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `tipe`, `bobot`) VALUES
-(1, 'Nilai Raport', '1', 10),
 (2, 'Nilai USBN', '1', 10),
-(3, 'Nilai UAS', '1', 10),
-(4, 'Nilai Prestasi', '0', 10),
+
 (5, 'Nilai Ujian Seleksi', '0', 20);
 
 -- --------------------------------------------------------
@@ -142,7 +138,6 @@ INSERT INTO `tbl_kriteria` (`id_kriteria`, `nama_kriteria`, `tipe`, `bobot`) VAL
 -- Table structure for table `tbl_nilai`
 --
 
-CREATE TABLE `tbl_nilai` (
   `id_nilai` int(20) NOT NULL,
   `no_pendaftaran` varchar(20) NOT NULL,
   `rata_rata_raport` int(11) NOT NULL,
@@ -171,13 +166,12 @@ CREATE TABLE `tbl_nilai` (
 -- Dumping data for table `tbl_nilai`
 --
 
-INSERT INTO `tbl_nilai` (`id_nilai`, `no_pendaftaran`, `rata_rata_raport`, `rata_rata_usbn`, `rata_rata_uas`, `matematika_raport`, `ipa_raport`, `pai_raport`, `bahasa_indonesia_raport`, `dok_raport`, `matematika_usbn`, `ipa_usbn`, `bindo_usbn`, `pai_usbn`, `dok_usbn`, `matematika_uas`, `ipa_uas`, `bindo_uas`, `pai_uas`, `dok_uas`, `nilai_prestasi`, `dok_prestasi`) VALUES
+INSE` (`id_nilai`, `no_pendaftaran`, `rata_rata_raport`, `rata_rata_usbn`, `rata_rata_uas`, `matematika_raport`, `ipa_raport`, `pai_raport`, `bahasa_indonesia_raport`, `dok_raport`, `matematika_usbn`, `ipa_usbn`, `bindo_usbn`, `pai_usbn`, `dok_usbn`, `matematika_uas`, `ipa_uas`, `bindo_uas`, `pai_uas`, `dok_uas`, `nilai_prestasi`, `dok_prestasi`) VALUES
 (1, '2022-019', 30, 70, 54, 90, 95, 90, 86, '_dok_raport.png', 60, 80, 90, 50, '_dok_usbn.jpeg', 40, 90, 70, 90, '_dok_uas.jpeg', 77, '_dok_prestasi.png'),
 (2, '2022-020', 12, 55, 66, 88, 79, 78, 76, '2022-020_dok_raport.jpeg', 80, 87, 76, 87, '2022-020_dok_usbn.jpeg', 90, 77, 90, 85, '2022-020_dok_uas.pdf', 78, '2022-020_dok_prestasi.pdf'),
 (3, '2022-021', 65, 66, 66, 0, 0, 0, 0, '2022-021_dok_raport.pdf', 0, 0, 0, 0, '2022-021_dok_usbn.pdf', 0, 0, 0, 0, '2022-021_dok_uas.pdf', 66, '2022-021_dok_prestasi.pdf'),
 (4, '2022-022', 66, 65, 66, 0, 0, 0, 0, '2022-022_dok_raport.pdf', 0, 0, 0, 0, '2022-022_dok_usbn.pdf', 0, 0, 0, 0, '2022-022_dok_uas.pdf', 66, '2022-022_dok_prestasi.pdf'),
-(5, '2022-023', 88, 88, 88, 0, 0, 0, 0, '2022-023_dok_raport.pdf', 0, 0, 0, 0, '2022-023_dok_usbn.pdf', 0, 0, 0, 0, '2022-023_dok_uas.pdf', 44, '2022-023_dok_prestasi.pdf');
-
+(5, '2022-023', 88, 
 -- --------------------------------------------------------
 
 --
@@ -289,15 +283,15 @@ INSERT INTO `tbl_pengumuman` (`id_pengumuman`, `ket_pengumuman`, `tgl_pengumuman
 -- Table structure for table `tbl_siswa`
 --
 
-CREATE TABLE `tbl_siswa` (
+
   `id_siswa` int(100) NOT NULL,
   `no_pendaftaran` varchar(20) NOT NULL,
   `password` text,
   `nis` varchar(10) DEFAULT NULL,
-  `nisn` varchar(10) DEFAULT NULL,
+ 
   `nik` text,
   `nama_lengkap` varchar(100) DEFAULT NULL,
-  `jk` varchar(12) DEFAULT NULL,
+ 
   `tempat_lahir` text,
   `tgl_lahir` varchar(10) DEFAULT NULL,
   `agama` varchar(30) DEFAULT NULL,
@@ -560,14 +554,12 @@ ALTER TABLE `tbl_dokumen`
 
 --
 -- Indexes for table `tbl_ikut_ujian`
---
-ALTER TABLE `tbl_ikut_ujian`
-  ADD PRIMARY KEY (`id_ikut_ujian`);
+--  ADD PRIMARY KEY (`id_ikut_ujian`);
 
 --
 -- Indexes for table `tbl_jawaban_ujian_siswa`
 --
-ALTER TABLE `tbl_jawaban_ujian_siswa`
+
   ADD PRIMARY KEY (`id_jawaban_ujian_siswa`);
 
 --
